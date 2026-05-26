@@ -302,3 +302,10 @@ if (contactForm) {
     }, 1500);
   });
 }
+
+// --- AUTO COPYRIGHT YEAR ---
+const yearEl = document.getElementById("year");
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+

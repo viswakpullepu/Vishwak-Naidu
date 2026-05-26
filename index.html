@@ -4,153 +4,505 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishwak Naidu • Portfolio</title>
-  <meta name="description" content="Vishwak Naidu – Full‑Stack Developer, Designer, Artist. Showcasing projects, art, and community work." />
+  <title>Vishwak Pullepu • Portfolio</title>
+  <meta name="description" content="Vishwak Pullepu – Computer Science Student, Computational Scientist, Tech Ambassador. Showcasing academic projects, community work, and credentials." />
   <link rel="stylesheet" href="style.css" />
   <!-- Font Awesome for social icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-<header>
-  <div class="logo"><a href="#">Vishwak Naidu</a></div>
-  <nav>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-container">
+      <p class="loading-text">
+        <span class="loading-letter" style="animation-delay: 0.05s">L</span>
+        <span class="loading-letter" style="animation-delay: 0.1s">O</span>
+        <span class="loading-letter" style="animation-delay: 0.15s">A</span>
+        <span class="loading-letter" style="animation-delay: 0.2s">D</span>
+        <span class="loading-letter" style="animation-delay: 0.25s">I</span>
+        <span class="loading-letter" style="animation-delay: 0.3s">N</span>
+        <span class="loading-letter" style="animation-delay: 0.35s">G</span>
+        <span class="loading-letter" style="margin-right: 10px;"></span>
+        <span class="loading-letter" style="animation-delay: 0.4s">P</span>
+        <span class="loading-letter" style="animation-delay: 0.45s">O</span>
+        <span class="loading-letter" style="animation-delay: 0.5s">R</span>
+        <span class="loading-letter" style="animation-delay: 0.55s">T</span>
+        <span class="loading-letter" style="animation-delay: 0.6s">F</span>
+        <span class="loading-letter" style="animation-delay: 0.65s">O</span>
+        <span class="loading-letter" style="animation-delay: 0.7s">L</span>
+        <span class="loading-letter" style="animation-delay: 0.75s">I</span>
+        <span class="loading-letter" style="animation-delay: 0.8s">O</span>
+      </p>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div id="custom-cursor"></div>
+  <div id="custom-cursor-ring"></div>
+
+  <!-- Side Social bar -->
+  <div class="floating-socials">
+    <a href="https://github.com/viswakpullepu" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+
+  <header>
+    <div class="logo"><a href="#"><span>Vishwak</span> Pullepu</a></div>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#gallery">Art</a></li>
+        <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
+  </header>
+
+  <div class="mobile-nav-menu">
+    <button class="close-mobile-btn"><i class="fas fa-times"></i></button>
     <ul>
       <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certifications">Certifications</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#gallery">Art</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-  </nav>
-</header>
-  <!-- Custom cursor -->
-  <div id="custom-cursor"></div>
-<div id="custom-cursor-ring"></div>
-
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="loader">
-      <div class="progress-bar">
-        <div class="progress-bar-fill"></div>
-      </div>
-      <p class="loading-text">LOADING PORTFOLIO… <span class="percent">0%</span></p>
-    </div>
   </div>
 
   <!-- Main content (hidden until preloader finishes) -->
   <main class="content hidden">
     <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-inner">
-        <h1>Vishwak Naidu</h1>
-        <p class="tagline">Full‑Stack Developer • Designer • Digital Artist</p>
-        <a href="#about" class="btn-primary">Learn More</a>
+    <section id="hero">
+      <div class="hero-content">
+        <p class="hero-subtitle-top">Hello, I'm</p>
+        <h1 class="hero-title">
+          <span class="hero-letter" style="animation-delay: 0.1s">V</span>
+          <span class="hero-letter" style="animation-delay: 0.15s">i</span>
+          <span class="hero-letter" style="animation-delay: 0.2s">s</span>
+          <span class="hero-letter" style="animation-delay: 0.25s">h</span>
+          <span class="hero-letter" style="animation-delay: 0.3s">w</span>
+          <span class="hero-letter" style="animation-delay: 0.35s">a</span>
+          <span class="hero-letter" style="animation-delay: 0.4s">k</span>
+          <span class="hero-letter" style="margin-right: 20px;"></span>
+          <span class="hero-letter" style="animation-delay: 0.45s">P</span>
+          <span class="hero-letter" style="animation-delay: 0.5s">u</span>
+          <span class="hero-letter" style="animation-delay: 0.55s">l</span>
+          <span class="hero-letter" style="animation-delay: 0.6s">l</span>
+          <span class="hero-letter" style="animation-delay: 0.65s">e</span>
+          <span class="hero-letter" style="animation-delay: 0.7s">p</span>
+          <span class="hero-letter" style="animation-delay: 0.75s">u</span>
+        </h1>
+        <p class="hero-subtitle">Computer Science & Computational Science • CVRH 2K29</p>
+        <a href="#about" class="hero-btn"><span>Explore Portfolio</span><i class="fas fa-arrow-down"></i></a>
       </div>
-<canvas id="three-bg-canvas"></canvas>
+      <canvas id="three-bg-canvas"></canvas>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section about-section">
-      <div class="container">
-        <h2>About Me</h2>
-        <div class="about-grid">
-          <div class="about-photo">
-            <img src="assets/profile.jpg" alt="Vishwak Naidu" loading="lazy" />
+    <section id="about" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Who I Am</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      
+      <div class="about-grid">
+        <div class="about-image-container">
+          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image" loading="lazy" />
+          <div class="about-image-overlay"></div>
+        </div>
+        
+        <div class="about-info-blocks">
+          <p class="bio-text">
+            I am currently pursuing a Bachelor of Technology in Computer Science at CVR College of Engineering, Hyderabad. Most recently, worked as a Campus Ambassador at SkillHigh, where efforts were focused on promoting technical programs, workshops, and supporting student engagement initiatives. Developed skills in computer science education, thinking skills, and VLAN, complemented by certifications in generative AI and advertising technologies.
+          </p>
+          <p class="bio-text">
+            At SkillHigh, I contributed to fostering student learning experiences by representing the organization at the campus level and promoting educational opportunities in technology. I value collaboration and strive to inspire peers through innovative engagement strategies while bringing a passion for computational science and emerging tech to academic and professional environments.
+          </p>
+          
+          <div class="info-cards-grid">
+            <!-- Education Sub-Card -->
+            <div class="glass-card info-sub-card">
+              <h4><i class="fas fa-graduation-cap"></i> Education</h4>
+              
+              <div class="timeline-item">
+                <div class="timeline-meta">Sept 2025 - Sept 2029</div>
+                <div class="timeline-title">CVR College of Engineering, Hyderabad</div>
+                <div class="timeline-desc">Bachelor of Technology, Computational Science</div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-meta">2024 - 2025</div>
+                <div class="timeline-title">Excellencia Junior College</div>
+                <div class="timeline-desc">High School Diploma</div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-meta">2023 - 2024</div>
+                <div class="timeline-title">Sri Chaitanya College of Education</div>
+                <div class="timeline-desc">Intermediate/Higher Education</div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-meta">2012 - 2022</div>
+                <div class="timeline-title">Sri Chaitanya Techno School</div>
+                <div class="timeline-desc">Secondary Education (10th)</div>
+              </div>
+            </div>
+            
+            <!-- Skills Sub-Card -->
+            <div class="glass-card info-sub-card">
+              <h4><i class="fas fa-tools"></i> Skills & Tech</h4>
+              
+              <div class="timeline-item">
+                <div class="timeline-title" style="color: var(--accent-color); margin-bottom: 8px;">Top Skills</div>
+                <div class="skills-list">
+                  <span class="skill-badge">VLAN</span>
+                  <span class="skill-badge">Thinking Skills</span>
+                  <span class="skill-badge">Computer Science Education</span>
+                </div>
+              </div>
+              
+              <div class="timeline-item" style="margin-top: 16px;">
+                <div class="timeline-title" style="color: var(--accent-color); margin-bottom: 8px;">Soft Skills</div>
+                <div class="skills-list">
+                  <span class="skill-badge">Collaboration</span>
+                  <span class="skill-badge">Student Engagement</span>
+                  <span class="skill-badge">Strategic Promotion</span>
+                </div>
+              </div>
+              
+              <div class="timeline-item" style="margin-top: 16px;">
+                <div class="timeline-title" style="color: var(--accent-color); margin-bottom: 8px;">Tools & Technologies</div>
+                <div class="skills-list">
+                  <span class="skill-badge">Generative AI</span>
+                  <span class="skill-badge">Microsoft Excel</span>
+                  <span class="skill-badge">Google AdMob</span>
+                  <span class="skill-badge">Google Ad Manager</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="about-text">
-            <p>
-              I am a passionate full‑stack developer and visual artist based in Hyderabad, Telangana, India. I blend code and creativity to build immersive web experiences that feel like digital art installations.
-            </p>
-            <p>
-              My expertise spans JavaScript/TypeScript, React, Node.js, Three.js, and modern CSS techniques such as glassmorphism and neon gradients. When I'm not coding, I create digital paintings and experiment with generative art.
-            </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Professional History</span>
+        <h2 class="section-title">Work Experience</h2>
+      </div>
+      
+      <div class="community-grid">
+        <div class="glass-card community-card">
+          <div class="community-image-box">
+            <img src="assets/community1.png" alt="SkillHigh Campus" loading="lazy" />
+          </div>
+          <div class="community-info">
+            <div class="community-date">Oct 2025 - Dec 2025 (3 Months)</div>
+            <h3 class="community-role">Campus Ambassador</h3>
+            <p class="community-org">SkillHigh • Hyderabad, Telangana</p>
+            <ul style="margin-top: 12px; margin-left: 18px; color: var(--text-secondary); font-size: 13px; line-height: 1.6;">
+              <li>Represented SkillHigh at the campus level to foster student learning experiences.</li>
+              <li>Promoted technical programs and workshops to the student body.</li>
+              <li>Supported student engagement initiatives and innovative engagement strategies.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Credentials</span>
+        <h2 class="section-title">Certifications</h2>
+      </div>
+      
+      <div class="awards-grid">
+        <!-- Certification 1 -->
+        <div class="glass-card award-card">
+          <div class="award-image-box">
+            <img src="assets/award1.png" alt="Generative AI" loading="lazy" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">Generative AI</div>
+            <div class="award-name">Introduction to Prompt Engineering for Generative AI</div>
+          </div>
+        </div>
+        
+        <!-- Certification 2 -->
+        <div class="glass-card award-card">
+          <div class="award-image-box">
+            <img src="assets/award2.png" alt="Cybersecurity" loading="lazy" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">Palo Alto Networks</div>
+            <div class="award-name">Cybersecurity Foundation Certification</div>
+          </div>
+        </div>
+        
+        <!-- Certification 3 -->
+        <div class="glass-card award-card">
+          <div class="award-image-box">
+            <img src="assets/project4.png" alt="Google Ad Manager" loading="lazy" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">Google Advertising</div>
+            <div class="award-name">Drive Advertising Revenue with Google Ad Manager</div>
+          </div>
+        </div>
+        
+        <!-- Certification 4 -->
+        <div class="glass-card award-card">
+          <div class="award-image-box">
+            <img src="assets/project5.png" alt="Microsoft Excel" loading="lazy" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">Data Analysis</div>
+            <div class="award-name">Getting Started with Microsoft Excel</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section projects-section">
-      <div class="container">
-        <h2>Featured Projects</h2>
-        <div class="grid">
-          <!-- Project cards – placeholders for now -->
-          <article class="card project-card">
-            <div class="card-image"><img src="assets/project1.jpg" alt="Project 1" loading="lazy" /></div>
-            <div class="card-content">
-              <h3>Project One</h3>
-              <p>Brief description of the project, technologies used, and impact.</p>
+    <section id="projects" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">My Work</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+      
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="glass-card project-card">
+          <div class="project-image-box">
+            <img src="assets/project1.png" alt="VLAN Setup & Simulation" loading="lazy" />
+            <div class="project-tags">
+              <span class="project-tag">Networking</span>
+              <span class="project-tag">VLAN</span>
             </div>
-          </article>
-          <article class="card project-card">
-            <div class="card-image"><img src="assets/project2.jpg" alt="Project 2" loading="lazy" /></div>
-            <div class="card-content">
-              <h3>Project Two</h3>
-              <p>Brief description of the project, technologies used, and impact.</p>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">VLAN Network Infrastructure</h3>
+            <p class="project-desc">A secure, simulated virtual LAN layout designing segmented subnetworks for corporate environments to optimize data throughput and reinforce system-wide firewalls.</p>
+            <div class="project-links">
+              <a href="https://github.com/viswakpullepu" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
             </div>
-          </article>
-          <article class="card project-card">
-            <div class="card-image"><img src="assets/project3.jpg" alt="Project 3" loading="lazy" /></div>
-            <div class="card-content">
-              <h3>Project Three</h3>
-              <p>Brief description of the project, technologies used, and impact.</p>
+          </div>
+        </article>
+        
+        <!-- Project 2 -->
+        <article class="glass-card project-card">
+          <div class="project-image-box">
+            <img src="assets/project2.png" alt="Generative AI Prompt Lab" loading="lazy" />
+            <div class="project-tags">
+              <span class="project-tag">AI / LLM</span>
+              <span class="project-tag">Prompt Eng</span>
             </div>
-          </article>
-        </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Generative AI Prompt Lab</h3>
+            <p class="project-desc">Interactive experimental playground exploring context window parameters, prompt chains, and system instructions to maximize reasoning and safety in LLMs.</p>
+            <div class="project-links">
+              <a href="https://github.com/viswakpullepu" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Project 3 -->
+        <article class="glass-card project-card">
+          <div class="project-image-box">
+            <img src="assets/project3.png" alt="Computational Model" loading="lazy" />
+            <div class="project-tags">
+              <span class="project-tag">Computer Science</span>
+              <span class="project-tag">Algorithms</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Computational Science Simulator</h3>
+            <p class="project-desc">Interactive graphical simulation mapping algorithmic problem-solving and thinking strategies to simplify complex data science concepts.</p>
+            <div class="project-links">
+              <a href="https://github.com/viswakpullepu" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- Art Gallery Marquee -->
-    <section id="gallery" class="section gallery-section">
-      <div class="container">
-        <h2>Art Gallery</h2>
-        <div class="marquee">
-          <div class="marquee-content">
-            <!-- Duplicate images for seamless scrolling -->
-            <img src="assets/art1.jpg" alt="Art 1" loading="lazy" />
-            <img src="assets/art2.jpg" alt="Art 2" loading="lazy" />
-            <img src="assets/art3.jpg" alt="Art 3" loading="lazy" />
-            <img src="assets/art1.jpg" alt="Art 1" loading="lazy" />
-            <img src="assets/art2.jpg" alt="Art 2" loading="lazy" />
-            <img src="assets/art3.jpg" alt="Art 3" loading="lazy" />
+    <!-- Art Gallery Section -->
+    <section id="gallery" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Creative Corner</span>
+        <h2 class="section-title">Digital Art Gallery</h2>
+      </div>
+      
+      <div class="art-marquee-container">
+        <div class="art-marquee-track">
+          <!-- Slide 1 -->
+          <div class="art-slide">
+            <img src="assets/art1.png" alt="Artwork 1" loading="lazy" />
+            <div class="art-slide-overlay">Abstract Fluid</div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="art-slide">
+            <img src="assets/art2.png" alt="Artwork 2" loading="lazy" />
+            <div class="art-slide-overlay">Neon Geometry</div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="art-slide">
+            <img src="assets/art3.png" alt="Artwork 3" loading="lazy" />
+            <div class="art-slide-overlay">Generative Waves</div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="art-slide">
+            <img src="assets/art4.png" alt="Artwork 4" loading="lazy" />
+            <div class="art-slide-overlay">Digital Portrait</div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="art-slide">
+            <img src="assets/art5.png" alt="Artwork 5" loading="lazy" />
+            <div class="art-slide-overlay">Cyber Cityscape</div>
+          </div>
+          <!-- Slide 6 -->
+          <div class="art-slide">
+            <img src="assets/art6.png" alt="Artwork 6" loading="lazy" />
+            <div class="art-slide-overlay">Future Vision</div>
+          </div>
+          <!-- Duplicate set for seamless infinite loop scroll -->
+          <div class="art-slide">
+            <img src="assets/art1.png" alt="Artwork 1" loading="lazy" />
+            <div class="art-slide-overlay">Abstract Fluid</div>
+          </div>
+          <div class="art-slide">
+            <img src="assets/art2.png" alt="Artwork 2" loading="lazy" />
+            <div class="art-slide-overlay">Neon Geometry</div>
+          </div>
+          <div class="art-slide">
+            <img src="assets/art3.png" alt="Artwork 3" loading="lazy" />
+            <div class="art-slide-overlay">Generative Waves</div>
+          </div>
+          <div class="art-slide">
+            <img src="assets/art4.png" alt="Artwork 4" loading="lazy" />
+            <div class="art-slide-overlay">Digital Portrait</div>
+          </div>
+          <div class="art-slide">
+            <img src="assets/art5.png" alt="Artwork 5" loading="lazy" />
+            <div class="art-slide-overlay">Cyber Cityscape</div>
+          </div>
+          <div class="art-slide">
+            <img src="assets/art6.png" alt="Artwork 6" loading="lazy" />
+            <div class="art-slide-overlay">Future Vision</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-      <div class="container">
-        <h2>Contact Me</h2>
-        <div class="contact-grid">
-          <div class="contact-form">
-            <form id="portfolio-contact-form" novalidate>
-              <input type="text" name="name" placeholder="Your Name" required />
-              <input type="email" name="email" placeholder="Your Email" required />
-              <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-              <button type="submit" class="btn-primary submit-btn"><i class="fas fa-paper-plane"></i><span>Send Message</span></button>
-            </form>
+    <section id="contact" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Contact Me</h2>
+      </div>
+      
+      <div class="contact-wrapper">
+        <!-- Form Block -->
+        <div class="glass-card contact-form-box">
+          <h3>Send a Message</h3>
+          <form id="portfolio-contact-form" novalidate>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="form-name">Your Name</label>
+                <input type="text" id="form-name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="form-email">Your Email</label>
+                <input type="email" id="form-email" name="email" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="form-message">Your Message</label>
+              <textarea id="form-message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+        
+        <!-- Info Details Block -->
+        <div class="contact-details-box">
+          <div class="contact-details-list">
+            <h3>Contact Info</h3>
+            
+            <div class="detail-item">
+              <div class="detail-icon-box">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <div class="detail-label">Call Me</div>
+                <div class="detail-value">+91 9848990042</div>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-icon-box">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <div class="detail-label">Email Me</div>
+                <div class="detail-value"><a href="mailto:viswakpullepu1@gmail.com">viswakpullepu1@gmail.com</a></div>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-icon-box">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <div class="detail-label">Location</div>
+                <div class="detail-value">Hyderabad, Telangana, India</div>
+              </div>
+            </div>
           </div>
-          <div class="contact-details">
-            <p><i class="fas fa-phone"></i> +91 9848990042</p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:viswaknaidu1@gmail.com">viswaknaidu1@gmail.com</a></p>
-            <p><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana, India</p>
-            <p class="social-links">
-              <a href="https://github.com/viswakpullepu" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="https://www.instagram.com/vishwak_pullepu/" target="blank"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="blank"><i class="fab fa-linkedin"></i></a>
-            </p>
+          
+          <div class="social-connect">
+            <div class="social-connect-title">Social Links</div>
+            <div class="social-icons-row">
+              <a href="https://github.com/viswakpullepu" target="_blank" class="social-icon-btn"><i class="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          
+          <div class="glass-card availability-card">
+            <div class="availability-header">
+              <i class="fas fa-circle-notch fa-spin"></i>
+              <h4>Current Availability</h4>
+            </div>
+            <p class="availability-desc">Open for research collaborations, computational projects, and networking opportunities at CVR College of Engineering.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-      <p>&copy; <span id="year"></span> Vishwak Naidu. All rights reserved.</p>
+    <footer>
+      <p class="footer-text">&copy; <span id="year"></span> Vishwak Pullepu. All rights reserved. Designed with passion.</p>
     </footer>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
