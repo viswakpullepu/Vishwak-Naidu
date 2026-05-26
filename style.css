@@ -422,6 +422,15 @@ nav a:hover, nav a.active {
   text-transform: uppercase;
   color: #fff;
   margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.3em; /* Dynamic word gap */
+}
+
+.hero-word {
+  display: inline-block;
+  white-space: nowrap; /* Forces browser to wrap entire word rather than characters! */
 }
 
 .hero-letter {
@@ -443,6 +452,48 @@ nav a:hover, nav a.active {
   transform: translateY(20px);
   animation: fadeInUp 0.8s ease forwards 1.8s;
 }
+
+/* --- 3D PERSPECTIVE SYSTEM FOR CARDS --- */
+.about-grid, .projects-grid, .awards-grid, .community-grid {
+  perspective: 1000px; /* Activates 3D depth field for children */
+}
+
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d; /* Allows nested children to translate in Z-axis */
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.5);
+  backface-visibility: hidden;
+}
+
+/* Glass card boundary shadow highlights */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: var(--transition-smooth);
+}
+.glass-card:hover::after {
+  border-color: rgba(224, 96, 49, 0.2);
+}
+
+/* Studio light reflection glare layer */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 200px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.06) 0%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+.glass-card:hover .card-glare {
+  opacity: 1;
+}
+
 
 .hero-btn {
   pointer-events: auto;
