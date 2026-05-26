@@ -573,3 +573,61 @@ if (contactForm) {
     }, 1500);
   });
 }
+
+// --- CERTIFICATE MODAL SYSTEM WITH ROLLOUT ANIMATION ---
+try {
+  const awardCards = document.querySelectorAll(".award-card");
+  const certModal = document.getElementById("cert-modal");
+  const certModalClose = document.querySelector(".cert-modal-close");
+  const certModalIframe = document.getElementById("cert-modal-iframe");
+  const certModalOverlay = document.querySelector(".cert-modal-overlay");
+
+  if (awardCards && certModal && certModalClose && certModalIframe) {
+    awardCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const pdfSrc = card.getAttribute("data-pdf");
+        if (!pdfSrc) return;
+
+        // 1. Add rolling-out animation class for a premium transition effect
+        card.classList.add("rolling-out");
+
+        // 2. Pause Lenis smooth scrolling to lock background interaction
+        if (lenis) {
+          try { lenis.stop(); } catch(e) {}
+        }
+
+        // 3. Open the modal after the rollout animation completes (400ms delay)
+        setTimeout(() => {
+          certModalIframe.src = pdfSrc;
+          certModal.classList.add("active");
+          
+          // Remove rolling-out class from card once modal is fully open
+          setTimeout(() => {
+            card.classList.remove("rolling-out");
+          }, 300);
+        }, 400);
+      });
+    });
+
+    const closeModal = () => {
+      certModal.classList.remove("active");
+      
+      // Clean iframe source to release resources and stop loading
+      setTimeout(() => {
+        certModalIframe.src = "";
+      }, 500);
+
+      // Resume Lenis smooth scrolling
+      if (lenis) {
+        try { lenis.start(); } catch(e) {}
+      }
+    };
+
+    certModalClose.addEventListener("click", closeModal);
+    if (certModalOverlay) {
+      certModalOverlay.addEventListener("click", closeModal);
+    }
+  }
+} catch (e) {
+  console.error("Certificate modal initialization error:", e);
+}
