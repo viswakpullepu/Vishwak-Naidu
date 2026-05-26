@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishwak Naidu • Portfolio</title>
+  <meta name="description" content="Vishwak Naidu – Full‑Stack Developer, Designer, Artist. Showcasing projects, art, and community work." />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for social icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <div class="logo"><a href="#">Vishwak Naidu</a></div>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#gallery">Art</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+  <!-- Custom cursor -->
+  <div id="custom-cursor"></div>
+<div id="custom-cursor-ring"></div>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader">
+      <div class="progress-bar">
+        <div class="progress-bar-fill"></div>
+      </div>
+      <p class="loading-text">LOADING PORTFOLIO… <span class="percent">0%</span></p>
+    </div>
+  </div>
+
+  <!-- Main content (hidden until preloader finishes) -->
+  <main class="content hidden">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Vishwak Naidu</h1>
+        <p class="tagline">Full‑Stack Developer • Designer • Digital Artist</p>
+        <a href="#about" class="btn-primary">Learn More</a>
+      </div>
+<canvas id="three-bg-canvas"></canvas>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <h2>About Me</h2>
+        <div class="about-grid">
+          <div class="about-photo">
+            <img src="assets/profile.jpg" alt="Vishwak Naidu" loading="lazy" />
+          </div>
+          <div class="about-text">
+            <p>
+              I am a passionate full‑stack developer and visual artist based in Hyderabad, Telangana, India. I blend code and creativity to build immersive web experiences that feel like digital art installations.
+            </p>
+            <p>
+              My expertise spans JavaScript/TypeScript, React, Node.js, Three.js, and modern CSS techniques such as glassmorphism and neon gradients. When I'm not coding, I create digital paintings and experiment with generative art.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <h2>Featured Projects</h2>
+        <div class="grid">
+          <!-- Project cards – placeholders for now -->
+          <article class="card project-card">
+            <div class="card-image"><img src="assets/project1.jpg" alt="Project 1" loading="lazy" /></div>
+            <div class="card-content">
+              <h3>Project One</h3>
+              <p>Brief description of the project, technologies used, and impact.</p>
+            </div>
+          </article>
+          <article class="card project-card">
+            <div class="card-image"><img src="assets/project2.jpg" alt="Project 2" loading="lazy" /></div>
+            <div class="card-content">
+              <h3>Project Two</h3>
+              <p>Brief description of the project, technologies used, and impact.</p>
+            </div>
+          </article>
+          <article class="card project-card">
+            <div class="card-image"><img src="assets/project3.jpg" alt="Project 3" loading="lazy" /></div>
+            <div class="card-content">
+              <h3>Project Three</h3>
+              <p>Brief description of the project, technologies used, and impact.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Art Gallery Marquee -->
+    <section id="gallery" class="section gallery-section">
+      <div class="container">
+        <h2>Art Gallery</h2>
+        <div class="marquee">
+          <div class="marquee-content">
+            <!-- Duplicate images for seamless scrolling -->
+            <img src="assets/art1.jpg" alt="Art 1" loading="lazy" />
+            <img src="assets/art2.jpg" alt="Art 2" loading="lazy" />
+            <img src="assets/art3.jpg" alt="Art 3" loading="lazy" />
+            <img src="assets/art1.jpg" alt="Art 1" loading="lazy" />
+            <img src="assets/art2.jpg" alt="Art 2" loading="lazy" />
+            <img src="assets/art3.jpg" alt="Art 3" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <h2>Contact Me</h2>
+        <div class="contact-grid">
+          <div class="contact-form">
+            <form id="portfolio-contact-form" novalidate>
+              <input type="text" name="name" placeholder="Your Name" required />
+              <input type="email" name="email" placeholder="Your Email" required />
+              <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+              <button type="submit" class="btn-primary submit-btn"><i class="fas fa-paper-plane"></i><span>Send Message</span></button>
+            </form>
+          </div>
+          <div class="contact-details">
+            <p><i class="fas fa-phone"></i> +91 9848990042</p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:viswaknaidu1@gmail.com">viswaknaidu1@gmail.com</a></p>
+            <p><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana, India</p>
+            <p class="social-links">
+              <a href="https://github.com/viswakpullepu" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/vishwak_pullepu/" target="blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="blank"><i class="fab fa-linkedin"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; <span id="year"></span> Vishwak Naidu. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
