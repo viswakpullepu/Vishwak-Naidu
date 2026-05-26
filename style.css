@@ -1279,7 +1279,7 @@ html.lenis, html.lenis body {
 .award-card {
   width: 250px;
   height: 330px;
-  margin-left: -140px; /* Overlap stacking effect */
+  margin-left: -170px; /* Overlap stacking effect for 13 cards */
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1), box-shadow 0.6s ease, z-index 0.3s ease;
   cursor: pointer;
   transform-origin: bottom center;
@@ -1296,16 +1296,20 @@ html.lenis, html.lenis body {
   margin-left: 0;
 }
 
-/* Symmetrical Fan Rotation & Y-Translation offsets */
-.award-card:nth-child(1) { transform: rotate(-16deg) translateY(45px); }
-.award-card:nth-child(2) { transform: rotate(-12deg) translateY(28px); }
-.award-card:nth-child(3) { transform: rotate(-8deg) translateY(15px); }
-.award-card:nth-child(4) { transform: rotate(-4deg) translateY(6px); }
-.award-card:nth-child(5) { transform: rotate(0deg) translateY(0px); }
-.award-card:nth-child(6) { transform: rotate(4deg) translateY(6px); }
-.award-card:nth-child(7) { transform: rotate(8deg) translateY(15px); }
-.award-card:nth-child(8) { transform: rotate(12deg) translateY(28px); }
-.award-card:nth-child(9) { transform: rotate(16deg) translateY(45px); }
+/* Symmetrical Fan Rotation & Y-Translation offsets for 13 cards */
+.award-card:nth-child(1) { transform: rotate(-18deg) translateY(55px); }
+.award-card:nth-child(2) { transform: rotate(-15deg) translateY(38px); }
+.award-card:nth-child(3) { transform: rotate(-12deg) translateY(24px); }
+.award-card:nth-child(4) { transform: rotate(-9deg) translateY(13px); }
+.award-card:nth-child(5) { transform: rotate(-6deg) translateY(6px); }
+.award-card:nth-child(6) { transform: rotate(-3deg) translateY(2px); }
+.award-card:nth-child(7) { transform: rotate(0deg) translateY(0px); }
+.award-card:nth-child(8) { transform: rotate(3deg) translateY(2px); }
+.award-card:nth-child(9) { transform: rotate(6deg) translateY(6px); }
+.award-card:nth-child(10) { transform: rotate(9deg) translateY(13px); }
+.award-card:nth-child(11) { transform: rotate(12deg) translateY(24px); }
+.award-card:nth-child(12) { transform: rotate(15deg) translateY(38px); }
+.award-card:nth-child(13) { transform: rotate(18deg) translateY(55px); }
 
 /* Premium Roll-out hover effect (straighten, scale, pop up, front z-index) */
 .award-card:hover {

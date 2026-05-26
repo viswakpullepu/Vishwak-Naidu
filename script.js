@@ -578,13 +578,17 @@ try {
   const certModal = document.getElementById("cert-modal");
   const certModalClose = document.querySelector(".cert-modal-close");
   const certModalIframe = document.getElementById("cert-modal-iframe");
+  const certModalImg = document.getElementById("cert-modal-img");
   const certModalOverlay = document.querySelector(".cert-modal-overlay");
 
-  if (awardCards && certModal && certModalClose && certModalIframe) {
+  if (awardCards && certModal && certModalClose && (certModalIframe || certModalImg)) {
     awardCards.forEach((card) => {
       card.addEventListener("click", () => {
-        const pdfSrc = card.getAttribute("data-pdf");
-        if (!pdfSrc) return;
+        const fileSrc = card.getAttribute("data-pdf");
+        if (!fileSrc) return;
+
+        // Detect if the file is a PDF
+        const isPdf = fileSrc.toLowerCase().endsWith(".pdf");
 
         // 1. Add rolling-out animation class for a premium transition effect
         card.classList.add("rolling-out");
@@ -596,7 +600,26 @@ try {
 
         // 3. Open the modal after the rollout animation completes (400ms delay)
         setTimeout(() => {
-          certModalIframe.src = pdfSrc;
+          if (isPdf) {
+            if (certModalImg) {
+              certModalImg.style.display = "none";
+              certModalImg.src = "";
+            }
+            if (certModalIframe) {
+              certModalIframe.style.display = "block";
+              certModalIframe.src = fileSrc;
+            }
+          } else {
+            if (certModalIframe) {
+              certModalIframe.style.display = "none";
+              certModalIframe.src = "";
+            }
+            if (certModalImg) {
+              certModalImg.style.display = "block";
+              certModalImg.src = fileSrc;
+            }
+          }
+          
           certModal.classList.add("active");
           
           // Remove rolling-out class from card once modal is fully open
@@ -610,9 +633,16 @@ try {
     const closeModal = () => {
       certModal.classList.remove("active");
       
-      // Clean iframe source to release resources and stop loading
+      // Clean up sources and hide elements to release resources
       setTimeout(() => {
-        certModalIframe.src = "";
+        if (certModalIframe) {
+          certModalIframe.src = "";
+          certModalIframe.style.display = "none";
+        }
+        if (certModalImg) {
+          certModalImg.src = "";
+          certModalImg.style.display = "none";
+        }
       }, 500);
 
       // Resume Lenis smooth scrolling
