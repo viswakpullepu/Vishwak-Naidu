@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&family=Pacifico&display=swap');
 
 /* --- DESIGN SYSTEM & VARIABLES --- */
 :root {
@@ -408,9 +408,6 @@ nav a:hover, nav a.active {
   color: var(--accent-color);
   font-size: 28px;
   margin-bottom: 12px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards 1s;
 }
 
 .hero-title {
@@ -435,9 +432,7 @@ nav a:hover, nav a.active {
 
 .hero-letter {
   display: inline-block;
-  opacity: 0;
   transform: translateY(40px) scale(0.9);
-  animation: revealLetter 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero-subtitle {
@@ -448,9 +443,6 @@ nav a:hover, nav a.active {
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-bottom: 40px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards 1.8s;
 }
 
 /* --- 3D PERSPECTIVE SYSTEM FOR CARDS --- */
@@ -486,7 +478,7 @@ nav a:hover, nav a.active {
   inset: 0;
   pointer-events: none;
   background: radial-gradient(circle 200px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.06) 0%, transparent 80%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
   z-index: 5;
 }
@@ -496,25 +488,25 @@ nav a:hover, nav a.active {
 
 
 .hero-btn {
-  pointer-events: auto;
-  border: 1px solid var(--accent-color);
-  background: var(--accent-soft);
-  color: #fff;
-  padding: 14px 36px;
-  border-radius: 50px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  padding: 16px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 0 20px rgba(224, 96, 49, 0.2);
   transition: var(--transition-smooth);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards 2s;
+  pointer-events: auto;
 }
 .hero-btn:hover {
   background: var(--accent-color);
@@ -1120,9 +1112,7 @@ footer {
 
 /* --- ANIMATION ON SCROLL REVEALS --- */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* GSAP handles opacity for children, so parent shouldn't hide them */
 }
 .reveal-on-scroll.visible {
   opacity: 1;
