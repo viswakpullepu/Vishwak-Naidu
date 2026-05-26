@@ -178,17 +178,15 @@ try {
     });
 
     // Stagger certifications reveal
-    gsap.from(".award-card", {
+    gsap.from(".awards-grid", {
       scrollTrigger: {
         trigger: "#certifications",
         start: "top 75%"
       },
       opacity: 0,
-      scale: 0.9,
-      y: 40,
-      duration: 1,
-      stagger: 0.15,
-      ease: "back.out(1.2)"
+      y: 50,
+      duration: 1.2,
+      ease: "power3.out"
     });
   }
 } catch (e) {
