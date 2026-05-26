@@ -1,29 +1,43 @@
 // --- INERTIAL SMOOTH SCROLLING (LENIS) ---
 let lenis;
-if (typeof Lenis !== "undefined") {
-  lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom liquid scroll curve
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    infinite: false,
-  });
-
-  // Connect Lenis to GSAP ScrollTrigger
-  if (typeof ScrollTrigger !== "undefined") {
-    lenis.on('scroll', ScrollTrigger.update);
-  }
-
-  if (typeof gsap !== "undefined") {
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
+try {
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom liquid scroll curve
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
     });
-    gsap.ticker.lagSmoothing(0);
+
+    // Connect Lenis to GSAP ScrollTrigger
+    if (typeof ScrollTrigger !== "undefined") {
+      lenis.on('scroll', () => {
+        try {
+          ScrollTrigger.update();
+        } catch (e) {
+          console.error("ScrollTrigger update error:", e);
+        }
+      });
+    }
+
+    // Run Lenis in its own independent requestAnimationFrame loop
+    function raf(time) {
+      try {
+        lenis.raf(time);
+      } catch (e) {
+        console.error("Lenis animation frame error:", e);
+      }
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
   }
+} catch (e) {
+  console.error("Lenis initialization error:", e);
 }
 
 // --- PRELOADER ENTRANCE & INITIALIZATION ---
@@ -39,16 +53,24 @@ function initPreloader() {
       progress = 100;
       clearInterval(interval);
       setTimeout(() => {
-        if (preloader) preloader.classList.add("loaded");
-        if (mainContent) {
-          mainContent.classList.remove("hidden");
+        try {
+          if (preloader) preloader.classList.add("loaded");
+          if (mainContent) {
+            mainContent.classList.remove("hidden");
+          }
+          // Force refresh GSAP layout metrics after page reveal
+          if (typeof ScrollTrigger !== "undefined") {
+            try {
+              ScrollTrigger.refresh();
+            } catch (e) {
+              console.error("ScrollTrigger refresh error:", e);
+            }
+          }
+          // Fire entrance animations
+          playEntranceAnimations();
+        } catch (e) {
+          console.error("Preloader completion handler error:", e);
         }
-        // Force refresh GSAP layout metrics after page reveal
-        if (typeof ScrollTrigger !== "undefined") {
-          ScrollTrigger.refresh();
-        }
-        // Fire entrance animations
-        playEntranceAnimations();
       }, 600);
     }
     if (progressFill) {
@@ -109,64 +131,68 @@ function playEntranceAnimations() {
 }
 
 // --- GSAP SCROLL REVEALS FOR SECTIONS ---
-if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
+try {
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
 
-  // Fade up headers on scroll entrance
-  const headers = document.querySelectorAll(".section-header");
-  headers.forEach((header) => {
-    gsap.from(header, {
+    // Fade up headers on scroll entrance
+    const headers = document.querySelectorAll(".section-header");
+    headers.forEach((header) => {
+      gsap.from(header, {
+        scrollTrigger: {
+          trigger: header,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: "power3.out"
+      });
+    });
+
+    // Stagger details inside About blocks on scroll
+    gsap.from(".about-image-container, .bio-text, .info-sub-card", {
       scrollTrigger: {
-        trigger: header,
-        start: "top 85%",
-        toggleActions: "play none none none"
+        trigger: "#about",
+        start: "top 75%"
       },
       opacity: 0,
-      y: 40,
-      duration: 1,
+      y: 50,
+      duration: 1.2,
+      stagger: 0.15,
       ease: "power3.out"
     });
-  });
 
-  // Stagger details inside About blocks on scroll
-  gsap.from(".about-image-container, .bio-text, .info-sub-card", {
-    scrollTrigger: {
-      trigger: "#about",
-      start: "top 75%"
-    },
-    opacity: 0,
-    y: 50,
-    duration: 1.2,
-    stagger: 0.15,
-    ease: "power3.out"
-  });
+    // Stagger project cards reveal
+    gsap.from(".project-card", {
+      scrollTrigger: {
+        trigger: "#projects",
+        start: "top 75%"
+      },
+      opacity: 0,
+      y: 60,
+      duration: 1.2,
+      stagger: 0.2,
+      ease: "power3.out"
+    });
 
-  // Stagger project cards reveal
-  gsap.from(".project-card", {
-    scrollTrigger: {
-      trigger: "#projects",
-      start: "top 75%"
-    },
-    opacity: 0,
-    y: 60,
-    duration: 1.2,
-    stagger: 0.2,
-    ease: "power3.out"
-  });
-
-  // Stagger certifications reveal
-  gsap.from(".award-card", {
-    scrollTrigger: {
-      trigger: "#certifications",
-      start: "top 75%"
-    },
-    opacity: 0,
-    scale: 0.9,
-    y: 40,
-    duration: 1,
-    stagger: 0.15,
-    ease: "back.out(1.2)"
-  });
+    // Stagger certifications reveal
+    gsap.from(".award-card", {
+      scrollTrigger: {
+        trigger: "#certifications",
+        start: "top 75%"
+      },
+      opacity: 0,
+      scale: 0.9,
+      y: 40,
+      duration: 1,
+      stagger: 0.15,
+      ease: "back.out(1.2)"
+    });
+  }
+} catch (e) {
+  console.error("GSAP ScrollTrigger registration/init error:", e);
 }
 
 // --- TRAILING CUSTOM CURSOR ---
@@ -424,11 +450,9 @@ if (canvas && typeof THREE !== "undefined") {
         const endY = stateEnd[idx + 1];
         const endZ = stateEnd[idx + 2];
 
-        const basePos = new THREE.Vector3(
-          startX + (endX - startX) * localProgress,
-          startY + (endY - startY) * localProgress,
-          startZ + (endZ - startZ) * localProgress
-        );
+        const baseX = startX + (endX - startX) * localProgress;
+        const baseY = startY + (endY - startY) * localProgress;
+        const baseZ = startZ + (endZ - startZ) * localProgress;
 
         // Micro ripple wave adjustments based on sine coordinates
         let rippleX = 0;
@@ -436,26 +460,26 @@ if (canvas && typeof THREE !== "undefined") {
         
         if (progressVal < 1.0) {
           // Active sine ripples on wave state
-          rippleY = Math.sin(basePos.x * 0.015 + elapsedTime * 1.5) * 10 + Math.cos(basePos.z * 0.015 + elapsedTime * 1.2) * 10;
+          rippleY = Math.sin(baseX * 0.015 + elapsedTime * 1.5) * 10 + Math.cos(baseZ * 0.015 + elapsedTime * 1.2) * 10;
         } else if (progressVal >= 1.0 && progressVal < 2.0) {
           // Breathing pulse on Sphere state
-          rippleX = Math.sin(elapsedTime * 2.0 + basePos.y * 0.1) * 3;
-          rippleY = Math.cos(elapsedTime * 2.0 + basePos.x * 0.1) * 3;
+          rippleX = Math.sin(elapsedTime * 2.0 + baseY * 0.1) * 3;
+          rippleY = Math.cos(elapsedTime * 2.0 + baseX * 0.1) * 3;
         } else {
           // Magnetic vortex pull
-          rippleX = Math.sin(elapsedTime * 1.5 + basePos.y) * 2;
+          rippleX = Math.sin(elapsedTime * 1.5 + baseY) * 2;
         }
 
         // Cursor repel displacement physics
         const distToCursor = Math.sqrt(
-          Math.pow(basePos.x - currentMouseX * 160, 2) +
-          Math.pow(basePos.z - currentMouseY * 160, 2)
+          Math.pow(baseX - currentMouseX * 160, 2) +
+          Math.pow(baseZ - currentMouseY * 160, 2)
         );
         const cursorRepel = Math.max(0, 50 - distToCursor * 0.3) * 1.8;
 
-        positionArray[idx] = basePos.x + rippleX;
-        positionArray[idx + 1] = basePos.y + rippleY + cursorRepel;
-        positionArray[idx + 2] = basePos.z;
+        positionArray[idx] = baseX + rippleX;
+        positionArray[idx + 1] = baseY + rippleY + cursorRepel;
+        positionArray[idx + 2] = baseZ;
       }
 
       geometry.attributes.position.needsUpdate = true;
@@ -482,28 +506,36 @@ if (canvas && typeof THREE !== "undefined") {
 }
 
 // --- ACTIVE LINK ON SCROLL SECTIONS ---
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll("nav a");
+try {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll("nav a");
 
-if (lenis) {
-  lenis.on('scroll', () => {
-    let scrollY = window.pageYOffset;
+  if (lenis) {
+    lenis.on('scroll', () => {
+      try {
+        let scrollY = window.pageYOffset;
 
-    sections.forEach((current) => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 150;
-      const sectionId = current.getAttribute("id");
+        sections.forEach((current) => {
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 150;
+          const sectionId = current.getAttribute("id");
 
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("active");
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach((link) => {
+              link.classList.remove("active");
+              if (link.getAttribute("href") === `#${sectionId}`) {
+                link.classList.add("active");
+              }
+            });
           }
         });
+      } catch (e) {
+        console.error("Lenis scroll event callback error:", e);
       }
     });
-  });
+  }
+} catch (e) {
+  console.error("Active links on scroll initialization error:", e);
 }
 
 // --- DYNAMIC FOOTER CURRENT YEAR ---
