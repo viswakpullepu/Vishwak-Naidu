@@ -1077,3 +1077,126 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* --- RESPONSIVE SCREEN OPTIMIZATIONS (ALL BREAKPOINTS) --- */
+
+/* 1. Ultra-Wide Monitors & Large Screens (1600px and up) */
+@media (min-width: 1600px) {
+  header {
+    padding-left: calc((100% - 1200px) / 2);
+    padding-right: calc((100% - 1200px) / 2);
+  }
+}
+
+/* 2. Laptops & Large Tablets Landscape (1024px to 1366px) */
+@media (max-width: 1200px) {
+  .about-grid {
+    gap: 32px;
+  }
+  .info-cards-grid {
+    gap: 16px;
+  }
+}
+
+/* 3. Small Laptops & Tablets Landscape (under 1024px) */
+@media (max-width: 1024px) {
+  .floating-socials {
+    display: none; /* Hide sidebar socials on tablet views */
+  }
+}
+
+/* 4. Tablets Portrait & Smaller Screens (under 768px) */
+@media (max-width: 768px) {
+  header {
+    padding: 16px 24px;
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-nav-toggle {
+    display: block !important;
+  }
+  section {
+    padding: 60px 16px;
+  }
+  .section-header {
+    margin-bottom: 40px;
+  }
+  .section-title {
+    font-size: 32px;
+  }
+  
+  /* Stacking columns */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .info-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .community-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  /* Centering stacked card elements to keep visual balance */
+  .project-card, .award-card, .community-card {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 5. Mobile Landscape / Small Tablets (under 600px) */
+@media (max-width: 600px) {
+  .form-group-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .contact-wrapper {
+    gap: 32px;
+  }
+}
+
+/* 6. Mobile Portrait / Standard Phones (under 480px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+  .hero-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 0 8px;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .awards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .about-photo {
+    max-width: 240px;
+    margin: 0 auto 24px auto;
+  }
+  .logo {
+    font-size: 20px;
+  }
+}
+
+/* 7. Extra-Small Mobile Devices (under 360px) */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 34px;
+  }
+  .logo {
+    font-size: 18px;
+  }
+  .loading-text {
+    font-size: 16px;
+  }
+}
+
+
