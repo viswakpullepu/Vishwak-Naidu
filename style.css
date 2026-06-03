@@ -1742,20 +1742,51 @@ html.lenis, html.lenis body {
   .resume-timeline-title { font-size: 17px; }
   .resume-content { min-height: unset; }
 
-  /* Projects / Cards */
-  .projects-grid { grid-template-columns: 1fr; gap: 20px; }
-  .community-grid { grid-template-columns: 1fr; gap: 20px; }
+  /* Projects — horizontal swipe carousel */
+  .projects-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px !important;
+    padding: 8px 4px 16px !important;
+    scrollbar-width: none;
+  }
+  .projects-grid::-webkit-scrollbar { display: none; }
+  .project-card {
+    flex: 0 0 78vw !important;
+    max-width: 320px !important;
+    scroll-snap-align: start;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+  }
 
-  /* Highlights */
+  /* Highlights — horizontal swipe carousel */
   #highlights .awards-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-    overflow-x: unset !important;
-    min-height: unset !important;
-    padding: 0 !important;
-    flex-wrap: unset !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px !important;
+    padding: 8px 4px 16px !important;
     margin-top: 0 !important;
+    min-height: unset !important;
+    scrollbar-width: none;
+  }
+  #highlights .awards-grid::-webkit-scrollbar { display: none; }
+  #highlights .award-card {
+    flex: 0 0 80vw !important;
+    max-width: 340px !important;
+    height: auto !important;
+    min-height: 200px !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    scroll-snap-align: start;
+    will-change: transform;
   }
 
   /* Contact */
@@ -1778,33 +1809,37 @@ html.lenis, html.lenis body {
 
   .resume-tab-btn { padding: 10px 14px; font-size: 12px; }
 
-  /* Certifications: single column on small mobile */
+  /* Certifications — smooth horizontal swipe carousel */
   .awards-grid {
-    flex-direction: column !important;
-    align-items: center !important;
-    overflow-x: unset !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px !important;
+    padding: 16px 4px 24px !important;
     min-height: unset !important;
-    padding: 20px 0 !important;
-    gap: 20px !important;
     margin-top: 0 !important;
+    scrollbar-width: none;
+    /* GPU acceleration for buttery scrolling */
+    will-change: scroll-position;
+    transform: translate3d(0,0,0);
   }
+  .awards-grid::-webkit-scrollbar { display: none; }
   .award-card {
-    flex: unset !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    height: auto !important;
-    min-height: 260px !important;
+    flex: 0 0 72vw !important;
+    max-width: 280px !important;
+    height: 300px !important;
     margin-left: 0 !important;
     transform: none !important;
+    scroll-snap-align: start;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    border-radius: 16px;
   }
-  .award-card:hover {
-    transform: translateY(-8px) scale(1.03) !important;
-  }
-
-  /* Highlights section */
-  #highlights .awards-grid {
-    grid-template-columns: 1fr !important;
-    padding: 0 !important;
+  .award-card:active {
+    transform: scale(0.97) !important;
   }
 
   .glass-card { padding: 22px; }
