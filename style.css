@@ -1586,6 +1586,39 @@ html.lenis, html.lenis body {
   }
 }
 
+/* --- STATUS DOT (Current Availability) --- */
+.status-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #2ecc71, 0 0 16px #2ecc71;
+  animation: naturalFlicker 3s ease-in-out infinite alternate;
+}
+
+@keyframes naturalFlicker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px #2ecc71, 0 0 20px #2ecc71;
+  }
+  30% {
+    opacity: 0.7;
+    transform: scale(0.95);
+    box-shadow: 0 0 6px #2ecc71, 0 0 12px #2ecc71;
+  }
+  60% {
+    opacity: 0.4;
+    transform: scale(0.9);
+    box-shadow: 0 0 4px #2ecc71, 0 0 8px #2ecc71;
+  }
+  80% {
+    opacity: 0.9;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px #2ecc71, 0 0 24px #2ecc71;
+  }
+}
+
 /* Responsiveness: Horizontal overlapping scroll for Mobile/Tablets */
 @media (max-width: 1024px) {
   .awards-grid {
