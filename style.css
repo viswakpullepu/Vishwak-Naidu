@@ -1619,47 +1619,241 @@ html.lenis, html.lenis body {
   }
 }
 
-/* Responsiveness: Horizontal overlapping scroll for Mobile/Tablets */
+/* =============================================
+   COMPREHENSIVE MOBILE & ALL-SCREEN RESPONSIVE
+   Breakpoints: 1600 | 1200 | 1024 | 900 | 768 | 600 | 480 | 360
+   ============================================= */
+
+/* ---- 1. Ultra-wide centering (1600px+) ---- */
+@media (min-width: 1600px) {
+  header {
+    padding-left: calc((100vw - 1200px) / 2);
+    padding-right: calc((100vw - 1200px) / 2);
+  }
+}
+
+/* ---- 2. Large Laptop / 1200px ---- */
+@media (max-width: 1200px) {
+  .about-grid { gap: 32px; }
+  .info-cards-grid { gap: 16px; }
+  .resume-wrapper { gap: 24px; }
+  .resume-tabs { min-width: 200px; }
+}
+
+/* ---- 3. Tablet Landscape / 1024px ---- */
 @media (max-width: 1024px) {
+  .floating-socials { display: none; }
+
+  /* Awards / certifications horizontal scroll */
   .awards-grid {
     flex-wrap: nowrap !important;
     justify-content: flex-start !important;
     overflow-x: auto !important;
-    padding: 60px 40px !important;
+    padding: 60px 32px !important;
     min-height: 440px !important;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     gap: 0;
   }
-  
-  .awards-grid::-webkit-scrollbar {
-    height: 6px;
-  }
-  
+  .awards-grid::-webkit-scrollbar { height: 6px; }
   .awards-grid::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
     border-radius: 10px;
   }
-  
   .award-card {
     flex: 0 0 230px !important;
     height: 310px !important;
     margin-left: -90px !important;
     scroll-snap-align: center;
-    transform: rotate(0deg) translateY(0px) !important; /* Neutralized fan on touch devices for swipe clarity */
+    transform: rotate(0deg) translateY(0px) !important;
   }
-  
-  .award-card:first-child {
-    margin-left: 0 !important;
-  }
-  
-  .award-card:hover {
-    transform: translateY(-20px) scale(1.08) !important;
-  }
-  
-  .cert-modal-content {
-    width: 95vw;
-    height: 90vh;
-  }
+  .award-card:first-child { margin-left: 0 !important; }
+  .award-card:hover { transform: translateY(-20px) scale(1.08) !important; }
+
+  .cert-modal-content { width: 95vw; height: 90vh; }
 }
 
+/* ---- 4. Tablet Portrait / 900px ---- */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .info-cards-grid { grid-template-columns: 1fr; }
+  .contact-wrapper { grid-template-columns: 1fr; gap: 48px; }
+  .resume-wrapper { flex-direction: column; }
+  .resume-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+    gap: 10px;
+    padding-bottom: 8px;
+    min-width: unset;
+  }
+  .resume-tab-btn {
+    white-space: nowrap;
+    padding: 12px 18px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .resume-content { min-height: unset; }
+}
+
+/* ---- 5. Mobile / Tablet Portrait / 768px ---- */
+@media (max-width: 768px) {
+  /* Header */
+  header { padding: 14px 20px; }
+  .desktop-nav { display: none !important; }
+  .mobile-nav-toggle { display: block !important; }
+
+  /* Sections */
+  section { padding: 60px 16px; }
+  .section-header { margin-bottom: 36px; }
+  .section-title { font-size: 28px; }
+  .section-tag { font-size: 17px; }
+
+  /* Hero */
+  .hero-title { font-size: 13vw; }
+  .hero-subtitle {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 0 8px;
+  }
+  .hero-subtitle-top { font-size: 22px; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .info-cards-grid { grid-template-columns: 1fr; }
+  .bio-text { font-size: 15px; }
+
+  /* Resume */
+  .resume-wrapper { flex-direction: column; gap: 20px; }
+  .resume-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 8px;
+    gap: 10px;
+    min-width: unset;
+  }
+  .resume-tab-btn {
+    white-space: nowrap;
+    padding: 11px 16px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .resume-timeline-title { font-size: 17px; }
+  .resume-content { min-height: unset; }
+
+  /* Projects / Cards */
+  .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+  .community-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Highlights */
+  #highlights .awards-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    overflow-x: unset !important;
+    min-height: unset !important;
+    padding: 0 !important;
+    flex-wrap: unset !important;
+    margin-top: 0 !important;
+  }
+
+  /* Contact */
+  .contact-wrapper { grid-template-columns: 1fr; gap: 36px; }
+  .form-group-row { grid-template-columns: 1fr; }
+  .detail-value { font-size: 14px; }
+
+  /* Footer */
+  footer { padding: 28px 16px; }
+  .footer-text { font-size: 11px; }
+}
+
+/* ---- 6. Small Mobile / 600px ---- */
+@media (max-width: 600px) {
+  section { padding: 48px 14px; }
+  .section-title { font-size: 24px; }
+
+  .hero-title { font-size: 14vw; line-height: 1.05; }
+  .hero-subtitle { font-size: 9px; letter-spacing: 0.1em; }
+
+  .resume-tab-btn { padding: 10px 14px; font-size: 12px; }
+
+  /* Certifications: single column on small mobile */
+  .awards-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+    overflow-x: unset !important;
+    min-height: unset !important;
+    padding: 20px 0 !important;
+    gap: 20px !important;
+    margin-top: 0 !important;
+  }
+  .award-card {
+    flex: unset !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    height: auto !important;
+    min-height: 260px !important;
+    margin-left: 0 !important;
+    transform: none !important;
+  }
+  .award-card:hover {
+    transform: translateY(-8px) scale(1.03) !important;
+  }
+
+  /* Highlights section */
+  #highlights .awards-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 !important;
+  }
+
+  .glass-card { padding: 22px; }
+  .contact-form-box, .contact-details-box { padding: 0; }
+  .social-icons-row { gap: 12px; }
+}
+
+/* ---- 7. Standard Phones / 480px ---- */
+@media (max-width: 480px) {
+  header { padding: 12px 16px; }
+  .logo { font-size: 18px; }
+
+  .hero-title { font-size: 11.5vw; line-height: 1.0; }
+  .hero-subtitle { font-size: 8.5px; letter-spacing: 0.08em; padding: 0 4px; }
+  .hero-btn { padding: 13px 24px; font-size: 12px; }
+
+  section { padding: 44px 12px; }
+  .section-title { font-size: 22px; }
+
+  .resume-tabs { gap: 8px; }
+  .resume-tab-btn { padding: 10px 12px; font-size: 12px; gap: 8px; }
+  .resume-tab-btn i { font-size: 15px; }
+  .resume-timeline-title { font-size: 16px; }
+  .resume-timeline-org { font-size: 13px; }
+
+  .skill-badge { font-size: 11px; padding: 5px 12px; }
+  .skill-category h4 { font-size: 15px; }
+
+  .projects-grid { gap: 16px; }
+  .project-title { font-size: 17px; }
+
+  .detail-value { font-size: 13px; }
+  .detail-icon-box { width: 40px; height: 40px; font-size: 16px; }
+
+  .availability-card { padding: 20px; }
+  .availability-desc { font-size: 12px; }
+}
+
+/* ---- 8. Extra-Small Phones / 360px ---- */
+@media (max-width: 360px) {
+  .logo { font-size: 16px; }
+  .hero-title { font-size: 10.5vw; }
+  .hero-subtitle { font-size: 8px; }
+  .loading-text { font-size: 16px; }
+  .section-title { font-size: 20px; }
+
+  .resume-tab-btn { padding: 9px 10px; font-size: 11px; }
+  .resume-timeline-title { font-size: 15px; }
+
+  .skill-badge { font-size: 10px; padding: 4px 10px; }
+  section { padding: 36px 10px; }
+}
