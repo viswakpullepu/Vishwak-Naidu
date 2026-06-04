@@ -2011,3 +2011,14 @@ body.dark-web-mode .logo-text, body.dark-web-mode h1, body.dark-web-mode h2, bod
   80% { transform: translate(2px, -2px) }
   100% { transform: translate(0) }
 }
+
+/* UGLY MODE */
+body.ugly-mode, body.ugly-mode * {
+  font-family: "Comic Sans MS", "Comic Sans", cursive !important;
+  color: #ff00ff !important;
+  background-color: #39ff14 !important;
+  border-color: #ff00ff !important;
+}
+body.ugly-mode img {
+  filter: sepia(100%) hue-rotate(90deg) saturate(300%) !important;
+}

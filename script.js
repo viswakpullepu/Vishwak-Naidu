@@ -961,6 +961,87 @@ if (secretTrigger && eeModal) {
           return;
         }
         
+        // --- NEW EASTER EGGS ---
+        if (val === 'flip' || val === 'stranger things') {
+          let txt = "> INVERTING GRAVITY PROTOCOLS...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                document.body.style.transition = 'transform 3s ease-in-out';
+                document.body.style.transform = document.body.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+                eeModal.classList.add('hidden');
+              }, 1000);
+            }
+          }
+          typeRes();
+          return;
+        }
+
+        if (val === 'ugly' || val === 'comic sans') {
+          let txt = "> WARNING: DEGRADING AESTHETICS TO 1999...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                document.body.classList.toggle('ugly-mode');
+                eeModal.classList.add('hidden');
+              }, 1000);
+            }
+          }
+          typeRes();
+          return;
+        }
+
+        if (val === 'hack' || val === 'sudo rm -rf /') {
+          let txt = "> CRITICAL BREACH DETECTED...\n> INITIATING RICKROLL DEFENSE MECHANISM...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+                eeModal.classList.add('hidden');
+              }, 1000);
+            }
+          }
+          typeRes();
+          return;
+        }
+
+        if (val === 'pew pew') {
+          let txt = "> DEPLOYING ASTEROIDS FIGHTER...\n> PRESS SPACE TO SHOOT, ARROW KEYS TO MOVE.";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                var s = document.createElement('script');
+                s.type='text/javascript';
+                document.body.appendChild(s);
+                s.src='https://hi.kickassapp.com/kickass.js';
+                eeModal.classList.add('hidden');
+              }, 1000);
+            }
+          }
+          typeRes();
+          return;
+        }
+        
         if (val === 'matrix') {
           let txt = "> Wake up, Neo...\n> The Matrix has you...\n> Follow the white rabbit.";
           let cIdx = 0;
