@@ -690,3 +690,63 @@ try {
 } catch (e) {
   console.error("Resume tabs initialization error:", e);
 }
+
+// --- CONTACT FORM SUBMISSION ---
+try {
+  const contactForm = document.getElementById("portfolio-contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector("button[type='submit']");
+      const originalText = submitBtn.innerHTML;
+      
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        submitBtn.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+        submitBtn.disabled = true;
+
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          submitBtn.innerHTML = '<span>Message Sent!</span><i class="fas fa-check"></i>';
+          submitBtn.style.backgroundColor = 'rgba(76, 175, 80, 0.2)';
+          submitBtn.style.color = '#4CAF50';
+          contactForm.reset();
+          
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.backgroundColor = '';
+            submitBtn.style.color = '';
+          }, 3000);
+        } else {
+          throw new Error(result.error || 'Failed to send message');
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        submitBtn.innerHTML = '<span>Error! Try again.</span><i class="fas fa-exclamation-triangle"></i>';
+        submitBtn.style.backgroundColor = 'rgba(244, 67, 54, 0.2)';
+        submitBtn.style.color = '#f44336';
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          submitBtn.style.backgroundColor = '';
+          submitBtn.style.color = '';
+        }, 3000);
+      }
+    });
+  }
+} catch (e) {
+  console.error("Contact form initialization error:", e);
+}
