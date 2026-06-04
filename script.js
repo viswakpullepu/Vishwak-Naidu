@@ -901,6 +901,25 @@ if (secretTrigger && eeModal) {
           return;
         }
         
+        if (val === 'matrix') {
+          let txt = "> Wake up, Neo...\n> The Matrix has you...\n> Follow the white rabbit.";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 50);
+            } else {
+              setTimeout(() => {
+                eeModal.classList.add('hidden');
+                startMatrixRain();
+              }, 1500);
+            }
+          }
+          typeRes();
+          return;
+        }
+        
         if (val === 'sudo hire vishwak') {
           let txt = "> INITIATING HIRING PROTOCOL...\n> DISPENSING CONFETTI...\n> PLEASE WAIT...";
           let cIdx = 0;
@@ -1315,6 +1334,76 @@ if (darkWebTrigger) {
       osc.start();
       osc.stop(audioCtx.currentTime + 0.5);
     } catch(e) {}
+  });
+}
+
+// --- MATRIX DIGITAL RAIN ---
+function startMatrixRain() {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'matrix-canvas';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.zIndex = '99999999';
+  canvas.style.pointerEvents = 'none'; // so you can still click things underneath
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?/アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  const charArray = characters.split('');
+  
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
+  const drops = [];
+  for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+  }
+
+  function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = '#0F0';
+    ctx.font = fontSize + 'px monospace';
+    
+    for (let i = 0; i < drops.length; i++) {
+      const text = charArray[Math.floor(Math.random() * charArray.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  const matrixInterval = setInterval(draw, 33);
+  
+  // Create an exit button for the matrix rain
+  const exitBtn = document.createElement('button');
+  exitBtn.textContent = 'EXIT MATRIX';
+  exitBtn.style.position = 'fixed';
+  exitBtn.style.bottom = '20px';
+  exitBtn.style.right = '20px';
+  exitBtn.style.zIndex = '100000000';
+  exitBtn.style.padding = '10px 20px';
+  exitBtn.style.background = '#0F0';
+  exitBtn.style.color = '#000';
+  exitBtn.style.fontFamily = 'monospace';
+  exitBtn.style.fontWeight = 'bold';
+  exitBtn.style.border = 'none';
+  exitBtn.style.cursor = 'pointer';
+  document.body.appendChild(exitBtn);
+  
+  exitBtn.addEventListener('click', () => {
+    clearInterval(matrixInterval);
+    canvas.remove();
+    exitBtn.remove();
   });
 }
 
