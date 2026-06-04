@@ -1,8 +1,0 @@
-{
-  "name": "vishwak-naidu-portfolio",
-  "version": "1.0.0",
-  "description": "Personal portfolio of Vishwak Pullepu",
-  "dependencies": {
-    "mongodb": "^6.3.0"
-  }
-}
