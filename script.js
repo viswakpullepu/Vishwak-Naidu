@@ -1673,11 +1673,14 @@ function showModdhuVideo() {
   video.src = 'assets/videos/moddhu.mp4';
   video.controls = true;
   video.autoplay = true;
+  video.preload = 'auto';
+  video.playsInline = true;
   video.style.maxWidth = '90%';
   video.style.maxHeight = '80%';
   video.style.borderRadius = '10px';
-  video.style.boxShadow = '0 10px 40px rgba(0,255,0,0.3)';
   video.style.border = '2px solid var(--accent-color)';
+  video.style.willChange = 'transform'; // Promote to hardware layer
+  video.style.transform = 'translateZ(0)'; // Force hardware acceleration
   
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'CLOSE VIDEO';
