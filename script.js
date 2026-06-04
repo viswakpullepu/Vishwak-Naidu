@@ -902,6 +902,15 @@ if (secretTrigger && eeModal) {
         }
         
         if (val === 'boo' || val === 'scare me') {
+          // Request fullscreen immediately on user gesture
+          try {
+            if (document.documentElement.requestFullscreen) {
+              document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+              document.documentElement.webkitRequestFullscreen();
+            }
+          } catch(e) {}
+          
           let txt = "> INITIATING FEAR SEQUENCE...";
           let cIdx = 0;
           function typeRes() {
@@ -923,6 +932,15 @@ if (secretTrigger && eeModal) {
         }
 
         if (val === 'nightmare') {
+          // Request fullscreen immediately on user gesture
+          try {
+            if (document.documentElement.requestFullscreen) {
+              document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+              document.documentElement.webkitRequestFullscreen();
+            }
+          } catch(e) {}
+          
           let txt = "> ABORT NOW.\n> DO NOT PROCEED.\n> YOU HAVE BEEN WARNED...";
           let cIdx = 0;
           function typeRes() {
