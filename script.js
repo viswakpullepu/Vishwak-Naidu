@@ -542,33 +542,62 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// --- CONTACT FORM SUCCESS UI STATE MORPH ---
+// --- CONTACT FORM SUBMISSION (FORMSPREE) ---
 const contactForm = document.getElementById("portfolio-contact-form");
 if (contactForm) {
-  contactForm.addEventListener("submit", (e) => {
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector(".submit-btn");
     const btnText = btn.querySelector("span");
     const originalText = btnText.textContent;
+    const icon = btn.querySelector("i");
 
     btnText.textContent = "Sending...";
     btn.disabled = true;
 
-    setTimeout(() => {
-      btnText.textContent = "Message Sent!";
-      btn.style.background = "#2e7d32";
-      btn.style.borderColor = "#2e7d32";
-      btn.querySelector("i").className = "fas fa-check";
-      contactForm.reset();
+    // Get form data
+    const formData = new FormData(contactForm);
 
-      setTimeout(() => {
-        btnText.textContent = originalText;
-        btn.style.background = "";
-        btn.style.borderColor = "";
-        btn.querySelector("i").className = "fas fa-paper-plane";
-        btn.disabled = false;
-      }, 3000);
-    }, 1500);
+    try {
+      // Formspree endpoint URL
+      const response = await fetch("https://formspree.io/f/xpqezneo", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        // Success state
+        btnText.textContent = "Message Sent!";
+        btn.style.background = "#2e7d32";
+        btn.style.borderColor = "#2e7d32";
+        icon.className = "fas fa-check";
+        contactForm.reset();
+      } else {
+        // Error state from Formspree
+        btnText.textContent = "Oops! Error.";
+        btn.style.background = "#c62828";
+        btn.style.borderColor = "#c62828";
+        icon.className = "fas fa-exclamation-triangle";
+      }
+    } catch (error) {
+      // Network/Fetch error state
+      btnText.textContent = "Network Error!";
+      btn.style.background = "#c62828";
+      btn.style.borderColor = "#c62828";
+      icon.className = "fas fa-wifi";
+    }
+
+    // Reset button back to normal after 3 seconds
+    setTimeout(() => {
+      btnText.textContent = originalText;
+      btn.style.background = "";
+      btn.style.borderColor = "";
+      icon.className = "fas fa-paper-plane";
+      btn.disabled = false;
+    }, 3000);
   });
 }
 
