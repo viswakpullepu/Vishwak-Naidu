@@ -723,31 +723,36 @@ const eeGalleryMsg = document.getElementById('ee-gallery-msg');
 
 const friendsData = {
   // Nikitha aliases
-  'nikitha': { codename: 'The Catalyst', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
-  'nikita': { codename: 'The Catalyst', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
-  'nikki': { codename: 'The Catalyst', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
+  'nikitha': { codename: 'The Catalyst', folderKey: 'nikitha', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
+  'nikita': { codename: 'The Catalyst', folderKey: 'nikitha', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
+  'nikki': { codename: 'The Catalyst', folderKey: 'nikitha', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
   
   // Sahithi aliases
-  'sahithi': { codename: 'The Spark', msg: 'Hey Sahithi! The brightest energy in the group. Never stop bringing those good vibes.' },
-  'sahiti': { codename: 'The Spark', msg: 'Hey Sahithi! The brightest energy in the group. Never stop bringing those good vibes.' },
+  'sahithi': { codename: 'The Spark', folderKey: 'sahithi', msg: 'Hey Sahithi! The brightest energy in the group. Never stop bringing those good vibes.' },
+  'sahiti': { codename: 'The Spark', folderKey: 'sahithi', msg: 'Hey Sahithi! The brightest energy in the group. Never stop bringing those good vibes.' },
   
   // Akhilesh aliases
-  'akhilesh': { codename: 'The Anchor', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
-  'akilesh': { codename: 'The Anchor', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
-  'akhil': { codename: 'The Anchor', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
+  'akhilesh': { codename: 'The Anchor', folderKey: 'akhilesh', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
+  'akilesh': { codename: 'The Anchor', folderKey: 'akhilesh', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
+  'akhil': { codename: 'The Anchor', folderKey: 'akhilesh', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
   
   // Akshara aliases
-  'akshara': { codename: 'The Radiance', msg: 'Hey Akshara! Always bringing the best smiles and the best moments. Keep shining.' },
-  'aksara': { codename: 'The Radiance', msg: 'Hey Akshara! Always bringing the best smiles and the best moments. Keep shining.' },
+  'akshara': { codename: 'The Radiance', folderKey: 'akshara', msg: 'Hey Akshara! Always bringing the best smiles and the best moments. Keep shining.' },
+  'aksara': { codename: 'The Radiance', folderKey: 'akshara', msg: 'Hey Akshara! Always bringing the best smiles and the best moments. Keep shining.' },
   
   // Vashishta aliases
-  'vashishta': { codename: 'The Wingman', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
-  'vashishtha': { codename: 'The Wingman', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
-  'vashista': { codename: 'The Wingman', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
+  'vashishta': { codename: 'The Wingman', folderKey: 'vashishta', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
+  'vashishtha': { codename: 'The Wingman', folderKey: 'vashishta', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
+  'vashista': { codename: 'The Wingman', folderKey: 'vashishta', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
   
+  // Jayavardan aliases
+  'jaya vardan': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
+  'jayavardan': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
+  'jaya': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
+
   // Group aliases
-  'squad': { codename: 'Core Memory', msg: 'The best friends a guy could ask for. Squad forever.' },
-  'cvr2024': { codename: 'Core Memory', msg: 'The best friends a guy could ask for. Squad forever.' }
+  'squad': { codename: 'Core Memory', folderKey: 'squad', msg: 'The best friends a guy could ask for. Squad forever.' },
+  'cvr2024': { codename: 'Core Memory', folderKey: 'squad', msg: 'The best friends a guy could ask for. Squad forever.' }
 };
 
 if (secretTrigger && eeModal) {
@@ -984,6 +989,28 @@ if (secretTrigger && eeModal) {
                 eeGallery.classList.remove('hidden');
                 eeGalleryTitle.textContent = "Agent: " + matchedFriend.codename;
                 eeGalleryMsg.textContent = matchedFriend.msg;
+                
+                const galleryContainer = document.getElementById('scrolling-gallery');
+                if (galleryContainer) {
+                  galleryContainer.innerHTML = '';
+                  const assets = window.galleryAssets && window.galleryAssets[matchedFriend.folderKey] ? window.galleryAssets[matchedFriend.folderKey] : [];
+                  
+                  if (assets.length === 0) {
+                    galleryContainer.innerHTML = '<p style="color:var(--accent-color); padding: 50px;">No classified intel found for this agent.</p>';
+                  } else {
+                    for (let i = 0; i < 2; i++) {
+                      assets.forEach(src => {
+                        let img = document.createElement('img');
+                        img.src = src;
+                        img.alt = matchedFriend.codename;
+                        galleryContainer.appendChild(img);
+                        if (typeof attachTeasingToImage === 'function') {
+                          attachTeasingToImage(img);
+                        }
+                      });
+                    }
+                  }
+                }
               }, 1000);
             }
           }
@@ -1058,8 +1085,7 @@ if (secretTrigger && eeModal) {
     { text: "Downloading forcefully to your device right now... 😂", btn: "Get it over with!" }
   ];
 
-  const galleryImages = document.querySelectorAll('.scrolling-gallery img');
-  galleryImages.forEach(img => {
+  function attachTeasingToImage(img) {
     img.style.cursor = 'pointer';
     img.addEventListener('click', () => {
       let step = 0;
@@ -1188,7 +1214,7 @@ if (secretTrigger && eeModal) {
         }
       });
     });
-  });
+  }
 }
 
 // --- LASER POINTER CURSOR ---

@@ -1,0 +1,42 @@
+const galleryAssets = {
+  "squad": [
+    "assets/squad_group/IMG-20251205-WA0012.jpg",
+    "assets/squad_group/IMG-20251213-WA0011.jpg",
+    "assets/squad_group/IMG-20251213-WA0049(1).png",
+    "assets/squad_group/IMG-20251213-WA0050.jpg",
+    "assets/squad_group/IMG-20251213-WA0053(1).jpg",
+    "assets/squad_group/IMG-20251213-WA0055.jpg",
+    "assets/squad_group/IMG-20260216-WA0003.jpg",
+    "assets/squad_group/IMG-20260313-WA0004.jpg",
+    "assets/squad_group/IMG-20260313-WA0026(1).jpg",
+    "assets/squad_group/IMG-20260313-WA0027 (1).jpg",
+    "assets/squad_group/IMG-20260313-WA0027.jpg",
+    "assets/squad_group/IMG-20260314-WA0056.jpg",
+    "assets/squad_group/IMG-20260314-WA0057 (1).jpg",
+    "assets/squad_group/IMG-20260314-WA0057.jpg",
+    "assets/squad_group/IMG20260314100209.jpg",
+    "assets/squad_group/IMG20260314100211.jpg",
+    "assets/squad_group/IMG20260314100214.jpg",
+    "assets/squad_group/IMG20260314100215.jpg",
+    "assets/squad_group/IMG20260314100216.jpg",
+    "assets/squad_group/Screenshot_20251213_082318.jpg",
+    "assets/squad_group/Screenshot_20260314_204723.jpg",
+    "assets/squad_group/Screenshot_2026_0406_213519.jpg"
+  ],
+  "akhilesh": [],
+  "akshara": [],
+  "jayavardan": [
+    "assets/friends/jayavardan/20260313_102542.jpg",
+    "assets/friends/jayavardan/file_0000000014cc71fd8ed1bf2b4f7156f7.png",
+    "assets/friends/jayavardan/file_00000000b0a871fd8a4034023e86808b.png",
+    "assets/friends/jayavardan/IMG_20260510_184646.jpg",
+    "assets/friends/jayavardan/IMG_20260510_184741.jpg",
+    "assets/friends/jayavardan/IMG_20260510_191717.jpg",
+    "assets/friends/jayavardan/Snapchat-1220280891.jpg",
+    "assets/friends/jayavardan/Snapchat-2011084385.jpg",
+    "assets/friends/jayavardan/Snapchat-257923605.jpg"
+  ],
+  "nikitha": [],
+  "sahithi": [],
+  "vashishta": []
+};
