@@ -557,6 +557,26 @@ if (contactForm) {
 
     // Get form data
     const formData = new FormData(contactForm);
+    const emailStr = formData.get("email");
+
+    // Email Validation Regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailStr)) {
+      btnText.textContent = "Invalid Email!";
+      btn.style.background = "#c62828";
+      btn.style.borderColor = "#c62828";
+      icon.className = "fas fa-times-circle";
+      
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        btn.style.background = "";
+        btn.style.borderColor = "";
+        icon.className = "fas fa-paper-plane";
+        btn.disabled = false;
+      }, 3000);
+      
+      return; // Stop form submission
+    }
 
     try {
       // Formspree endpoint URL
