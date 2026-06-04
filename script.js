@@ -921,6 +921,27 @@ if (secretTrigger && eeModal) {
           typeRes();
           return;
         }
+
+        if (val === 'nightmare') {
+          let txt = "> ABORT NOW.\n> DO NOT PROCEED.\n> YOU HAVE BEEN WARNED...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 100);
+            } else {
+              setTimeout(() => {
+                triggerNightmare();
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 2000);
+            }
+          }
+          typeRes();
+          return;
+        }
         
         if (val === 'matrix') {
           let txt = "> Wake up, Neo...\n> The Matrix has you...\n> Follow the white rabbit.";
@@ -1399,6 +1420,121 @@ function triggerJumpScare() {
   setTimeout(() => {
     scareContainer.remove();
   }, 800);
+}
+
+// --- 2-MINUTE NIGHTMARE ---
+function triggerNightmare() {
+  const scareContainer = document.createElement('div');
+  scareContainer.style.position = 'fixed';
+  scareContainer.style.top = '0';
+  scareContainer.style.left = '0';
+  scareContainer.style.width = '100vw';
+  scareContainer.style.height = '100vh';
+  scareContainer.style.backgroundColor = '#000';
+  scareContainer.style.zIndex = '99999999999';
+  scareContainer.style.display = 'flex';
+  scareContainer.style.justifyContent = 'center';
+  scareContainer.style.alignItems = 'center';
+  
+  const scareImg = document.createElement('img');
+  // Different scary face gif
+  scareImg.src = 'https://media.giphy.com/media/xT9KVjXlGL5P0TVszu/giphy.gif';
+  scareImg.style.width = '100%';
+  scareImg.style.height = '100%';
+  scareImg.style.objectFit = 'cover';
+  
+  // Glitch effect on image
+  scareImg.style.animation = 'glitch 0.2s infinite alternate';
+  
+  scareContainer.appendChild(scareImg);
+  document.body.appendChild(scareContainer);
+  
+  // Synthesize a creepy drone that lasts 2 minutes
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const lfo = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    const lfoGain = audioCtx.createGain();
+    
+    osc1.type = 'sawtooth';
+    osc2.type = 'triangle';
+    lfo.type = 'sine';
+    
+    osc1.frequency.setValueAtTime(100, audioCtx.currentTime);
+    osc2.frequency.setValueAtTime(102, audioCtx.currentTime);
+    lfo.frequency.setValueAtTime(5, audioCtx.currentTime); // 5hz wobble
+    
+    lfo.connect(lfoGain);
+    lfoGain.gain.value = 10;
+    lfoGain.connect(osc1.frequency);
+    lfoGain.connect(osc2.frequency);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(1.5, audioCtx.currentTime + 2); // fade in over 2s
+    
+    // Add random high pitch screams every few seconds
+    const screamInterval = setInterval(() => {
+      if(Math.random() > 0.6) {
+        osc1.frequency.linearRampToValueAtTime(3000 + Math.random()*2000, audioCtx.currentTime + 0.1);
+        osc1.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.5);
+      }
+    }, 2000);
+    
+    osc1.connect(gainNode);
+    osc2.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    lfo.start();
+    osc1.start();
+    osc2.start();
+    
+    const duration = 120; // 2 minutes in seconds
+    osc1.stop(audioCtx.currentTime + duration);
+    osc2.stop(audioCtx.currentTime + duration);
+    lfo.stop(audioCtx.currentTime + duration);
+    
+    setTimeout(() => clearInterval(screamInterval), duration * 1000);
+  } catch(e) {}
+  
+  // Flash red background
+  let flashInterval = setInterval(() => {
+    scareImg.style.filter = Math.random() > 0.5 ? 'invert(1) sepia(1) hue-rotate(300deg) saturate(10)' : 'none';
+  }, 100);
+  
+  // Vibrate intensely on mobile
+  let vibeInterval;
+  if (navigator.vibrate) {
+    vibeInterval = setInterval(() => {
+      navigator.vibrate([300, 100, 300, 100, 300]);
+    }, 1000);
+  }
+  
+  // Emergency exit (tiny hidden button in corner in case it's too much)
+  const exitBtn = document.createElement('div');
+  exitBtn.style.position = 'fixed';
+  exitBtn.style.top = '0';
+  exitBtn.style.right = '0';
+  exitBtn.style.width = '50px';
+  exitBtn.style.height = '50px';
+  exitBtn.style.cursor = 'pointer';
+  scareContainer.appendChild(exitBtn);
+  
+  exitBtn.addEventListener('click', () => {
+    scareContainer.remove();
+    clearInterval(flashInterval);
+    if(vibeInterval) clearInterval(vibeInterval);
+    // audio won't stop easily unless we reload or close context, but user can reload page
+    location.reload();
+  });
+  
+  // Remove after 2 minutes
+  setTimeout(() => {
+    scareContainer.remove();
+    clearInterval(flashInterval);
+    if(vibeInterval) clearInterval(vibeInterval);
+  }, 120000);
 }
 
 // --- DARK WEB MODE ---
