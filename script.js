@@ -1294,6 +1294,31 @@ function drawLaser(e) {
   anim.onfinish = () => laserDot.remove();
 }
 
+// --- DARK WEB MODE ---
+const darkWebTrigger = document.getElementById('dark-web-trigger');
+if (darkWebTrigger) {
+  darkWebTrigger.addEventListener('click', () => {
+    document.body.classList.toggle('dark-web-mode');
+    
+    // Add glitch sound effect
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(100, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.5);
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.5);
+    } catch(e) {}
+  });
+}
+
+
 // --- KONAMI CODE SNAKE GAME ---
 const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowRight', 'ArrowLeft'];
 let konamiPosition = 0;
