@@ -1218,17 +1218,23 @@ function toggleLaser() {
   if (laserActive) {
     document.body.style.cursor = 'crosshair';
     document.addEventListener('mousemove', drawLaser);
+    document.addEventListener('touchmove', drawLaser, {passive: false});
   } else {
     document.body.style.cursor = '';
     document.removeEventListener('mousemove', drawLaser);
+    document.removeEventListener('touchmove', drawLaser);
   }
 }
 
 function drawLaser(e) {
+  if (e.type === 'touchmove') e.preventDefault(); // Prevent scrolling while drawing laser
+  let clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+  let clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
   const laserDot = document.createElement('div');
   laserDot.style.position = 'fixed';
-  laserDot.style.left = e.clientX + 'px';
-  laserDot.style.top = e.clientY + 'px';
+  laserDot.style.left = clientX + 'px';
+  laserDot.style.top = clientY + 'px';
   laserDot.style.width = '6px';
   laserDot.style.height = '6px';
   laserDot.style.borderRadius = '50%';
@@ -1248,4 +1254,237 @@ function drawLaser(e) {
   });
   
   anim.onfinish = () => laserDot.remove();
+}
+
+// --- KONAMI CODE SNAKE GAME ---
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowRight', 'ArrowLeft'];
+let konamiPosition = 0;
+
+function checkKonami(input) {
+  if (input === konamiCode[konamiPosition]) {
+    konamiPosition++;
+    if (konamiPosition === konamiCode.length) {
+      launchSnakeGame();
+      konamiPosition = 0;
+    }
+  } else {
+    konamiPosition = 0;
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  checkKonami(e.key);
+});
+
+let touchStartX = 0;
+let touchStartY = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, {passive: true});
+
+document.addEventListener('touchend', e => {
+  let touchEndX = e.changedTouches[0].screenX;
+  let touchEndY = e.changedTouches[0].screenY;
+  handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+}, {passive: true});
+
+function handleSwipe(startX, startY, endX, endY) {
+  let diffX = endX - startX;
+  let diffY = endY - startY;
+  if (Math.abs(diffX) < 30 && Math.abs(diffY) < 30) return; // Tap, not swipe
+  
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+    if (diffX > 0) checkKonami('ArrowRight');
+    else checkKonami('ArrowLeft');
+  } else {
+    if (diffY > 0) checkKonami('ArrowDown');
+    else checkKonami('ArrowUp');
+  }
+}
+
+function launchSnakeGame() {
+  // Create Modal
+  if (document.getElementById('snake-modal')) return;
+  
+  const modal = document.createElement('div');
+  modal.id = 'snake-modal';
+  
+  const title = document.createElement('h1');
+  title.textContent = "HACKER SNAKE";
+  title.style.marginBottom = '10px';
+  title.style.color = '#0f0';
+  
+  const scoreBoard = document.createElement('div');
+  scoreBoard.id = 'snake-score';
+  scoreBoard.textContent = "SCORE: 0";
+  
+  const canvas = document.createElement('canvas');
+  canvas.id = 'snake-canvas';
+  canvas.width = 400;
+  canvas.height = 400;
+  
+  const gameOverScreen = document.createElement('div');
+  gameOverScreen.id = 'snake-gameover';
+  
+  const gameOverTitle = document.createElement('h2');
+  gameOverTitle.textContent = "SYSTEM FAILURE";
+  
+  const finalScore = document.createElement('p');
+  finalScore.style.fontSize = '20px';
+  finalScore.textContent = "Final Score: 0";
+  
+  const restartBtn = document.createElement('button');
+  restartBtn.className = 'snake-btn';
+  restartBtn.textContent = "REBOOT (Play Again)";
+  
+  const exitBtn = document.createElement('button');
+  exitBtn.className = 'snake-btn';
+  exitBtn.textContent = "EXIT SYSTEM";
+  exitBtn.style.borderColor = '#f00';
+  exitBtn.style.color = '#f00';
+  exitBtn.style.marginTop = '10px';
+  
+  gameOverScreen.appendChild(gameOverTitle);
+  gameOverScreen.appendChild(finalScore);
+  gameOverScreen.appendChild(restartBtn);
+  gameOverScreen.appendChild(exitBtn);
+  
+  modal.appendChild(title);
+  modal.appendChild(scoreBoard);
+  modal.appendChild(canvas);
+  modal.appendChild(gameOverScreen);
+  document.body.appendChild(modal);
+  
+  if(window.lenis) { try { window.lenis.stop(); } catch(e){} }
+  
+  // Game Logic
+  const ctx = canvas.getContext('2d');
+  const gridSize = 20;
+  const tileCount = canvas.width / gridSize;
+  
+  let snake = [];
+  let velocityX = 0;
+  let velocityY = 0;
+  let foodX = 15;
+  let foodY = 15;
+  let score = 0;
+  let gameInterval;
+  
+  function resetGame() {
+    snake = [
+      {x: 10, y: 10},
+      {x: 10, y: 11},
+      {x: 10, y: 12}
+    ];
+    velocityX = 0;
+    velocityY = -1;
+    score = 0;
+    scoreBoard.textContent = "SCORE: 0";
+    placeFood();
+    gameOverScreen.style.display = 'none';
+    if(gameInterval) clearInterval(gameInterval);
+    gameInterval = setInterval(gameLoop, 100);
+  }
+  
+  function placeFood() {
+    foodX = Math.floor(Math.random() * tileCount);
+    foodY = Math.floor(Math.random() * tileCount);
+  }
+  
+  function gameLoop() {
+    // Move snake
+    let head = {x: snake[0].x + velocityX, y: snake[0].y + velocityY};
+    
+    // Check collision with walls
+    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+      return gameOver();
+    }
+    
+    // Check collision with self
+    for (let i = 0; i < snake.length; i++) {
+      if (head.x === snake[i].x && head.y === snake[i].y) {
+        return gameOver();
+      }
+    }
+    
+    snake.unshift(head);
+    
+    // Check collision with food
+    if (head.x === foodX && head.y === foodY) {
+      score += 10;
+      scoreBoard.textContent = "SCORE: " + score;
+      placeFood();
+    } else {
+      snake.pop();
+    }
+    
+    // Draw background
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw food
+    ctx.fillStyle = "red";
+    ctx.fillRect(foodX * gridSize, foodY * gridSize, gridSize - 2, gridSize - 2);
+    
+    // Draw snake
+    ctx.fillStyle = "lime";
+    for (let i = 0; i < snake.length; i++) {
+      ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 2, gridSize - 2);
+    }
+  }
+  
+  function gameOver() {
+    clearInterval(gameInterval);
+    finalScore.textContent = "Final Score: " + score;
+    gameOverScreen.style.display = 'flex';
+  }
+  
+  // Controls
+  function keyHandler(e) {
+    if (gameOverScreen.style.display === 'flex') return;
+    if (e.key === 'ArrowUp' && velocityY !== 1) { velocityX = 0; velocityY = -1; e.preventDefault(); }
+    if (e.key === 'ArrowDown' && velocityY !== -1) { velocityX = 0; velocityY = 1; e.preventDefault(); }
+    if (e.key === 'ArrowLeft' && velocityX !== 1) { velocityX = -1; velocityY = 0; e.preventDefault(); }
+    if (e.key === 'ArrowRight' && velocityX !== -1) { velocityX = 1; velocityY = 0; e.preventDefault(); }
+  }
+  
+  document.addEventListener('keydown', keyHandler);
+
+  let gameTouchStartX = 0;
+  let gameTouchStartY = 0;
+  
+  modal.addEventListener('touchstart', e => {
+    gameTouchStartX = e.changedTouches[0].screenX;
+    gameTouchStartY = e.changedTouches[0].screenY;
+  }, {passive: true});
+
+  modal.addEventListener('touchend', e => {
+    let gameTouchEndX = e.changedTouches[0].screenX;
+    let gameTouchEndY = e.changedTouches[0].screenY;
+    if (gameOverScreen.style.display === 'flex') return;
+
+    let diffX = gameTouchEndX - gameTouchStartX;
+    let diffY = gameTouchEndY - gameTouchStartY;
+    
+    if (Math.abs(diffX) < 20 && Math.abs(diffY) < 20) return;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0 && velocityX !== -1) { velocityX = 1; velocityY = 0; } // Right
+      else if (diffX < 0 && velocityX !== 1) { velocityX = -1; velocityY = 0; } // Left
+    } else {
+      if (diffY > 0 && velocityY !== -1) { velocityX = 0; velocityY = 1; } // Down
+      else if (diffY < 0 && velocityY !== 1) { velocityX = 0; velocityY = -1; } // Up
+    }
+  }, {passive: true});
+  
+  restartBtn.addEventListener('click', resetGame);
+  exitBtn.addEventListener('click', () => {
+    clearInterval(gameInterval);
+    document.removeEventListener('keydown', keyHandler);
+    modal.remove();
+    if(window.lenis) { try { window.lenis.start(); } catch(e){} }
+  });
+  
+  resetGame();
 }
