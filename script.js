@@ -900,6 +900,27 @@ if (secretTrigger && eeModal) {
           typeRes();
           return;
         }
+
+        if (val === 'moddhu') {
+          let txt = "> DECRYPTING CLASSIFIED VIDEO FILE...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 50);
+            } else {
+              setTimeout(() => {
+                showModdhuVideo();
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 1000);
+            }
+          }
+          typeRes();
+          return;
+        }
         
         if (val === 'boo' || val === 'scare me') {
           // Request fullscreen immediately on user gesture
@@ -1631,6 +1652,53 @@ function triggerNightmare() {
     clearInterval(flashInterval);
     if(vibeInterval) clearInterval(vibeInterval);
   }, 120000);
+}
+
+// --- MODDHU VIDEO EASTER EGG ---
+function showModdhuVideo() {
+  const vidContainer = document.createElement('div');
+  vidContainer.style.position = 'fixed';
+  vidContainer.style.top = '0';
+  vidContainer.style.left = '0';
+  vidContainer.style.width = '100vw';
+  vidContainer.style.height = '100vh';
+  vidContainer.style.backgroundColor = 'rgba(0,0,0,0.95)';
+  vidContainer.style.zIndex = '99999999999';
+  vidContainer.style.display = 'flex';
+  vidContainer.style.justifyContent = 'center';
+  vidContainer.style.alignItems = 'center';
+  vidContainer.style.flexDirection = 'column';
+  
+  const video = document.createElement('video');
+  video.src = 'assets/videos/moddhu.mp4';
+  video.controls = true;
+  video.autoplay = true;
+  video.style.maxWidth = '90%';
+  video.style.maxHeight = '80%';
+  video.style.borderRadius = '10px';
+  video.style.boxShadow = '0 10px 40px rgba(0,255,0,0.3)';
+  video.style.border = '2px solid var(--accent-color)';
+  
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = 'CLOSE VIDEO';
+  closeBtn.style.marginTop = '20px';
+  closeBtn.style.padding = '10px 20px';
+  closeBtn.style.background = 'var(--accent-color)';
+  closeBtn.style.color = '#000';
+  closeBtn.style.border = 'none';
+  closeBtn.style.borderRadius = '5px';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.style.fontWeight = 'bold';
+  closeBtn.style.fontFamily = 'monospace';
+  
+  closeBtn.addEventListener('click', () => {
+    video.pause();
+    vidContainer.remove();
+  });
+  
+  vidContainer.appendChild(video);
+  vidContainer.appendChild(closeBtn);
+  document.body.appendChild(vidContainer);
 }
 
 // --- DARK WEB MODE ---
