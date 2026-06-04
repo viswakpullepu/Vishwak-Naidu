@@ -821,7 +821,7 @@ if (secretTrigger && eeModal) {
     eeTerminal.classList.remove('hazard-shake');
   });
   
-  function unlockGalleryForFriend() {
+  function unlockGalleryForFriend(response) {
     let txt = "> CLEARANCE ACCEPTED.\n> Decrypting profile: " + matchedFriend.codename + "...";
     let cIdx = 0;
     function typeRes() {
@@ -986,7 +986,7 @@ if (secretTrigger && eeModal) {
         if(friendsData[val] || isJayaRegex) {
           matchedFriend = friendsData[val] || friendsData['jayavardan'];
           if (matchedFriend.folderKey === 'jayavardan') {
-             unlockGalleryForFriend();
+             unlockGalleryForFriend(response);
           } else {
             terminalState = 'SECRET';
             let txt = "> USER RECOGNIZED.\n> AWAITING SECRET CLEARANCE CODE:";
@@ -1026,7 +1026,7 @@ if (secretTrigger && eeModal) {
         }
       } else if (terminalState === 'SECRET') {
         if (val === 'hacker') {
-          unlockGalleryForFriend();
+          unlockGalleryForFriend(response);
         } else {
           let txt = "> INCORRECT CODE. SECURITY ALERT TRIGGERED.\n> INITIATING LOCKDOWN PROTOCOL...";
           terminalState = 'ID';
