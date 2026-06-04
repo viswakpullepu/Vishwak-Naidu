@@ -1064,27 +1064,23 @@ if (secretTrigger && eeModal) {
         let isJayaRegex = val.startsWith('j') && val.endsWith('n');
         if(friendsData[val] || isJayaRegex) {
           matchedFriend = friendsData[val] || friendsData['jayavardan'];
-          if (matchedFriend.folderKey === 'jayavardan') {
-             unlockGalleryForFriend(response);
-          } else {
-            terminalState = 'SECRET';
-            let txt = "> USER RECOGNIZED.\n> AWAITING SECRET CLEARANCE CODE:";
-            let cIdx = 0;
-            function typeRes() {
-              if(cIdx < txt.length) {
-                response.textContent += txt.charAt(cIdx);
-                cIdx++;
-                setTimeout(typeRes, 30);
-              } else {
-                setTimeout(() => {
-                  eeInputLine.classList.remove('hidden');
-                  eeInput.value = '';
-                  eeInput.focus();
-                }, 500);
-              }
+          terminalState = 'SECRET';
+          let txt = "> USER RECOGNIZED.\n> AWAITING SECRET CLEARANCE CODE:";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 500);
             }
-            typeRes();
           }
+          typeRes();
         } else {
           let txt = "> ACCESS DENIED. INTRUDER LOGGED.";
           let cIdx = 0;
@@ -1104,7 +1100,8 @@ if (secretTrigger && eeModal) {
           typeRes();
         }
       } else if (terminalState === 'SECRET') {
-        if (val === 'hacker') {
+        let expectedCode = (matchedFriend && matchedFriend.folderKey === 'jayavardan') ? '6969' : 'hacker';
+        if (val === expectedCode) {
           unlockGalleryForFriend(response);
         } else {
           let txt = "> INCORRECT CODE. SECURITY ALERT TRIGGERED.\n> INITIATING LOCKDOWN PROTOCOL...";
