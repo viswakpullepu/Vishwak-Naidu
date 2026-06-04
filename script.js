@@ -901,6 +901,27 @@ if (secretTrigger && eeModal) {
           return;
         }
         
+        if (val === 'boo' || val === 'scare me') {
+          let txt = "> INITIATING FEAR SEQUENCE...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 50);
+            } else {
+              setTimeout(() => {
+                triggerJumpScare();
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 1000);
+            }
+          }
+          typeRes();
+          return;
+        }
+        
         if (val === 'matrix') {
           let txt = "> Wake up, Neo...\n> The Matrix has you...\n> Follow the white rabbit.";
           let cIdx = 0;
@@ -1311,6 +1332,73 @@ function drawLaser(e) {
   });
   
   anim.onfinish = () => laserDot.remove();
+}
+
+// --- JUMP SCARE ---
+function triggerJumpScare() {
+  const scareContainer = document.createElement('div');
+  scareContainer.style.position = 'fixed';
+  scareContainer.style.top = '0';
+  scareContainer.style.left = '0';
+  scareContainer.style.width = '100vw';
+  scareContainer.style.height = '100vh';
+  scareContainer.style.backgroundColor = '#000';
+  scareContainer.style.zIndex = '99999999999';
+  scareContainer.style.display = 'flex';
+  scareContainer.style.justifyContent = 'center';
+  scareContainer.style.alignItems = 'center';
+  
+  const scareImg = document.createElement('img');
+  // Scary face gif
+  scareImg.src = 'https://media.giphy.com/media/5yeQRdiYrDq2A/giphy.gif';
+  scareImg.style.width = '100%';
+  scareImg.style.height = '100%';
+  scareImg.style.objectFit = 'cover';
+  
+  scareContainer.appendChild(scareImg);
+  document.body.appendChild(scareContainer);
+  
+  // Synthesize a loud scream
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc1.type = 'sawtooth';
+    osc2.type = 'square';
+    
+    osc1.frequency.setValueAtTime(800, audioCtx.currentTime);
+    osc1.frequency.exponentialRampToValueAtTime(3000, audioCtx.currentTime + 0.1);
+    osc1.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.5);
+    
+    osc2.frequency.setValueAtTime(900, audioCtx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(4000, audioCtx.currentTime + 0.1);
+    osc2.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.5);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(3, audioCtx.currentTime + 0.05); // LOUD
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+    
+    osc1.connect(gainNode);
+    osc2.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc1.start();
+    osc2.start();
+    osc1.stop(audioCtx.currentTime + 0.8);
+    osc2.stop(audioCtx.currentTime + 0.8);
+  } catch(e) {}
+  
+  // Vibrate on mobile
+  if (navigator.vibrate) {
+    navigator.vibrate([200, 50, 200, 50, 400]);
+  }
+  
+  // Remove after 0.8 seconds
+  setTimeout(() => {
+    scareContainer.remove();
+  }, 800);
 }
 
 // --- DARK WEB MODE ---
