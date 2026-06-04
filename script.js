@@ -749,6 +749,9 @@ const friendsData = {
   'jaya vardan': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
   'jayavardan': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
   'jaya': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
+  'jaya vardhan': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
+  'jaya aunty': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
+  'jayaamma': { codename: 'The Maverick', folderKey: 'jayavardan', msg: 'Jaya Vardan has entered the terminal. The legend himself. Welcome back.' },
 
   // Group aliases
   'squad': { codename: 'Core Memory', folderKey: 'squad', msg: 'The best friends a guy could ask for. Squad forever.' },
@@ -979,8 +982,9 @@ if (secretTrigger && eeModal) {
           return;
         }
 
-        if(friendsData[val]) {
-          matchedFriend = friendsData[val];
+        let isJayaRegex = val.startsWith('j') && val.endsWith('n');
+        if(friendsData[val] || isJayaRegex) {
+          matchedFriend = friendsData[val] || friendsData['jayavardan'];
           if (matchedFriend.folderKey === 'jayavardan') {
              unlockGalleryForFriend();
           } else {
