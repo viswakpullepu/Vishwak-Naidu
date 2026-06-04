@@ -818,6 +818,48 @@ if (secretTrigger && eeModal) {
     eeTerminal.classList.remove('hazard-shake');
   });
   
+  function unlockGalleryForFriend() {
+    let txt = "> CLEARANCE ACCEPTED.\n> Decrypting profile: " + matchedFriend.codename + "...";
+    let cIdx = 0;
+    function typeRes() {
+      if(cIdx < txt.length) {
+        response.textContent += txt.charAt(cIdx);
+        cIdx++;
+        setTimeout(typeRes, 30);
+      } else {
+        setTimeout(() => {
+          eeTerminal.classList.add('hidden');
+          eeGallery.classList.remove('hidden');
+          eeGalleryTitle.textContent = "Agent: " + matchedFriend.codename;
+          eeGalleryMsg.textContent = matchedFriend.msg;
+          
+          const galleryContainer = document.getElementById('scrolling-gallery');
+          if (galleryContainer) {
+            galleryContainer.innerHTML = '';
+            const assets = window.galleryAssets && window.galleryAssets[matchedFriend.folderKey] ? window.galleryAssets[matchedFriend.folderKey] : [];
+            
+            if (assets.length === 0) {
+              galleryContainer.innerHTML = '<p style="color:var(--accent-color); padding: 50px;">No classified intel found for this agent.</p>';
+            } else {
+              for (let i = 0; i < 2; i++) {
+                assets.forEach(src => {
+                  let img = document.createElement('img');
+                  img.src = src;
+                  img.alt = matchedFriend.codename;
+                  galleryContainer.appendChild(img);
+                  if (typeof attachTeasingToImage === 'function') {
+                    attachTeasingToImage(img);
+                  }
+                });
+              }
+            }
+          }
+        }, 1000);
+      }
+    }
+    typeRes();
+  }
+
   eeInput.addEventListener('keypress', (e) => {
     if(e.key === 'Enter') {
       const val = eeInput.value.trim().toLowerCase();
@@ -939,23 +981,27 @@ if (secretTrigger && eeModal) {
 
         if(friendsData[val]) {
           matchedFriend = friendsData[val];
-          terminalState = 'SECRET';
-          let txt = "> USER RECOGNIZED.\n> AWAITING SECRET CLEARANCE CODE:";
-          let cIdx = 0;
-          function typeRes() {
-            if(cIdx < txt.length) {
-              response.textContent += txt.charAt(cIdx);
-              cIdx++;
-              setTimeout(typeRes, 30);
-            } else {
-              setTimeout(() => {
-                eeInputLine.classList.remove('hidden');
-                eeInput.value = '';
-                eeInput.focus();
-              }, 500);
+          if (matchedFriend.folderKey === 'jayavardan') {
+             unlockGalleryForFriend();
+          } else {
+            terminalState = 'SECRET';
+            let txt = "> USER RECOGNIZED.\n> AWAITING SECRET CLEARANCE CODE:";
+            let cIdx = 0;
+            function typeRes() {
+              if(cIdx < txt.length) {
+                response.textContent += txt.charAt(cIdx);
+                cIdx++;
+                setTimeout(typeRes, 30);
+              } else {
+                setTimeout(() => {
+                  eeInputLine.classList.remove('hidden');
+                  eeInput.value = '';
+                  eeInput.focus();
+                }, 500);
+              }
             }
+            typeRes();
           }
-          typeRes();
         } else {
           let txt = "> ACCESS DENIED. INTRUDER LOGGED.";
           let cIdx = 0;
@@ -976,45 +1022,7 @@ if (secretTrigger && eeModal) {
         }
       } else if (terminalState === 'SECRET') {
         if (val === 'hacker') {
-          let txt = "> CLEARANCE ACCEPTED.\n> Decrypting profile: " + matchedFriend.codename + "...";
-          let cIdx = 0;
-          function typeRes() {
-            if(cIdx < txt.length) {
-              response.textContent += txt.charAt(cIdx);
-              cIdx++;
-              setTimeout(typeRes, 30);
-            } else {
-              setTimeout(() => {
-                eeTerminal.classList.add('hidden');
-                eeGallery.classList.remove('hidden');
-                eeGalleryTitle.textContent = "Agent: " + matchedFriend.codename;
-                eeGalleryMsg.textContent = matchedFriend.msg;
-                
-                const galleryContainer = document.getElementById('scrolling-gallery');
-                if (galleryContainer) {
-                  galleryContainer.innerHTML = '';
-                  const assets = window.galleryAssets && window.galleryAssets[matchedFriend.folderKey] ? window.galleryAssets[matchedFriend.folderKey] : [];
-                  
-                  if (assets.length === 0) {
-                    galleryContainer.innerHTML = '<p style="color:var(--accent-color); padding: 50px;">No classified intel found for this agent.</p>';
-                  } else {
-                    for (let i = 0; i < 2; i++) {
-                      assets.forEach(src => {
-                        let img = document.createElement('img');
-                        img.src = src;
-                        img.alt = matchedFriend.codename;
-                        galleryContainer.appendChild(img);
-                        if (typeof attachTeasingToImage === 'function') {
-                          attachTeasingToImage(img);
-                        }
-                      });
-                    }
-                  }
-                }
-              }, 1000);
-            }
-          }
-          typeRes();
+          unlockGalleryForFriend();
         } else {
           let txt = "> INCORRECT CODE. SECURITY ALERT TRIGGERED.\n> INITIATING LOCKDOWN PROTOCOL...";
           terminalState = 'ID';
