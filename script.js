@@ -785,40 +785,13 @@ if (secretTrigger && eeModal) {
     document.querySelector('.ee-overlay').classList.remove('hazard-flash');
     eeTerminal.classList.remove('hazard-shake');
     
-    const lines = [
-      "> WARNING: UNAUTHORIZED ACCESS DETECTED",
-      "> INITIATING TRACE...",
-      "> TRACE FAILED.",
-      "> PLEASE IDENTIFY YOURSELF (Enter your name or secret code):"
-    ];
+    let p = document.createElement('div');
+    p.textContent = "PLEASE IDENTIFY YOURSELF (Enter your name or secret code):";
+    p.style.marginBottom = "10px";
+    eeTerminalBody.appendChild(p);
     
-    let lineIdx = 0;
-    
-    function typeLine() {
-      if(lineIdx < lines.length) {
-        let p = document.createElement('div');
-        eeTerminalBody.appendChild(p);
-        let charIdx = 0;
-        let line = lines[lineIdx];
-        
-        function typeChar() {
-          if(charIdx < line.length) {
-            p.textContent += line.charAt(charIdx);
-            charIdx++;
-            setTimeout(typeChar, typeSpeed);
-          } else {
-            lineIdx++;
-            setTimeout(typeLine, 300);
-          }
-        }
-        typeChar();
-      } else {
-        eeInputLine.classList.remove('hidden');
-        eeInput.focus();
-      }
-    }
-    
-    setTimeout(typeLine, 500);
+    eeInputLine.classList.remove('hidden');
+    eeInput.focus();
   });
   
   eeClose.addEventListener('click', () => {
@@ -835,7 +808,7 @@ if (secretTrigger && eeModal) {
       if(cIdx < txt.length) {
         response.textContent += txt.charAt(cIdx);
         cIdx++;
-        setTimeout(typeRes, 30);
+        setTimeout(typeRes, 2);
       } else {
         setTimeout(() => {
           eeTerminal.classList.add('hidden');
@@ -876,11 +849,12 @@ if (secretTrigger && eeModal) {
       eeInputLine.classList.add('hidden');
       
       let p = document.createElement('div');
-      p.textContent = "> " + eeInput.value;
+      p.innerHTML = "<span class='ee-prompt'>root@vishwa-server:~$</span> " + eeInput.value;
       eeTerminalBody.appendChild(p);
       
       let response = document.createElement('div');
       response.style.marginTop = '10px';
+      response.style.marginBottom = '10px';
       eeTerminalBody.appendChild(response);
       
       if (terminalState === 'ID') {
@@ -891,7 +865,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 let restart = document.createElement('div');
@@ -915,7 +889,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 50);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 showModdhuVideo();
@@ -945,7 +919,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 50);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 triggerJumpScare();
@@ -975,7 +949,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 100);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 triggerNightmare();
@@ -997,7 +971,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 document.body.style.transition = 'transform 3s ease-in-out';
@@ -1017,7 +991,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 document.body.classList.toggle('ugly-mode');
@@ -1036,7 +1010,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
@@ -1055,7 +1029,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 var s = document.createElement('script');
@@ -1077,7 +1051,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 50);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 eeModal.classList.add('hidden');
@@ -1096,7 +1070,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               for(let i=0; i<80; i++) {
                  let conf = document.createElement('div');
@@ -1141,7 +1115,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
                let files = ['/boot/vmlinuz', '/etc/passwd', '/home/vishwak', '/var/www', '/usr/bin'];
                let fIdx = 0;
@@ -1180,7 +1154,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 eeInputLine.classList.remove('hidden');
@@ -1197,7 +1171,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 30);
+              setTimeout(typeRes, 2);
             } else {
               setTimeout(() => {
                 eeInputLine.classList.remove('hidden');
@@ -1222,7 +1196,7 @@ if (secretTrigger && eeModal) {
             if(cIdx < txt.length) {
               response.textContent += txt.charAt(cIdx);
               cIdx++;
-              setTimeout(typeRes, 20);
+              setTimeout(typeRes, 2);
             } else {
               const overlay = document.querySelector('.ee-overlay');
               overlay.classList.add('hazard-flash');
