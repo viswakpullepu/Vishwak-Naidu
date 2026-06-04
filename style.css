@@ -2022,3 +2022,31 @@ body.ugly-mode, body.ugly-mode * {
 body.ugly-mode img {
   filter: sepia(100%) hue-rotate(90deg) saturate(300%) !important;
 }
+
+/* MOBILE OPTIMIZATIONS (LOW-END DEVICES) */
+body.is-mobile .glass-card, 
+body.is-mobile .project-card, 
+body.is-mobile .timeline-item-content, 
+body.is-mobile .gallery-item {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(10, 10, 10, 0.95) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.is-mobile nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(0, 0, 0, 0.98) !important;
+}
+
+body.is-mobile .tech-item:hover, 
+body.is-mobile .btn:hover {
+  box-shadow: 0 0 10px var(--accent-color) !important; /* Reduced shadow radius */
+}
+
+/* Hide custom cursor elements just in case JS failed */
+body.is-mobile #custom-cursor,
+body.is-mobile #custom-cursor-ring {
+  display: none !important;
+}

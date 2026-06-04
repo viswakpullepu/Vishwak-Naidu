@@ -1,7 +1,15 @@
-// --- INERTIAL SMOOTH SCROLLING (LENIS) ---
-let lenis;
-try {
-  if (typeof Lenis !== "undefined") {
+document.addEventListener('DOMContentLoaded', () => {
+  // --- MOBILE DETECTION ---
+  const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  // Add mobile class to body for CSS overrides
+  if (isMobile) {
+    document.body.classList.add('is-mobile');
+  }
+
+  // --- SMOOTH SCROLLING (LENIS) ---
+  // Only initialize smooth scroll on desktop. Native mobile scroll is hardware accelerated and smoother.
+  if (!isMobile && typeof Lenis !== "undefined") {
     lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom liquid scroll curve
@@ -36,9 +44,6 @@ try {
     }
     requestAnimationFrame(raf);
   }
-} catch (e) {
-  console.error("Lenis initialization error:", e);
-}
 
 // --- PRELOADER ENTRANCE & INITIALIZATION ---
 function initPreloader() {
@@ -197,45 +202,47 @@ try {
 const cursor = document.getElementById("custom-cursor");
 const cursorRing = document.getElementById("custom-cursor-ring");
 
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let ringX = mouseX;
-let ringY = mouseY;
+if (!isMobile) {
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
 
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  
-  if (cursor) {
-    cursor.style.left = `${mouseX}px`;
-    cursor.style.top = `${mouseY}px`;
-  }
-});
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (cursor) {
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
+    }
+  });
 
-function updateCursor() {
-  const lerpFactor = 0.12;
-  ringX += (mouseX - ringX) * lerpFactor;
-  ringY += (mouseY - ringY) * lerpFactor;
-  
-  if (cursorRing) {
-    cursorRing.style.left = `${ringX}px`;
-    cursorRing.style.top = `${ringY}px`;
+  function updateCursor() {
+    const lerpFactor = 0.12;
+    ringX += (mouseX - ringX) * lerpFactor;
+    ringY += (mouseY - ringY) * lerpFactor;
+    
+    if (cursorRing) {
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
+    }
+    
+    requestAnimationFrame(updateCursor);
   }
-  
-  requestAnimationFrame(updateCursor);
+  updateCursor();
+
+  // Set cursor hover active states
+  const hoverables = document.querySelectorAll("a, button, input, textarea, .tech-item, .art-slide, .glass-card");
+  hoverables.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      document.body.classList.add("hovering");
+    });
+    el.addEventListener("mouseleave", () => {
+      document.body.classList.remove("hovering");
+    });
+  });
 }
-updateCursor();
-
-// Set cursor hover active states
-const hoverables = document.querySelectorAll("a, button, input, textarea, .tech-item, .art-slide, .glass-card");
-hoverables.forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    document.body.classList.add("hovering");
-  });
-  el.addEventListener("mouseleave", () => {
-    document.body.classList.remove("hovering");
-  });
-});
 
 // --- PHYSICAL 3D GLASS TILT & GLARE EFFECT ---
 const glassCards = document.querySelectorAll(".glass-card");
@@ -769,7 +776,7 @@ if (secretTrigger && eeModal) {
     eeTerminal.classList.remove('hidden');
     eeGallery.classList.add('hidden');
     eeTerminalBody.innerHTML = '';
-    eeInputLine.classList.add('hidden');
+    eeInputLine.classList.remove('hidden');
     eeInput.value = '';
     terminalState = 'ID';
     matchedFriend = null;
@@ -1337,7 +1344,7 @@ if (secretTrigger && eeModal) {
       const cancelBtn = document.createElement('button');
       cancelBtn.style.padding = '10px 25px';
       cancelBtn.style.background = 'transparent';
-      cancelBtn.style.color = 'var(--text-secondary)';
+      cancelBtn.style.color = '#text-secondary)';
       cancelBtn.style.border = '1px solid #555';
       cancelBtn.style.borderRadius = '8px';
       cancelBtn.style.cursor = 'pointer';
@@ -1772,6 +1779,51 @@ if (darkWebTrigger) {
       osc.stop(audioCtx.currentTime + 0.5);
     } catch(e) {}
   });
+}
+
+// --- NOISE BACKGROUND (CANVAS) ---
+const noiseCanvas = document.getElementById('noise');
+if (noiseCanvas) {
+  if (isMobile) {
+    noiseCanvas.style.display = 'none';
+  } else {
+    const ctx = noiseCanvas.getContext('2d', { alpha: false });
+    
+    const resizeCanvas = () => {
+      noiseCanvas.width = window.innerWidth;
+      noiseCanvas.height = window.innerHeight;
+    };
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Optimize: Only draw every N frames
+    let frameCount = 0;
+    const drawNoise = () => {
+      const idata = ctx.createImageData(noiseCanvas.width, noiseCanvas.height);
+      const buffer32 = new Uint32Array(idata.data.buffer);
+      const len = buffer32.length;
+
+      for (let i = 0; i < len; i++) {
+        if (Math.random() < 0.05) {
+          buffer32[i] = 0xff000000;
+        }
+      }
+
+      ctx.putImageData(idata, 0, 0);
+    };
+
+    const animate = () => {
+      frameCount++;
+      if (frameCount % 4 === 0) { // Update at 15fps
+        drawNoise();
+      }
+      requestAnimationFrame(animate);
+    };
+    
+    // Initial call
+    requestAnimationFrame(animate);
+  }
 }
 
 // --- MATRIX DIGITAL RAIN ---
