@@ -1656,13 +1656,18 @@ function triggerNightmare() {
 
 // --- MODDHU VIDEO EASTER EGG ---
 function showModdhuVideo() {
+  // Stop background scrolling and heavy animations to free up CPU/GPU
+  if(window.lenis) { try { window.lenis.stop(); } catch(e){} }
+  const bgElements = document.querySelectorAll('.background-gradient, .noise, canvas');
+  bgElements.forEach(el => el.style.display = 'none');
+
   const vidContainer = document.createElement('div');
   vidContainer.style.position = 'fixed';
   vidContainer.style.top = '0';
   vidContainer.style.left = '0';
   vidContainer.style.width = '100vw';
   vidContainer.style.height = '100vh';
-  vidContainer.style.backgroundColor = 'rgba(0,0,0,0.95)';
+  vidContainer.style.backgroundColor = '#000';
   vidContainer.style.zIndex = '99999999999';
   vidContainer.style.display = 'flex';
   vidContainer.style.justifyContent = 'center';
@@ -1675,12 +1680,11 @@ function showModdhuVideo() {
   video.autoplay = true;
   video.preload = 'auto';
   video.playsInline = true;
-  video.style.maxWidth = '90%';
+  video.style.maxWidth = '100%';
   video.style.maxHeight = '80%';
-  video.style.borderRadius = '10px';
-  video.style.border = '2px solid var(--accent-color)';
-  video.style.willChange = 'transform'; // Promote to hardware layer
-  video.style.transform = 'translateZ(0)'; // Force hardware acceleration
+  video.style.border = 'none';
+  video.style.willChange = 'transform';
+  video.style.transform = 'translateZ(0)';
   
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'CLOSE VIDEO';
@@ -1697,6 +1701,9 @@ function showModdhuVideo() {
   closeBtn.addEventListener('click', () => {
     video.pause();
     vidContainer.remove();
+    // Restore background elements
+    if(window.lenis) { try { window.lenis.start(); } catch(e){} }
+    bgElements.forEach(el => el.style.display = '');
   });
   
   vidContainer.appendChild(video);
