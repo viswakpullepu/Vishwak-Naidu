@@ -708,35 +708,3 @@ try {
 } catch (e) {
   console.error("Certificate modal initialization error:", e);
 }
-
-// --- RESUME TABS INTERACTIVITY ---
-try {
-  const resumeTabBtns = document.querySelectorAll(".resume-tab-btn");
-  const resumePanes = document.querySelectorAll(".resume-pane");
-
-  if (resumeTabBtns.length > 0 && resumePanes.length > 0) {
-    resumeTabBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        // Remove active from all
-        resumeTabBtns.forEach(b => b.classList.remove("active"));
-        resumePanes.forEach(p => p.classList.remove("active"));
-        
-        // Add active to clicked
-        btn.classList.add("active");
-        const targetId = btn.getAttribute("data-target");
-        const targetPane = document.getElementById(targetId);
-        if (targetPane) {
-          targetPane.classList.add("active");
-          
-          // Refresh ScrollTrigger if pane heights change
-          if (typeof ScrollTrigger !== "undefined") {
-            setTimeout(() => ScrollTrigger.refresh(), 100);
-          }
-        }
-      });
-    });
-  }
-} catch (e) {
-  console.error("Resume tabs initialization error:", e);
-}
-
