@@ -708,3 +708,380 @@ try {
 } catch (e) {
   console.error("Certificate modal initialization error:", e);
 }
+
+// --- EASTER EGG LOGIC ---
+const secretTrigger = document.getElementById('secret-trigger');
+const eeModal = document.getElementById('ee-modal');
+const eeClose = document.querySelector('.ee-close');
+const eeTerminalBody = document.getElementById('ee-terminal-body');
+const eeInputLine = document.getElementById('ee-input-line');
+const eeInput = document.getElementById('ee-input');
+const eeTerminal = document.getElementById('ee-terminal');
+const eeGallery = document.getElementById('ee-gallery');
+const eeGalleryTitle = document.getElementById('ee-gallery-title');
+const eeGalleryMsg = document.getElementById('ee-gallery-msg');
+
+const friendsData = {
+  // Nikitha aliases
+  'nikitha': { codename: 'The Catalyst', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
+  'nikita': { codename: 'The Catalyst', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
+  'nikki': { codename: 'The Catalyst', msg: 'Hey Nikitha, thanks for always bringing the classic elegance and keeping the group grounded. You\'re the best.' },
+  
+  // Sahithi aliases
+  'sahithi': { codename: 'The Spark', msg: 'Hey Sahithi! The brightest energy in the group. Never stop bringing those good vibes.' },
+  'sahiti': { codename: 'The Spark', msg: 'Hey Sahithi! The brightest energy in the group. Never stop bringing those good vibes.' },
+  
+  // Akhilesh aliases
+  'akhilesh': { codename: 'The Anchor', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
+  'akilesh': { codename: 'The Anchor', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
+  'akhil': { codename: 'The Anchor', msg: 'Welcome back, Akhilesh. The cool, calm, and collected core of our squad.' },
+  
+  // Akshara aliases
+  'akshara': { codename: 'The Radiance', msg: 'Hey Akshara! Always bringing the best smiles and the best moments. Keep shining.' },
+  'aksara': { codename: 'The Radiance', msg: 'Hey Akshara! Always bringing the best smiles and the best moments. Keep shining.' },
+  
+  // Vashishta aliases
+  'vashishta': { codename: 'The Wingman', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
+  'vashishtha': { codename: 'The Wingman', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
+  'vashista': { codename: 'The Wingman', msg: 'Vashishta logging in. Twinning in traditional! The absolute best partner in crime.' },
+  
+  // Group aliases
+  'squad': { codename: 'Core Memory', msg: 'The best friends a guy could ask for. Squad forever.' },
+  'cvr2024': { codename: 'Core Memory', msg: 'The best friends a guy could ask for. Squad forever.' }
+};
+
+if (secretTrigger && eeModal) {
+  let typeSpeed = 40;
+  let terminalState = 'ID'; 
+  let matchedFriend = null;
+  let hazardInterval = null;
+  
+  secretTrigger.addEventListener('click', () => {
+    eeModal.classList.remove('hidden');
+    eeTerminal.classList.remove('hidden');
+    eeGallery.classList.add('hidden');
+    eeTerminalBody.innerHTML = '';
+    eeInputLine.classList.add('hidden');
+    eeInput.value = '';
+    terminalState = 'ID';
+    matchedFriend = null;
+    
+    if(hazardInterval) clearInterval(hazardInterval);
+    document.querySelector('.ee-overlay').classList.remove('hazard-flash');
+    eeTerminal.classList.remove('hazard-shake');
+    
+    const lines = [
+      "> WARNING: UNAUTHORIZED ACCESS DETECTED",
+      "> INITIATING TRACE...",
+      "> TRACE FAILED.",
+      "> PLEASE IDENTIFY YOURSELF (Enter your name or secret code):"
+    ];
+    
+    let lineIdx = 0;
+    
+    function typeLine() {
+      if(lineIdx < lines.length) {
+        let p = document.createElement('div');
+        eeTerminalBody.appendChild(p);
+        let charIdx = 0;
+        let line = lines[lineIdx];
+        
+        function typeChar() {
+          if(charIdx < line.length) {
+            p.textContent += line.charAt(charIdx);
+            charIdx++;
+            setTimeout(typeChar, typeSpeed);
+          } else {
+            lineIdx++;
+            setTimeout(typeLine, 300);
+          }
+        }
+        typeChar();
+      } else {
+        eeInputLine.classList.remove('hidden');
+        eeInput.focus();
+      }
+    }
+    
+    setTimeout(typeLine, 500);
+  });
+  
+  eeClose.addEventListener('click', () => {
+    eeModal.classList.add('hidden');
+    if(hazardInterval) clearInterval(hazardInterval);
+    document.querySelector('.ee-overlay').classList.remove('hazard-flash');
+    eeTerminal.classList.remove('hazard-shake');
+  });
+  
+  eeInput.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') {
+      const val = eeInput.value.trim().toLowerCase();
+      eeInputLine.classList.add('hidden');
+      
+      let p = document.createElement('div');
+      p.textContent = "> " + eeInput.value;
+      eeTerminalBody.appendChild(p);
+      
+      let response = document.createElement('div');
+      response.style.marginTop = '10px';
+      eeTerminalBody.appendChild(response);
+      
+      if (terminalState === 'ID') {
+        if(friendsData[val]) {
+          matchedFriend = friendsData[val];
+          terminalState = 'SECRET';
+          let txt = "> USER RECOGNIZED.\n> AWAITING SECRET CLEARANCE CODE:";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 500);
+            }
+          }
+          typeRes();
+        } else {
+          let txt = "> ACCESS DENIED. INTRUDER LOGGED.";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 1000);
+            }
+          }
+          typeRes();
+        }
+      } else if (terminalState === 'SECRET') {
+        if (val === 'hacker') {
+          let txt = "> CLEARANCE ACCEPTED.\n> Decrypting profile: " + matchedFriend.codename + "...";
+          let cIdx = 0;
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 30);
+            } else {
+              setTimeout(() => {
+                eeTerminal.classList.add('hidden');
+                eeGallery.classList.remove('hidden');
+                eeGalleryTitle.textContent = "Agent: " + matchedFriend.codename;
+                eeGalleryMsg.textContent = matchedFriend.msg;
+              }, 1000);
+            }
+          }
+          typeRes();
+        } else {
+          let txt = "> INCORRECT CODE. SECURITY ALERT TRIGGERED.\n> INITIATING LOCKDOWN PROTOCOL...";
+          terminalState = 'ID';
+          matchedFriend = null;
+          let cIdx = 0;
+          
+          function typeRes() {
+            if(cIdx < txt.length) {
+              response.textContent += txt.charAt(cIdx);
+              cIdx++;
+              setTimeout(typeRes, 20);
+            } else {
+              const overlay = document.querySelector('.ee-overlay');
+              overlay.classList.add('hazard-flash');
+              eeTerminal.classList.add('hazard-shake');
+              
+              hazardInterval = setInterval(() => {
+                 let errLine = document.createElement('div');
+                 errLine.style.color = '#ff0000';
+                 errLine.style.fontWeight = 'bold';
+                 errLine.style.textShadow = '0 0 10px red';
+                 errLine.textContent = "ERROR: UNAUTHORIZED ACCESS! ".repeat(Math.floor(Math.random() * 3 + 1));
+                 eeTerminalBody.appendChild(errLine);
+                 eeTerminalBody.scrollTop = eeTerminalBody.scrollHeight;
+              }, 60);
+              
+              setTimeout(() => {
+                clearInterval(hazardInterval);
+                overlay.classList.remove('hazard-flash');
+                eeTerminal.classList.remove('hazard-shake');
+                eeTerminalBody.innerHTML = '';
+                
+                let restart = document.createElement('div');
+                restart.style.marginTop = '10px';
+                restart.textContent = "> SYSTEM REBOOTED.\n> PLEASE IDENTIFY YOURSELF (Enter your name or secret code):";
+                eeTerminalBody.appendChild(restart);
+                eeInputLine.classList.remove('hidden');
+                eeInput.value = '';
+                eeInput.focus();
+              }, 3000); 
+            }
+          }
+          typeRes();
+        }
+      }
+    }
+  });
+
+  // MASSIVE TEASE DOWNLOAD SEQUENCE
+  const teaseSequence = [
+    { text: "Oh, caught you staring! Trying to steal our pics, huh? 😏", btn: "Maybe... can I have it?" },
+    { text: "Whoa there, hold on! You can't just click and save around here.", btn: "But I really want it!" },
+    { text: "Are you sure your device can even handle this much awesomeness?", btn: "I can handle it, promise!" },
+    { text: "I don't know... this is highly classified squad material.", btn: "I have clearance!" },
+    { text: "Clearance? We'll see about that. Are you actually going to look at it, or just let it rot in your downloads folder?", btn: "I will cherish it!" },
+    { text: "Okay, fine. But you have to promise not to print it out and stick it on your ceiling.", btn: "I won't put it on the ceiling." },
+    { text: "What about framing it on your bedside table? Gonna wake up to our faces?", btn: "No bedside table either, I swear!" },
+    { text: "Are you absolutely, 100%, undeniably sure you want this picture?", btn: "YES! Just give me the picture!" },
+    { text: "Alright, alright. I guess you've earned it. But keep it safe!", btn: "FINALLY! Download Image" }
+  ];
+
+  // CANCEL TEASE SEQUENCE
+  const cancelSequence = [
+    { text: "Oh, playing hard to get? You clicked it, now you HAVE to take it!", btn: "No, seriously, let me out!" },
+    { text: "Nope. No escape. The squad has spoken. You're downloading this.", btn: "I don't want it anymore!" },
+    { text: "Too late! It's happening!", btn: "Please no!" },
+    { text: "Resistance is futile. Just download it already!", btn: "Fine, force download!" },
+    { text: "Downloading forcefully to your device right now... 😂", btn: "Get it over with!" }
+  ];
+
+  const galleryImages = document.querySelectorAll('.scrolling-gallery img');
+  galleryImages.forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      let step = 0;
+      let cancelStep = -1;
+      
+      const teaseContainer = document.createElement('div');
+      teaseContainer.style.position = 'fixed';
+      teaseContainer.style.top = '0';
+      teaseContainer.style.left = '0';
+      teaseContainer.style.width = '100vw';
+      teaseContainer.style.height = '100vh';
+      teaseContainer.style.background = 'rgba(0,0,0,0.9)';
+      teaseContainer.style.zIndex = '99999999';
+      teaseContainer.style.display = 'flex';
+      teaseContainer.style.justifyContent = 'center';
+      teaseContainer.style.alignItems = 'center';
+      
+      const teaseBox = document.createElement('div');
+      teaseBox.style.background = '#111';
+      teaseBox.style.padding = '40px';
+      teaseBox.style.borderRadius = '15px';
+      teaseBox.style.border = '1px solid var(--accent-color)';
+      teaseBox.style.textAlign = 'center';
+      teaseBox.style.maxWidth = '500px';
+      teaseBox.style.color = 'var(--text-primary)';
+      teaseBox.style.boxShadow = '0 10px 40px rgba(0,0,0,0.8)';
+      
+      const imgPreview = document.createElement('img');
+      imgPreview.src = img.src;
+      imgPreview.style.width = '100%';
+      imgPreview.style.borderRadius = '8px';
+      imgPreview.style.marginBottom = '25px';
+      imgPreview.style.maxHeight = '250px';
+      imgPreview.style.objectFit = 'cover';
+      
+      const teaseText = document.createElement('h3');
+      teaseText.style.fontSize = '22px';
+      teaseText.style.marginBottom = '25px';
+      teaseText.style.lineHeight = '1.5';
+      teaseText.style.color = 'var(--accent-color)';
+      teaseText.textContent = teaseSequence[step].text;
+      
+      const btnContainer = document.createElement('div');
+      btnContainer.style.display = 'flex';
+      btnContainer.style.flexDirection = 'column';
+      btnContainer.style.gap = '15px';
+      
+      const actionBtn = document.createElement('button');
+      actionBtn.style.padding = '15px 25px';
+      actionBtn.style.background = 'var(--accent-color)';
+      actionBtn.style.color = '#000';
+      actionBtn.style.border = 'none';
+      actionBtn.style.borderRadius = '8px';
+      actionBtn.style.cursor = 'pointer';
+      actionBtn.style.fontWeight = 'bold';
+      actionBtn.style.fontSize = '16px';
+      actionBtn.textContent = teaseSequence[step].btn;
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.style.padding = '10px 25px';
+      cancelBtn.style.background = 'transparent';
+      cancelBtn.style.color = 'var(--text-secondary)';
+      cancelBtn.style.border = '1px solid #555';
+      cancelBtn.style.borderRadius = '8px';
+      cancelBtn.style.cursor = 'pointer';
+      cancelBtn.textContent = "Okay fine, I give up. Cancel.";
+      
+      btnContainer.appendChild(actionBtn);
+      btnContainer.appendChild(cancelBtn);
+      
+      teaseBox.appendChild(imgPreview);
+      teaseBox.appendChild(teaseText);
+      teaseBox.appendChild(btnContainer);
+      teaseContainer.appendChild(teaseBox);
+      document.body.appendChild(teaseContainer);
+      
+      if(window.lenis) { try { window.lenis.stop(); } catch(e){} }
+      
+      const closeModal = () => {
+        teaseContainer.remove();
+        if(window.lenis) { try { window.lenis.start(); } catch(e){} }
+      };
+      
+      cancelBtn.addEventListener('click', () => {
+        if(cancelStep === -1) cancelStep = 0;
+        else cancelStep++;
+        
+        if(cancelStep < cancelSequence.length) {
+          teaseText.textContent = cancelSequence[cancelStep].text;
+          cancelBtn.textContent = cancelSequence[cancelStep].btn;
+          actionBtn.style.display = 'none'; 
+          
+          teaseBox.style.transform = 'scale(0.95) rotate(-2deg)';
+          setTimeout(() => teaseBox.style.transform = 'scale(1) rotate(0deg)', 150);
+        } else {
+          const link = document.createElement('a');
+          link.href = img.src;
+          const filename = img.src.split('/').pop();
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          closeModal();
+        }
+      });
+      
+      actionBtn.addEventListener('click', () => {
+        step++;
+        if(step < teaseSequence.length) {
+          teaseText.textContent = teaseSequence[step].text;
+          actionBtn.textContent = teaseSequence[step].btn;
+          
+          teaseBox.style.transform = 'scale(1.02)';
+          setTimeout(() => teaseBox.style.transform = 'scale(1)', 150);
+        } else {
+          const link = document.createElement('a');
+          link.href = img.src;
+          const filename = img.src.split('/').pop();
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          closeModal();
+        }
+      });
+    });
+  });
+}
