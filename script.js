@@ -1686,6 +1686,45 @@ function showModdhuVideo() {
   video.style.willChange = 'transform';
   video.style.transform = 'translateZ(0)';
   
+  // Add a play button overlay in case mobile blocks autoplay
+  const playOverlay = document.createElement('div');
+  playOverlay.style.position = 'absolute';
+  playOverlay.style.top = '0';
+  playOverlay.style.left = '0';
+  playOverlay.style.width = '100%';
+  playOverlay.style.height = '100%';
+  playOverlay.style.display = 'flex';
+  playOverlay.style.justifyContent = 'center';
+  playOverlay.style.alignItems = 'center';
+  playOverlay.style.zIndex = '10';
+  playOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+  playOverlay.style.color = '#fff';
+  playOverlay.style.fontSize = '24px';
+  playOverlay.style.cursor = 'pointer';
+  playOverlay.innerHTML = '<h1>▶ TAP TO PLAY</h1>';
+  
+  vidContainer.appendChild(video);
+  vidContainer.appendChild(playOverlay);
+  
+  video.addEventListener('play', () => {
+    playOverlay.style.display = 'none';
+  });
+  
+  playOverlay.addEventListener('click', () => {
+    video.play();
+    playOverlay.style.display = 'none';
+  });
+  
+  // Try autoplay
+  setTimeout(() => {
+    let playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Autoplay was prevented. Overlay stays visible.
+      });
+    }
+  }, 100);
+  
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'CLOSE VIDEO';
   closeBtn.style.marginTop = '20px';
