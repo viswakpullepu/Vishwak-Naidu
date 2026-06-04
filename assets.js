@@ -1,4 +1,4 @@
-const galleryAssets = {
+window.galleryAssets = {
   "squad": [
     "assets/squad_group/IMG-20251205-WA0012.jpg",
     "assets/squad_group/IMG-20251213-WA0011.jpg",
