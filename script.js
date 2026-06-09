@@ -882,26 +882,7 @@ if (secretTrigger && eeModal) {
           return;
         }
 
-        if (val === 'moddhu') {
-          let txt = "> DECRYPTING CLASSIFIED VIDEO FILE...";
-          let cIdx = 0;
-          function typeRes() {
-            if(cIdx < txt.length) {
-              response.textContent += txt.charAt(cIdx);
-              cIdx++;
-              setTimeout(typeRes, 2);
-            } else {
-              setTimeout(() => {
-                showModdhuVideo();
-                eeInputLine.classList.remove('hidden');
-                eeInput.value = '';
-                eeInput.focus();
-              }, 1000);
-            }
-          }
-          typeRes();
-          return;
-        }
+
         
         if (val === 'boo' || val === 'scare me') {
           // Request fullscreen immediately on user gesture
@@ -1635,101 +1616,7 @@ function triggerNightmare() {
   }, 120000);
 }
 
-// --- MODDHU VIDEO EASTER EGG ---
-function showModdhuVideo() {
-  // Stop background scrolling and heavy animations to free up CPU/GPU
-  if(window.lenis) { try { window.lenis.stop(); } catch(e){} }
-  const bgElements = document.querySelectorAll('.background-gradient, .noise, canvas');
-  bgElements.forEach(el => el.style.display = 'none');
 
-  const vidContainer = document.createElement('div');
-  vidContainer.style.position = 'fixed';
-  vidContainer.style.top = '0';
-  vidContainer.style.left = '0';
-  vidContainer.style.width = '100vw';
-  vidContainer.style.height = '100vh';
-  vidContainer.style.backgroundColor = '#000';
-  vidContainer.style.zIndex = '99999999999';
-  vidContainer.style.display = 'flex';
-  vidContainer.style.justifyContent = 'center';
-  vidContainer.style.alignItems = 'center';
-  vidContainer.style.flexDirection = 'column';
-  
-  const video = document.createElement('video');
-  video.src = 'assets/videos/moddhu.mp4';
-  video.controls = true;
-  video.autoplay = true;
-  video.preload = 'auto';
-  video.playsInline = true;
-  video.style.maxWidth = '100%';
-  video.style.maxHeight = '80%';
-  video.style.border = 'none';
-  video.style.willChange = 'transform';
-  video.style.transform = 'translateZ(0)';
-  
-  // Add a play button overlay in case mobile blocks autoplay
-  const playOverlay = document.createElement('div');
-  playOverlay.style.position = 'absolute';
-  playOverlay.style.top = '0';
-  playOverlay.style.left = '0';
-  playOverlay.style.width = '100%';
-  playOverlay.style.height = '100%';
-  playOverlay.style.display = 'flex';
-  playOverlay.style.justifyContent = 'center';
-  playOverlay.style.alignItems = 'center';
-  playOverlay.style.zIndex = '10';
-  playOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-  playOverlay.style.color = '#fff';
-  playOverlay.style.fontSize = '24px';
-  playOverlay.style.cursor = 'pointer';
-  playOverlay.innerHTML = '<h1>▶ TAP TO PLAY</h1>';
-  
-  vidContainer.appendChild(video);
-  vidContainer.appendChild(playOverlay);
-  
-  video.addEventListener('play', () => {
-    playOverlay.style.display = 'none';
-  });
-  
-  playOverlay.addEventListener('click', () => {
-    video.play();
-    playOverlay.style.display = 'none';
-  });
-  
-  // Try autoplay
-  setTimeout(() => {
-    let playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        // Autoplay was prevented. Overlay stays visible.
-      });
-    }
-  }, 100);
-  
-  const closeBtn = document.createElement('button');
-  closeBtn.textContent = 'CLOSE VIDEO';
-  closeBtn.style.marginTop = '20px';
-  closeBtn.style.padding = '10px 20px';
-  closeBtn.style.background = 'var(--accent-color)';
-  closeBtn.style.color = '#000';
-  closeBtn.style.border = 'none';
-  closeBtn.style.borderRadius = '5px';
-  closeBtn.style.cursor = 'pointer';
-  closeBtn.style.fontWeight = 'bold';
-  closeBtn.style.fontFamily = 'monospace';
-  
-  closeBtn.addEventListener('click', () => {
-    video.pause();
-    vidContainer.remove();
-    // Restore background elements
-    if(window.lenis) { try { window.lenis.start(); } catch(e){} }
-    bgElements.forEach(el => el.style.display = '');
-  });
-  
-  vidContainer.appendChild(video);
-  vidContainer.appendChild(closeBtn);
-  document.body.appendChild(vidContainer);
-}
 
 // --- DARK WEB MODE ---
 const darkWebTrigger = document.getElementById('dark-web-trigger');
