@@ -807,7 +807,43 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Initialize GitHub Calendar Contribution Graph
   if (typeof GitHubCalendar !== 'undefined') {
-    GitHubCalendar(".calendar", username, { responsive: true, global_stats: false });
+    GitHubCalendar(".calendar", username, { responsive: true, global_stats: false })
+      .then(() => {
+        // Attach interactive tooltips after rendering
+        const tooltip = document.getElementById("gh-tooltip");
+        if (!tooltip) return;
+
+        // Select the day squares
+        const days = document.querySelectorAll(".calendar .ContributionCalendar-day, .calendar rect.day");
+        
+        days.forEach(day => {
+          day.addEventListener("mouseenter", (e) => {
+            // Find the screen-reader text inside the square (which contains the contribution count and date)
+            const sr = day.querySelector('.sr-only');
+            let text = sr ? sr.textContent : "No contributions";
+            
+            // Format text: "5 contributions on October 25" -> Title + Subtitle
+            const parts = text.split(' on ');
+            if (parts.length === 2) {
+              tooltip.innerHTML = `<strong>${parts[0]}</strong><span class="gh-tooltip-date">${parts[1]}</span>`;
+            } else {
+              tooltip.innerHTML = `<strong>${text}</strong>`;
+            }
+            
+            tooltip.classList.remove("hidden");
+            
+            // Position the tooltip centered above the square
+            const rect = day.getBoundingClientRect();
+            tooltip.style.left = (rect.left + rect.width / 2 + window.scrollX) + 'px';
+            tooltip.style.top = (rect.top + window.scrollY) + 'px';
+          });
+          
+          day.addEventListener("mouseleave", () => {
+            tooltip.classList.add("hidden");
+          });
+        });
+      })
+      .catch(err => console.error("GitHub Calendar failed to load:", err));
   }
 
   const repoContainer = document.getElementById("github-repos");
