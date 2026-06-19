@@ -2130,6 +2130,35 @@ html.lenis, html.lenis body {
   section { padding: 36px 10px; }
 }
 
+/* --- GITHUB CALENDAR OVERRIDES --- */
+:root {
+  --color-calendar-graph-day-bg: #161b22;
+  --color-calendar-graph-day-L1-bg: #0e4429;
+  --color-calendar-graph-day-L2-bg: #006d32;
+  --color-calendar-graph-day-L3-bg: #26a641;
+  --color-calendar-graph-day-L4-bg: #39d353;
+}
+.calendar.js-calendar-graph {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+.calendar .contrib-column {
+  border: none !important;
+}
+.calendar .contrib-column.table-column {
+  display: none !important; /* The library adds a weird footer text by default */
+}
+.calendar text.wday, .calendar text.month {
+  fill: var(--text-secondary) !important;
+}
+.calendar .contrib-legend text {
+  fill: var(--text-secondary) !important;
+}
+.calendar .float-right.color-text-secondary {
+  color: var(--text-secondary) !important;
+}
+
 /* MOBILE OPTIMIZATIONS (LOW-END DEVICES) */
 body.is-mobile .glass-card, 
 body.is-mobile .project-card, 

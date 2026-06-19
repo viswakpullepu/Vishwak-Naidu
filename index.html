@@ -7,9 +7,12 @@
   <title>VN | Creative Developer</title>
   <meta name="description" content="Vishwak Pullepu – Computational Scientist & Emerging Tech Ambassador. Experience in VLAN, Generative AI, and tech leadership." />
   <link rel="icon" type="image/png" href="assets/avatar.png" />
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=9" />
   <!-- Font Awesome for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  
+  <!-- GitHub Calendar CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
   
   <!-- Devicon for 3D Skill Logos -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
@@ -519,9 +522,22 @@
         <span class="section-tag">Open Source</span>
         <h2 class="section-title">GitHub Activity</h2>
       </div>
+      
+      <!-- GitHub Contribution Graph -->
+      <div class="glass-card" style="margin-bottom: 40px; padding: 30px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto;">
+        <h3 style="font-family: var(--font-display); font-size: 20px; color: #fff; margin-bottom: 20px;"><i class="fab fa-github" style="margin-right: 10px;"></i>Contributions in the last year</h3>
+        <div class="calendar" style="width: 100%; min-height: 150px; font-size: 12px; color: var(--text-secondary);">
+          <!-- Loading state -->
+          <div style="text-align: center; padding: 40px;">
+            <i class="fas fa-circle-notch fa-spin fa-2x" style="color: var(--accent-color);"></i>
+            <p style="margin-top: 15px;">Fetching GitHub contributions...</p>
+          </div>
+        </div>
+      </div>
+
       <div id="github-loading" style="text-align: center; color: var(--text-muted); padding: 40px;">
         <i class="fas fa-circle-notch fa-spin fa-2x"></i>
-        <p style="margin-top: 15px;">Synchronizing with GitHub...</p>
+        <p style="margin-top: 15px;">Synchronizing with GitHub Repositories...</p>
       </div>
       <div id="github-repos" class="github-repos-grid" style="display: none;">
         <!-- Repositories will be dynamically injected here -->
@@ -711,6 +727,9 @@
   <!-- TagCloud.js for 3D Sphere -->
   <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
   
+  <!-- GitHub Calendar for Contribution Graph -->
+  <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+  
   <!-- Full Screen Success Overlay -->
   <div id="success-overlay" class="success-overlay">
     <div class="success-content">
@@ -719,6 +738,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=21"></script>
+  <script src="script.js?v=22"></script>
 </body>
 </html>

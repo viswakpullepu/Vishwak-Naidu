@@ -801,9 +801,15 @@ try {
 });
 
 
-// --- GITHUB REPOSITORIES FETCH LOGIC ---
+// --- GITHUB CALENDAR & REPOSITORIES FETCH LOGIC ---
 document.addEventListener("DOMContentLoaded", () => {
   const username = "viswakpullepu";
+  
+  // Initialize GitHub Calendar Contribution Graph
+  if (typeof GitHubCalendar !== 'undefined') {
+    GitHubCalendar(".calendar", username, { responsive: true, global_stats: false });
+  }
+
   const repoContainer = document.getElementById("github-repos");
   const loadingIndicator = document.getElementById("github-loading");
 
