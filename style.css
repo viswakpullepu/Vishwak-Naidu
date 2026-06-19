@@ -1767,6 +1767,37 @@ html.lenis, html.lenis body {
   }
 }
 
+/* --- PREMIUM 3D PARALLAX CONTACT FORM --- */
+.contact-form-box {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.contact-form-box > * {
+  transition: transform 0.3s ease-out, text-shadow 0.3s ease-out, box-shadow 0.3s ease-out;
+  transform: translateZ(0);
+}
+
+.contact-form-box:hover h3 {
+  transform: translateZ(60px);
+  text-shadow: 0 10px 20px rgba(0,0,0,0.8);
+}
+
+.contact-form-box:hover form {
+  transform: translateZ(40px);
+}
+
+.contact-form-box:hover .submit-btn {
+  transform: translateZ(80px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(var(--accent-color-rgb), 0.4);
+}
+
+.contact-form-box:hover .form-group input, 
+.contact-form-box:hover .form-group textarea {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transform: translateZ(20px);
+}
+
 /* =============================================
    COMPREHENSIVE MOBILE & ALL-SCREEN RESPONSIVE
    Breakpoints: 1600 | 1200 | 1024 | 900 | 768 | 600 | 480 | 360
