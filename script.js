@@ -2156,6 +2156,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Massive array of Devicon HTML tags to create a dense 3D sphere
   const skills = [
+    '<i class="fas fa-robot" style="color: #74aa9c;"></i>',
+    '<i class="fas fa-sparkles" style="color: #1a73e8;"></i>',
+    '<i class="fas fa-brain" style="color: #d97757;"></i>',
+    '<i class="fas fa-code-branch" style="color: #fff;"></i>',
+    '<i class="fas fa-smile-beam" style="color: #ffd21e;"></i>',
+    '<i class="fas fa-palette" style="color: #9d00ff;"></i>',
+    '<i class="fas fa-cube" style="color: #fca311;"></i>',
+    '<i class="fas fa-image" style="color: #00b4d8;"></i>',
     '<i class="devicon-react-original colored"></i>',
     '<i class="devicon-nodejs-plain colored"></i>',
     '<i class="devicon-nextjs-original"></i>',
