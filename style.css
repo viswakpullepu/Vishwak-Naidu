@@ -1767,6 +1767,60 @@ html.lenis, html.lenis body {
   }
 }
 
+/* --- FULL SCREEN SUCCESS OVERLAY --- */
+.success-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #2e7d32; /* Vibrant Green */
+  z-index: 99997; /* Below the flying paper plane (99999) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.success-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.success-content {
+  text-align: center;
+  color: white;
+  transform: scale(0.8);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.success-overlay.active .success-content {
+  transform: scale(1);
+}
+.success-content i {
+  font-size: 80px;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.success-content h2 {
+  font-size: 40px;
+  font-family: var(--font-display);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+  .success-content i { font-size: 60px; }
+  .success-content h2 { font-size: 28px; }
+}
+/* --- FLYING PAPER PLANE ANIMATION --- */
+.flying-paper-plane {
+  position: fixed;
+  z-index: 99999;
+  font-size: 24px;
+  color: white; /* White stands out on the green overlay */
+  pointer-events: none;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.6));
+  transform-origin: center center;
+  transition: opacity 0.3s ease;
+}
+
 /* --- PREMIUM 3D PARALLAX CONTACT FORM --- */
 .contact-form-box {
   transform-style: preserve-3d;

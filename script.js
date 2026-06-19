@@ -600,7 +600,89 @@ if (contactForm) {
         btnText.textContent = "Message Sent!";
         btn.style.background = "#2e7d32";
         btn.style.borderColor = "#2e7d32";
-        icon.className = "fas fa-check";
+        
+        // --- SUCCESS OVERLAY & PAPER PLANE ANIMATION ---
+        const successOverlay = document.getElementById("success-overlay");
+        
+        // 1. Show the Green Full-Screen Overlay
+        if (successOverlay) {
+          successOverlay.classList.add("active");
+        }
+        
+        // 2. Hide original icon
+        icon.style.opacity = '0';
+        
+        // 3. Wait 1.5s for user to read "Message Sent" then launch the plane!
+        setTimeout(() => {
+          // Create a clone and append to body, starting in the center of the screen
+          const plane = document.createElement("i");
+          plane.className = "fas fa-paper-plane flying-paper-plane";
+          plane.style.left = `${window.innerWidth / 2}px`;
+          plane.style.top = `${window.innerHeight / 2 + 50}px`; // slightly below center
+          document.body.appendChild(plane);
+          
+          // Fade out the overlay so we can see the website as the plane flies
+          if (successOverlay) {
+            successOverlay.classList.remove("active");
+          }
+          
+          // Calculate safe sway distance to prevent mobile overflow
+          const swayDist = Math.min(200, window.innerWidth / 2 - 40);
+
+          // GSAP Timeline for the flight path
+          if (typeof gsap !== 'undefined') {
+            const tl = gsap.timeline();
+            
+            // Initial blast off from the center
+            tl.to(plane, {
+              y: window.innerHeight / 2 - 100,
+              rotation: -45,
+              scale: window.innerWidth < 768 ? 2 : 3, // Smaller plane on mobile
+              duration: 0.8,
+              ease: "power2.out",
+              onComplete: () => {
+                // Trigger smooth scroll to top
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            })
+            // Loop / Circling animation
+            .to(plane, {
+              x: window.innerWidth / 2 - swayDist,
+              rotation: -80,
+              duration: 0.8,
+              ease: "sine.inOut"
+            })
+            .to(plane, {
+              x: window.innerWidth / 2 + swayDist,
+              rotation: -10,
+              duration: 0.8,
+              ease: "sine.inOut"
+            })
+            .to(plane, {
+              x: window.innerWidth / 2,
+              rotation: -45,
+              duration: 0.5,
+              ease: "sine.inOut"
+            })
+            // Blast off top of screen
+            .to(plane, {
+              y: -500, // Fly off top of screen
+              scale: 1,
+              duration: 0.6,
+              ease: "power3.in",
+              onComplete: () => {
+                plane.remove(); // Cleanup clone
+                icon.style.opacity = '1'; // Restore original icon
+                icon.className = "fas fa-check"; // Set to checkmark
+              }
+            });
+          } else {
+            // Fallback
+            icon.className = "fas fa-check";
+            icon.style.opacity = '1';
+          }
+        }, 1500);
+
         contactForm.reset();
       } else {
         // Error state from Formspree
