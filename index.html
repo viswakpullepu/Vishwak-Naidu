@@ -92,7 +92,7 @@
     <section id="hero">
       <div class="hero-content">
         <p class="hero-subtitle-top">Hello, I'm</p>
-        <h1 class="hero-title" id="hero-name-trigger" style="user-select: none; touch-action: manipulation; -webkit-user-select: none;">
+        <h1 class="hero-title">
           <!-- Wrapped each word in a .hero-word container with white-space: nowrap to prevent mid-word letter splitting -->
           <span class="hero-word">
             <span class="hero-letter" style="animation-delay: 0.1s">V</span>
@@ -254,7 +254,7 @@
 
         </div>
       </div>
-      <div id="dark-web-trigger" style="text-align: center; margin-top: 40px; opacity: 0.05; cursor: crosshair;"><i class="fas fa-lock" style="font-size: 12px;"></i></div>
+
     </section>
 
 
@@ -687,43 +687,9 @@
 
     <!-- Footer -->
     <footer>
-      <p class="footer-text">&copy; <span id="year"></span> <span id="secret-trigger" style="cursor: pointer; position: relative; z-index: 10;">Vishwak Pullepu</span>. All rights reserved. Designed with passion.</p>
+      <p class="footer-text">&copy; <span id="year"></span> Vishwak Pullepu. All rights reserved. Designed with passion.</p>
     </footer>
   </main>
-
-  <!-- Easter Egg Modal -->
-  <div id="ee-modal" class="ee-modal hidden">
-    <div class="ee-overlay"></div>
-    <div class="ee-content">
-      <button class="ee-close" aria-label="Close Easter Egg"><i class="fas fa-times"></i></button>
-      
-      <!-- Terminal View -->
-      <div id="ee-terminal" class="ee-terminal">
-        <div class="ee-terminal-header">
-          <span class="ee-dot red"></span><span class="ee-dot yellow"></span><span class="ee-dot green"></span>
-          <span class="ee-terminal-title">bash - root@vishwa-server</span>
-        </div>
-        <div class="ee-terminal-body" id="ee-terminal-body">
-          <!-- Text will be typed here by JS -->
-        </div>
-        <div class="ee-terminal-input-line hidden" id="ee-input-line">
-          <span class="ee-prompt">root@vishwa-server:~$ </span>
-          <input type="text" id="ee-input" class="ee-input" autocomplete="off" spellcheck="false" autofocus>
-        </div>
-      </div>
-      
-      <!-- Gallery View -->
-      <div id="ee-gallery" class="ee-gallery hidden">
-        <h3 id="ee-gallery-title" class="ee-gallery-title"></h3>
-        <p id="ee-gallery-msg" class="ee-gallery-msg"></p>
-        <div class="scrolling-gallery-wrapper">
-          <div class="scrolling-gallery" id="scrolling-gallery">
-            <!-- Dynamic images go here -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script src="assets.js"></script>
   <!-- Certificate Modal Overlay -->
