@@ -2222,11 +2222,25 @@ body.is-mobile #custom-cursor-ring {
 
 /* --- GITHUB REPOS SECTION --- */
 .github-repos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  overflow-x: auto;
   gap: 20px;
   width: 100%;
+  padding-bottom: 24px;
+  scroll-snap-type: x mandatory;
 }
+.github-repos-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.github-repos-grid::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+.github-repos-grid::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 10px;
+}
+
 .github-repo-card {
   padding: 0;
   display: flex;
@@ -2237,6 +2251,10 @@ body.is-mobile #custom-cursor-ring {
   overflow: hidden;
   border: 1px solid var(--border-color);
   min-height: 250px;
+  min-width: 300px;
+  max-width: 300px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
 }
 .repo-image-box {
   width: 100%;
