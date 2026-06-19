@@ -1609,10 +1609,23 @@ html.lenis, html.lenis body {
 
 /* VERCEL DEPLOYMENTS SPECIFIC STYLES */
 .vercel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  display: flex;
+  overflow-x: auto;
   gap: 24px;
   width: 100%;
+  padding-bottom: 24px;
+  scroll-snap-type: x mandatory;
+}
+.vercel-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.vercel-grid::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+.vercel-grid::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 10px;
 }
 
 .vercel-card {
@@ -1628,7 +1641,11 @@ html.lenis, html.lenis body {
   overflow: hidden;
   text-decoration: none;
   min-height: 200px;
+  min-width: 320px;
+  max-width: 320px;
   word-wrap: break-word;
+  flex-shrink: 0;
+  scroll-snap-align: start;
 }
 
 .vercel-card:hover {
@@ -2004,9 +2021,7 @@ html.lenis, html.lenis body {
   .projects-grid { gap: 16px; }
   .project-title { font-size: 17px; }
 
-  .github-repos-grid, .vercel-grid {
-    grid-template-columns: 1fr;
-  }
+
 
   .detail-value { font-size: 13px; }
   .detail-icon-box { width: 40px; height: 40px; font-size: 16px; }
