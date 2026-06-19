@@ -1991,3 +1991,268 @@ function launchSnakeGame() {
   resetGame();
 }
 });
+
+
+// --- GITHUB REPOSITORIES FETCH LOGIC ---
+document.addEventListener("DOMContentLoaded", () => {
+  const username = "viswakpullepu";
+  const repoContainer = document.getElementById("github-repos");
+  const loadingIndicator = document.getElementById("github-loading");
+
+  if (!repoContainer) return;
+
+  const langColors = {
+    JavaScript: "#f1e05a",
+    HTML: "#e34c26",
+    CSS: "#563d7c",
+    Python: "#3572A5",
+    Java: "#b07219",
+    "C++": "#f34b7d",
+    TypeScript: "#3178c6",
+    Shell: "#89e051"
+  };
+
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=20`)
+    .then(response => {
+      if (!response.ok) throw new Error("Network response was not ok");
+      return response.json();
+    })
+    .then(repos => {
+      if (loadingIndicator) loadingIndicator.style.display = "none";
+      repoContainer.style.display = ""; // Defaults to grid due to class
+
+      if (!Array.isArray(repos) || repos.length === 0) {
+        repoContainer.innerHTML = "<p>No repositories found or API rate limit reached.</p>";
+        return;
+      }
+
+      const repoDataMap = {
+        "activity-generator": { type: "Digital Tool", image: "assets/repo_activity.png", desc: "A sleek digital utility for generating and tracking custom activities and workflows." },
+        "anon-chat": { type: "Web App", image: "assets/repo_anon_chat.png", desc: "A real-time anonymous messaging platform built for secure and untraceable communication." },
+        "Canarytoken": { type: "Cybersecurity Tool", image: "assets/repo_canary.png", desc: "A digital trap and tracking system designed to alert you of unauthorized system access." },
+        "cvresportsoff": { type: "Web Service", image: "assets/repo_cvresports.png", desc: "An export and management utility for CV and esports related tracking systems." },
+        "demo-restaurant-backend": { type: "Backend API", image: "assets/repo_rest_backend.png", desc: "Robust server-side architecture and database management for a modern restaurant application." },
+        "demo-restaurant-frontend": { type: "Web App", image: "assets/repo_rest_frontend.png", desc: "An elegant, responsive customer-facing interface for a restaurant ordering system." },
+        "interior-design": { type: "Website", image: "assets/repo_interior.png", desc: "A visually stunning landing page for premium interior design and architectural services." },
+        "kotha-s-atelier": { type: "Web App", image: "assets/repo_atelier.png", desc: "A sophisticated web application tailored for an atelier, focusing on premium digital presentation." },
+        "LORVEN": { type: "Digital Agency", image: "assets/repo_lorven.png", desc: "Corporate portfolio and service showcase for a comprehensive digital services company." },
+        "ngl---clone": { type: "Web App", image: "assets/repo_ngl.png", desc: "A functional frontend clone of the popular NGL anonymous Q&A platform." },
+        "password-strength-checker": { type: "Security Utility", image: "assets/repo_python.png", desc: "A Python-based cryptographic tool for evaluating and validating password entropy." },
+        "ppt-reviewer-agent": { type: "AI Tool", image: "assets/project1.png", desc: "An AI-powered analyzer built with FastAPI that reviews presentations and provides actionable design suggestions." },
+        "professional-resume": { type: "Digital Profile", image: "assets/project2.png", desc: "A cleanly formatted, code-based professional resume repository." },
+        "resume-builder-app": { type: "Web App", image: "assets/project3.png", desc: "A full-stack resume maker with AI-powered suggestions and ATS optimization." },
+        "resume-maker": { type: "Digital Tool", image: "assets/repo_generic.png", desc: "A lightweight client-side application for generating and downloading PDF resumes in real-time." },
+        "REVISO": { type: "Landing Page", image: "assets/repo_ts.png", desc: "A sleek pre-registration portal featuring modern UI components and conversion optimization." },
+        "Vishwak-Naidu": { type: "Portfolio Website", image: "assets/repo_vishwak.png", desc: "My primary creative developer portfolio, featuring glassmorphism and advanced GSAP animations." },
+        "viswak-portfolio": { type: "Website", image: "assets/repo_js.png", desc: "An alternative, streamlined version of my professional web development portfolio." },
+        "viswakpullepu": { type: "Profile Readme", image: "assets/repo_profile.png", desc: "The foundational README repository that acts as the front page of my GitHub profile." },
+        "vn-music-assistant": { type: "Web App", image: "assets/repo_music.png", desc: "A digital music utility designed to assist with audio playback and frequency analysis." }
+      };
+
+      repos.forEach(repo => {
+        const langColor = langColors[repo.language] || "#ccc";
+        const langHtml = repo.language ? `<span><i class="repo-lang-color" style="background:${langColor}"></i> ${repo.language}</span>` : "";
+        
+        // Fallback logic in case of unmapped repositories in the future
+        let repoConfig = repoDataMap[repo.name] || { 
+          type: "Open Source", 
+          image: "assets/repo_generic.png",
+          desc: repo.description || "No description provided." 
+        };
+        
+        const desc = repoConfig.desc;
+        
+        // Match specific data if configured, otherwise fallback
+
+        
+        const card = document.createElement("a");
+        card.href = repo.html_url;
+        card.target = "_blank";
+        card.className = "github-repo-card glass-card";
+        
+        card.innerHTML = `
+          <div class="repo-image-box">
+            <span class="repo-type-badge">${repoConfig.type}</span>
+            <img src="${repoConfig.image}" alt="${repo.name} Preview" loading="lazy" />
+          </div>
+          <div class="repo-content">
+            <div>
+              <div class="repo-name"><i class="far fa-folder-open"></i> ${repo.name}</div>
+              <div class="repo-desc">${desc}</div>
+            </div>
+            <div class="repo-meta">
+              ${langHtml}
+              <span><i class="far fa-star"></i> ${repo.stargazers_count}</span>
+              <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+            </div>
+          </div>
+        `;
+        repoContainer.appendChild(card);
+      });
+      
+      // --- VERCEL DEPLOYMENTS LOGIC ---
+      const vercelLoading = document.getElementById("vercel-loading");
+      const vercelContainer = document.getElementById("vercel-deployments");
+      
+      if (vercelLoading && vercelContainer) {
+        // Filter repos that have a homepage containing 'vercel.app'
+        const vercelRepos = repos.filter(repo => repo.homepage && repo.homepage.includes("vercel.app"));
+        
+        if (vercelRepos.length > 0) {
+          vercelLoading.style.display = "none";
+          vercelContainer.style.display = "";
+          
+          vercelRepos.forEach(repo => {
+            const card = document.createElement("a");
+            card.href = repo.homepage;
+            card.target = "_blank";
+            card.className = "vercel-card";
+            
+            // Format repo name cleanly
+            const cleanName = repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            
+            card.innerHTML = `
+              <div>
+                <div class="vercel-card-header">
+                  <h3 class="vercel-card-title">
+                    <svg viewBox="0 0 116 100" fill="#fff" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.5 0L115 100H0L57.5 0z"/></svg>
+                    ${cleanName}
+                  </h3>
+                  <div class="vercel-status">
+                    <div class="vercel-status-dot"></div>
+                    Ready
+                  </div>
+                </div>
+                <p class="vercel-card-desc">${repo.description || 'Production deployment successfully running on Vercel Edge Network.'}</p>
+              </div>
+              <div class="vercel-card-footer">
+                <span style="color: #666; font-size: 0.8rem; font-family: 'Courier New', monospace;">${repo.homepage.replace('https://', '')}</span>
+                <button class="vercel-link-btn">Visit <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i></button>
+              </div>
+            `;
+            vercelContainer.appendChild(card);
+          });
+        } else {
+          vercelLoading.innerHTML = "<p>No active Vercel deployments found.</p>";
+        }
+      }
+      
+      // Refresh GSAP ScrollTrigger
+      if (typeof ScrollTrigger !== 'undefined') {
+        setTimeout(() => ScrollTrigger.refresh(), 500);
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching GitHub repos:", error);
+      if (loadingIndicator) {
+        loadingIndicator.innerHTML = "<p>Unable to load GitHub repositories at the moment. (API Rate Limit)</p>";
+      }
+    });
+});
+
+// --- 3D SKILL SPHERE (TagCloud.js) ---
+document.addEventListener("DOMContentLoaded", () => {
+  const container = '#skill-sphere';
+  
+  // Massive array of Devicon HTML tags to create a dense 3D sphere
+  const skills = [
+    '<i class="devicon-javascript-plain colored"></i>',
+    '<i class="devicon-typescript-plain colored"></i>',
+    '<i class="devicon-python-plain colored"></i>',
+    '<i class="devicon-html5-plain colored"></i>',
+    '<i class="devicon-css3-plain colored"></i>',
+    '<i class="devicon-java-plain colored"></i>',
+    '<i class="devicon-cplusplus-plain colored"></i>',
+    '<i class="devicon-c-plain colored"></i>',
+    '<i class="devicon-mysql-plain colored"></i>',
+    '<i class="devicon-bash-plain colored"></i>',
+    '<i class="devicon-react-original colored"></i>',
+    '<i class="devicon-nodejs-plain colored"></i>',
+    '<i class="devicon-nextjs-original"></i>',
+    '<i class="devicon-tailwindcss-original colored"></i>',
+    '<i class="devicon-express-original"></i>',
+    '<i class="devicon-spring-original colored"></i>',
+    '<i class="devicon-git-plain colored"></i>',
+    '<i class="devicon-github-original"></i>',
+    '<i class="devicon-docker-plain colored"></i>',
+    '<i class="devicon-figma-plain colored"></i>',
+    '<i class="devicon-vscode-plain colored"></i>',
+    '<i class="devicon-postman-plain colored"></i>',
+    '<i class="devicon-amazonwebservices-plain-wordmark colored"></i>',
+    '<i class="devicon-azure-plain colored"></i>',
+    '<i class="devicon-mongodb-plain colored"></i>',
+    '<i class="devicon-postgresql-plain colored"></i>',
+    '<i class="devicon-firebase-plain colored"></i>',
+    '<i class="devicon-tensorflow-original colored"></i>',
+    '<i class="devicon-pytorch-original colored"></i>',
+    '<i class="devicon-opencv-plain colored"></i>',
+    '<i class="devicon-numpy-original colored"></i>',
+    '<i class="devicon-pandas-original colored"></i>',
+    '<i class="devicon-linux-plain"></i>',
+    '<i class="devicon-networkx-plain colored"></i>',
+    '<i class="devicon-npm-original-wordmark colored"></i>',
+    '<i class="devicon-webpack-plain colored"></i>',
+    '<i class="devicon-babel-plain colored"></i>',
+    '<i class="devicon-jest-plain colored"></i>',
+    '<i class="devicon-graphql-plain colored"></i>',
+    '<i class="devicon-redis-plain colored"></i>',
+    '<i class="devicon-ubuntu-plain colored"></i>',
+    '<i class="devicon-kubernetes-plain colored"></i>',
+    '<i class="devicon-go-original-wordmark colored"></i>',
+    '<i class="devicon-ruby-plain colored"></i>',
+    '<i class="devicon-php-plain colored"></i>',
+    '<i class="devicon-swift-plain colored"></i>',
+    '<i class="devicon-kotlin-plain colored"></i>',
+    '<i class="devicon-android-plain colored"></i>',
+    '<i class="devicon-apple-original"></i>',
+    '<i class="devicon-windows8-original colored"></i>',
+    '<i class="devicon-chrome-plain colored"></i>',
+    '<i class="devicon-firefox-plain colored"></i>',
+    '<i class="devicon-slack-plain colored"></i>',
+    '<i class="devicon-trello-plain colored"></i>',
+    '<i class="devicon-jira-plain colored"></i>',
+    '<i class="devicon-markdown-original"></i>',
+    '<i class="devicon-json-plain colored"></i>',
+    '<i class="devicon-yaml-plain colored"></i>',
+    '<i class="devicon-sqlite-plain colored"></i>',
+    '<i class="devicon-oracle-original colored"></i>',
+    '<i class="devicon-vuejs-plain colored"></i>',
+    '<i class="devicon-angularjs-plain colored"></i>',
+    '<i class="devicon-svelte-plain colored"></i>',
+    '<i class="devicon-jquery-plain colored"></i>',
+    '<i class="devicon-sass-original colored"></i>',
+    '<i class="devicon-wordpress-plain colored"></i>',
+    '<i class="devicon-webflow-original"></i>',
+    '<i class="devicon-debian-plain colored"></i>',
+    '<i class="devicon-nginx-original colored"></i>',
+    '<i class="devicon-apache-plain colored"></i>',
+    '<i class="devicon-heroku-original colored"></i>',
+    '<i class="devicon-digitalocean-plain colored"></i>',
+    '<i class="devicon-bitbucket-original colored"></i>',
+    '<i class="devicon-gitlab-plain colored"></i>',
+    '<i class="devicon-confluence-original colored"></i>',
+    '<i class="devicon-discord-plain colored"></i>'
+  ];
+
+  // Configure TagCloud
+  const options = {
+    radius: window.innerWidth < 768 ? 160 : 250,
+    maxSpeed: 'fast',
+    initSpeed: 'normal',
+    direction: 135,
+    keep: true
+  };
+
+  // Only init if TagCloud is loaded and container exists
+  if (typeof TagCloud !== 'undefined' && document.querySelector(container)) {
+    TagCloud(container, skills, options);
+    
+    // WORKAROUND: TagCloud v2.2.0 escapes HTML by default.
+    // We manually convert the escaped text back into actual HTML DOM nodes.
+    setTimeout(() => {
+      document.querySelectorAll('.tagcloud--item').forEach(item => {
+        item.innerHTML = item.textContent;
+      });
+    }, 100);
+  }
+});

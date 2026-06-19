@@ -1458,27 +1458,85 @@ html.lenis, html.lenis body {
   background: white;
 }
 
-/* --- SKILLS SECTION --- */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
+/* --- SKILLS SECTION (3D TagCloud & Categories) --- */
+.skills-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+  min-height: 500px;
 }
-.skill-card {
+.sphere-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 400px;
+}
+#skill-sphere {
+  font-size: 28px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  color: #fff;
+}
+/* Style the icons inside the TagCloud */
+.tagcloud {
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.tagcloud--item {
+  color: #fff;
+  transition: color 0.3s;
+}
+.tagcloud--item:hover {
+  color: var(--accent-color);
+  text-shadow: 0 0 20px var(--accent-color);
+}
+
+.skills-cards-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.skill-category-card {
   padding: 24px;
 }
-.skill-card h4 {
+.skill-category-title {
   font-family: var(--font-display);
-  font-size: 18px;
-  color: var(--text-primary);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
-.skill-card h4 i {
-  color: var(--accent-color);
-  font-size: 20px;
+.skill-grid-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 16px;
+  justify-items: center;
+}
+.skill-item-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease;
+}
+.skill-item-box:hover {
+  transform: translateY(-5px);
+}
+.skill-item-box i {
+  font-size: 32px;
+}
+.skill-item-box span {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* --- FEATURED PROJECT --- */
@@ -1541,6 +1599,111 @@ html.lenis, html.lenis body {
   background: transparent;
   border: 1px solid var(--accent-color);
   color: var(--accent-color);
+}
+.fp-btn.outline:hover {
+  background: var(--accent-color);
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px var(--accent-color);
+}
+
+/* VERCEL DEPLOYMENTS SPECIFIC STYLES */
+.vercel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.vercel-card {
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  min-height: 200px;
+  word-wrap: break-word;
+}
+
+.vercel-card:hover {
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+.vercel-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.vercel-card-title {
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vercel-status {
+  background: #000;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vercel-status-dot {
+  width: 8px;
+  height: 8px;
+  background: #50e3c2;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #50e3c2;
+}
+
+.vercel-card-desc {
+  color: #888;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.vercel-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+  padding-top: 16px;
+}
+
+.vercel-link-btn {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.vercel-card:hover .vercel-link-btn {
+  opacity: 0.8;
 }
 .fp-btn.outline:hover {
   background: var(--accent-color);
@@ -1612,6 +1775,11 @@ html.lenis, html.lenis body {
 @media (max-width: 1024px) {
   .floating-socials { display: none; }
 
+  /* Header */
+  header { padding: 14px 20px; }
+  .desktop-nav { display: none !important; }
+  .mobile-nav-toggle { display: block !important; }
+
   /* Awards / certifications horizontal scroll */
   .awards-grid {
     flex-wrap: nowrap !important;
@@ -1645,6 +1813,8 @@ html.lenis, html.lenis body {
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; }
   .info-cards-grid { grid-template-columns: 1fr; }
+  .skills-container { flex-direction: column; gap: 40px; }
+  .sphere-wrapper { min-height: 350px; }
   .contact-wrapper { grid-template-columns: 1fr; gap: 48px; }
   .resume-wrapper { flex-direction: column; }
   .resume-tabs {
@@ -1666,11 +1836,6 @@ html.lenis, html.lenis body {
 
 /* ---- 5. Mobile / Tablet Portrait / 768px ---- */
 @media (max-width: 768px) {
-  /* Header */
-  header { padding: 14px 20px; }
-  .desktop-nav { display: none !important; }
-  .mobile-nav-toggle { display: block !important; }
-
   /* Sections */
   section { padding: 60px 16px; }
   .section-header { margin-bottom: 36px; }
@@ -1838,6 +2003,10 @@ html.lenis, html.lenis body {
 
   .projects-grid { gap: 16px; }
   .project-title { font-size: 17px; }
+
+  .github-repos-grid, .vercel-grid {
+    grid-template-columns: 1fr;
+  }
 
   .detail-value { font-size: 13px; }
   .detail-icon-box { width: 40px; height: 40px; font-size: 16px; }
@@ -2049,4 +2218,100 @@ body.is-mobile .btn:hover {
 body.is-mobile #custom-cursor,
 body.is-mobile #custom-cursor-ring {
   display: none !important;
+}
+
+/* --- GITHUB REPOS SECTION --- */
+.github-repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.github-repo-card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  min-height: 250px;
+}
+.repo-image-box {
+  width: 100%;
+  height: 140px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+}
+.repo-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+.github-repo-card:hover .repo-image-box img {
+  transform: scale(1.05);
+}
+.repo-type-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  color: var(--accent-color);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--accent-color);
+  z-index: 10;
+}
+.repo-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.github-repo-card:hover {
+  transform: translateY(-5px);
+  background: var(--bg-card-hover);
+  border-color: var(--text-primary);
+}
+.repo-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.repo-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+.repo-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.repo-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.repo-lang-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
 }

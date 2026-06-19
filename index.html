@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Font Awesome for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  
+  <!-- Devicon for 3D Skill Logos -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 <body>
 
@@ -60,6 +63,8 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#certifications">Certifications</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#github-activity">GitHub</a></li>
+        <li><a href="#vercel">Live Apps</a></li>
         <li><a href="#highlights">Highlights</a></li>
         <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
       </ul>
@@ -74,6 +79,8 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#certifications">Certifications</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#github-activity">GitHub</a></li>
+      <li><a href="#vercel">Live Apps</a></li>
       <li><a href="#highlights">Highlights</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -123,7 +130,7 @@
       <div class="about-grid">
         <div class="about-image-container glass-card">
           <div class="card-glare"></div>
-          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image" loading="lazy" />
+          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image"  />
           <div class="about-image-overlay"></div>
         </div>
         
@@ -145,45 +152,106 @@
     <!-- Skills Section -->
     <section id="skills" class="reveal-on-scroll">
       <div class="section-header">
-        <span class="section-tag">Technical Arsenal</span>
-        <h2 class="section-title">My Skills</h2>
+        <span class="section-tag">Technologies & Tools</span>
+        <h2 class="section-title">My Arsenal</h2>
       </div>
       
-      <div class="skills-grid">
-        <div class="glass-card skill-card">
-          <div class="card-glare"></div>
-          <h4><i class="fas fa-shield-alt"></i> Cybersecurity</h4>
-          <div class="skills-list">
-            <span class="skill-badge">Linux</span>
-            <span class="skill-badge">Network Security</span>
-            <span class="skill-badge">OWASP Top 10</span>
-            <span class="skill-badge">Ethical Hacking</span>
-            <span class="skill-badge">Wireshark</span>
-            <span class="skill-badge">Nmap</span>
-          </div>
+      <div class="skills-container">
+        <!-- LEFT COLUMN: 3D Sphere -->
+        <div class="sphere-wrapper">
+          <div id="skill-sphere"></div>
         </div>
 
-        <div class="glass-card skill-card">
-          <div class="card-glare"></div>
-          <h4><i class="fas fa-globe"></i> Web Development</h4>
-          <div class="skills-list">
-            <span class="skill-badge">HTML</span>
-            <span class="skill-badge">CSS</span>
-            <span class="skill-badge">React</span>
-            <span class="skill-badge">Node.js</span>
-            <span class="skill-badge">Git</span>
+        <!-- RIGHT COLUMN: Categorized Cards -->
+        <div class="skills-cards-column">
+          
+          <!-- Card 1: Languages -->
+          <div class="glass-card skill-category-card">
+            <h4 class="skill-category-title">Languages</h4>
+            <div class="skill-grid-items">
+              <div class="skill-item-box"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+              <div class="skill-item-box"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+              <div class="skill-item-box"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+              <div class="skill-item-box"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
+              <div class="skill-item-box"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
+              <div class="skill-item-box"><i class="devicon-java-plain colored"></i><span>Java</span></div>
+              <div class="skill-item-box"><i class="devicon-cplusplus-plain colored"></i><span>C++</span></div>
+              <div class="skill-item-box"><i class="devicon-c-plain colored"></i><span>C</span></div>
+              <div class="skill-item-box"><i class="devicon-mysql-plain colored"></i><span>SQL</span></div>
+              <div class="skill-item-box"><i class="devicon-bash-plain colored"></i><span>Bash</span></div>
+              <div class="skill-item-box"><i class="devicon-go-original-wordmark colored"></i><span>Go</span></div>
+              <div class="skill-item-box"><i class="devicon-ruby-plain colored"></i><span>Ruby</span></div>
+              <div class="skill-item-box"><i class="devicon-php-plain colored"></i><span>PHP</span></div>
+              <div class="skill-item-box"><i class="devicon-swift-plain colored"></i><span>Swift</span></div>
+              <div class="skill-item-box"><i class="devicon-kotlin-plain colored"></i><span>Kotlin</span></div>
+              <div class="skill-item-box"><i class="devicon-sass-original colored"></i><span>Sass</span></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="glass-card skill-card">
-          <div class="card-glare"></div>
-          <h4><i class="fas fa-robot"></i> AI & Tools</h4>
-          <div class="skills-list">
-            <span class="skill-badge">AI Tools</span>
-            <span class="skill-badge">Prompt Engineering</span>
-            <span class="skill-badge">GitHub</span>
-            <span class="skill-badge">VS Code</span>
+
+          <!-- Card 2: Frameworks & Tools -->
+          <div class="glass-card skill-category-card">
+            <h4 class="skill-category-title">Frameworks & Tools</h4>
+            <div class="skill-grid-items">
+              <div class="skill-item-box"><i class="devicon-react-original colored"></i><span>React</span></div>
+              <div class="skill-item-box"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+              <div class="skill-item-box"><i class="devicon-nextjs-original"></i><span>Next.js</span></div>
+              <div class="skill-item-box"><i class="devicon-tailwindcss-original colored"></i><span>Tailwind</span></div>
+              <div class="skill-item-box"><i class="devicon-express-original"></i><span>Express</span></div>
+              <div class="skill-item-box"><i class="devicon-spring-original colored"></i><span>Spring Boot</span></div>
+              <div class="skill-item-box"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+              <div class="skill-item-box"><i class="devicon-github-original"></i><span>GitHub</span></div>
+              <div class="skill-item-box"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+              <div class="skill-item-box"><i class="devicon-figma-plain colored"></i><span>Figma</span></div>
+              <div class="skill-item-box"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
+              <div class="skill-item-box"><i class="devicon-postman-plain colored"></i><span>Postman</span></div>
+              <div class="skill-item-box"><i class="devicon-vuejs-plain colored"></i><span>Vue.js</span></div>
+              <div class="skill-item-box"><i class="devicon-angularjs-plain colored"></i><span>Angular</span></div>
+              <div class="skill-item-box"><i class="devicon-svelte-plain colored"></i><span>Svelte</span></div>
+              <div class="skill-item-box"><i class="devicon-jquery-plain colored"></i><span>jQuery</span></div>
+              <div class="skill-item-box"><i class="devicon-android-plain colored"></i><span>Android</span></div>
+              <div class="skill-item-box"><i class="devicon-apple-original"></i><span>iOS</span></div>
+              <div class="skill-item-box"><i class="devicon-chrome-plain colored"></i><span>Chrome</span></div>
+              <div class="skill-item-box"><i class="devicon-slack-plain colored"></i><span>Slack</span></div>
+              <div class="skill-item-box"><i class="devicon-trello-plain colored"></i><span>Trello</span></div>
+              <div class="skill-item-box"><i class="devicon-jira-plain colored"></i><span>Jira</span></div>
+              <div class="skill-item-box"><i class="devicon-markdown-original"></i><span>Markdown</span></div>
+              <div class="skill-item-box"><i class="devicon-json-plain colored"></i><span>JSON</span></div>
+              <div class="skill-item-box"><i class="devicon-wordpress-plain colored"></i><span>WordPress</span></div>
+              <div class="skill-item-box"><i class="devicon-webflow-original"></i><span>Webflow</span></div>
+              <div class="skill-item-box"><i class="devicon-discord-plain colored"></i><span>Discord</span></div>
+              <div class="skill-item-box"><i class="devicon-gitlab-plain colored"></i><span>GitLab</span></div>
+              <div class="skill-item-box"><i class="devicon-bitbucket-original colored"></i><span>Bitbucket</span></div>
+            </div>
           </div>
+
+          <!-- Card 3: Cloud, AI & Security -->
+          <div class="glass-card skill-category-card">
+            <h4 class="skill-category-title">Cloud, AI & Security</h4>
+            <div class="skill-grid-items">
+              <div class="skill-item-box"><i class="devicon-amazonwebservices-plain-wordmark colored"></i><span>AWS</span></div>
+              <div class="skill-item-box"><i class="devicon-azure-plain colored"></i><span>Azure</span></div>
+              <div class="skill-item-box"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
+              <div class="skill-item-box"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
+              <div class="skill-item-box"><i class="devicon-firebase-plain colored"></i><span>Firebase</span></div>
+              <div class="skill-item-box"><i class="devicon-tensorflow-original colored"></i><span>TensorFlow</span></div>
+              <div class="skill-item-box"><i class="devicon-pytorch-original colored"></i><span>PyTorch</span></div>
+              <div class="skill-item-box"><i class="devicon-opencv-plain colored"></i><span>OpenCV</span></div>
+              <div class="skill-item-box"><i class="devicon-numpy-original colored"></i><span>NumPy</span></div>
+              <div class="skill-item-box"><i class="devicon-pandas-original colored"></i><span>Pandas</span></div>
+              <div class="skill-item-box"><i class="devicon-linux-plain"></i><span>Linux</span></div>
+              <div class="skill-item-box"><i class="devicon-networkx-plain colored"></i><span>Security</span></div>
+              <div class="skill-item-box"><i class="devicon-oracle-original colored"></i><span>Oracle</span></div>
+              <div class="skill-item-box"><i class="devicon-sqlite-plain colored"></i><span>SQLite</span></div>
+              <div class="skill-item-box"><i class="devicon-debian-plain colored"></i><span>Debian</span></div>
+              <div class="skill-item-box"><i class="devicon-ubuntu-plain colored"></i><span>Ubuntu</span></div>
+              <div class="skill-item-box"><i class="devicon-nginx-original colored"></i><span>Nginx</span></div>
+              <div class="skill-item-box"><i class="devicon-apache-plain colored"></i><span>Apache</span></div>
+              <div class="skill-item-box"><i class="devicon-heroku-original colored"></i><span>Heroku</span></div>
+              <div class="skill-item-box"><i class="devicon-digitalocean-plain colored"></i><span>DigitalOcean</span></div>
+              <div class="skill-item-box"><i class="devicon-kubernetes-plain colored"></i><span>K8s</span></div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div id="dark-web-trigger" style="text-align: center; margin-top: 40px; opacity: 0.05; cursor: crosshair;"><i class="fas fa-lock" style="font-size: 12px;"></i></div>
@@ -215,7 +283,7 @@
         <div class="glass-card award-card" data-pdf="assets/prompt_eng_genai.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/prompt_eng_genai.png" alt="Prompt Engineering for Generative AI" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/prompt_eng_genai.png" alt="Prompt Engineering for Generative AI"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">LinkedIn Learning</div>
@@ -227,7 +295,7 @@
         <div class="glass-card award-card" data-pdf="assets/paloalto_cybersec.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/paloalto_cybersec.png" alt="Palo Alto Networks Cybersecurity Foundation" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/paloalto_cybersec.png" alt="Palo Alto Networks Cybersecurity Foundation"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -239,7 +307,7 @@
         <div class="glass-card award-card" data-pdf="assets/excel_started.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/excel_started.png" alt="Getting Started with Microsoft Excel" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/excel_started.png" alt="Getting Started with Microsoft Excel"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -251,7 +319,7 @@
         <div class="glass-card award-card" data-pdf="assets/google_ads_beginner.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/google_ads_beginner.png" alt="Google Ads for Beginners" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/google_ads_beginner.png" alt="Google Ads for Beginners"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -390,7 +458,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project1.png" alt="VLAN Setup & Simulation" loading="lazy" />
+            <img src="assets/project1.png" alt="VLAN Setup & Simulation"  />
             <div class="project-tags">
               <span class="project-tag">Networking</span>
               <span class="project-tag">VLAN</span>
@@ -409,7 +477,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project2.png" alt="Generative AI Prompt Lab" loading="lazy" />
+            <img src="assets/project2.png" alt="Generative AI Prompt Lab"  />
             <div class="project-tags">
               <span class="project-tag">AI / LLM</span>
               <span class="project-tag">Prompt Eng</span>
@@ -428,7 +496,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project3.png" alt="Computational Model" loading="lazy" />
+            <img src="assets/project3.png" alt="Computational Model"  />
             <div class="project-tags">
               <span class="project-tag">Computer Science</span>
               <span class="project-tag">Algorithms</span>
@@ -442,6 +510,45 @@
             </div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- GitHub Open Source Section -->
+    <section id="github-activity" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Open Source</span>
+        <h2 class="section-title">GitHub Activity</h2>
+      </div>
+      <div id="github-loading" style="text-align: center; color: var(--text-muted); padding: 40px;">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p style="margin-top: 15px;">Synchronizing with GitHub...</p>
+      </div>
+      <div id="github-repos" class="github-repos-grid" style="display: none;">
+        <!-- Repositories will be dynamically injected here -->
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://github.com/viswakpullepu" target="_blank" class="glow-button">View Full Profile <i class="fab fa-github" style="margin-left:8px;"></i></a>
+      </div>
+    </section>
+
+    <!-- Vercel Deployments Section -->
+    <section id="vercel" class="reveal-on-scroll">
+      <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+        <span class="section-tag" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">Live Apps</span>
+        <h2 class="section-title" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+          <svg viewBox="0 0 116 100" fill="#fff" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.5 0L115 100H0L57.5 0z"/></svg>
+          Vercel Deployments
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 20px auto 0; font-size: 1.1rem; line-height: 1.6;">
+          Automatically tracking live production deployments mapped from my GitHub repositories.
+        </p>
+      </div>
+      <div id="vercel-loading" style="text-align: center; color: var(--text-muted); padding: 40px;">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p style="margin-top: 15px;">Locating Deployments...</p>
+      </div>
+      <div id="vercel-deployments" class="vercel-grid" style="display: none;">
+        <!-- Vercel projects will be dynamically injected here -->
       </div>
     </section>
 
@@ -634,6 +741,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-  <script src="script.js"></script>
+  
+  <!-- TagCloud.js for 3D Sphere -->
+  <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
+  
+  <script src="script.js?v=12"></script>
 </body>
 </html>
