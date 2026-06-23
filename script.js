@@ -585,6 +585,27 @@ if (contactForm) {
       return; // Stop form submission
     }
 
+    // Phone Number Validation Regex
+    const phoneStr = formData.get("phone");
+    const phoneRegex = /^\+?[\d\s\-\(\)]{7,20}$/;
+    if (!phoneRegex.test(phoneStr)) {
+      btnText.textContent = "Invalid Phone!";
+      btn.style.background = "#c62828";
+      btn.style.borderColor = "#c62828";
+      icon.className = "fas fa-times-circle";
+      
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        btn.style.background = "";
+        btn.style.borderColor = "";
+        icon.className = "fas fa-paper-plane";
+        btn.disabled = false;
+      }, 3000);
+      
+      return; // Stop form submission
+    }
+
+
     try {
       // Formspree endpoint URL
       const response = await fetch("https://formspree.io/f/xpqezneo", {
