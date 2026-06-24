@@ -1,3 +1,5 @@
+let lenis = null; // Declare explicitly at top-level scope
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- MOBILE DETECTION ---
   const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
@@ -246,28 +248,65 @@ if (!isMobile) {
 
 // --- PHYSICAL 3D GLASS TILT & GLARE EFFECT ---
 const glassCards = document.querySelectorAll(".glass-card");
-glassCards.forEach((card) => {
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
+if (typeof gsap !== "undefined" && !isMobile) {
+  glassCards.forEach((card) => {
+    if (card.classList.contains("award-card")) return; // EXCLUDE award cards: Let CSS handle their complex fanning physics!
     
-    // Position of cursor relative to card center (normalized between -1 and 1)
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
+    card.addEventListener("mouseenter", () => {
+      let targetShadow = "0 20px 40px rgba(224, 96, 49, 0.15)";
+      if (card.classList.contains("award-card")) {
+        targetShadow = "0 20px 40px rgba(224, 96, 49, 0.2)";
+      }
+      gsap.to(card, {
+        scale: 1.03,
+        boxShadow: targetShadow,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      
+      // Position of cursor relative to card center (normalized between -1 and 1)
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      
+      const tiltX = (y - 0.5) * -15; // Max 15 degree rotation
+      const tiltY = (x - 0.5) * 15;
+      
+      gsap.to(card, {
+        rotateX: tiltX,
+        rotateY: tiltY,
+        y: -15,
+        duration: 0.1,
+        ease: "power1.out",
+        overwrite: "auto"
+      });
+      
+      // Update radial glare position using CSS custom variables
+      card.style.setProperty("--glare-x", `${x * 100}%`);
+      card.style.setProperty("--glare-y", `${y * 100}%`);
+    });
     
-    const tiltX = (y - 0.5) * -15; // Max 15 degree rotation
-    const tiltY = (x - 0.5) * 15;
-    
-    card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-8px)`;
-    
-    // Update radial glare position using CSS custom variables
-    card.style.setProperty("--glare-x", `${x * 100}%`);
-    card.style.setProperty("--glare-y", `${y * 100}%`);
+    card.addEventListener("mouseleave", () => {
+      let originalShadow = "0 10px 30px rgba(0, 0, 0, 0.2)";
+      if (!card.classList.contains("award-card")) {
+        originalShadow = "none";
+      }
+      gsap.to(card, {
+        rotateX: 0,
+        rotateY: 0,
+        y: 0,
+        scale: 1,
+        boxShadow: originalShadow,
+        duration: 0.6,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    });
   });
-  
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0)";
-  });
-});
+}
 
 // --- MOBILE SLIDING DRAWER NAVIGATION ---
 const mobileToggle = document.querySelector(".mobile-nav-toggle");
@@ -415,9 +454,12 @@ if (canvas && typeof THREE !== "undefined") {
 
     const clock = new THREE.Clock();
 
+    let animationFrameId = null;
+    const heroSection = document.getElementById("hero");
+
     // Animation render loop
     function animate() {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
 
       const elapsedTime = clock.getElapsedTime();
       const positionArray = geometry.attributes.position.array;
@@ -496,7 +538,26 @@ if (canvas && typeof THREE !== "undefined") {
       renderer.render(scene, camera);
     }
 
-    animate();
+    // Set up intersection observer to toggle loop
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!animationFrameId) {
+            clock.getElapsedTime(); // catch up clock
+            animate();
+          }
+        } else {
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
 
     // Resize canvas event handler
     window.addEventListener("resize", () => {
@@ -565,6 +626,26 @@ if (contactForm) {
     // Get form data
     const formData = new FormData(contactForm);
     const emailStr = formData.get("email");
+
+    const nameStr = formData.get("name") ? formData.get("name").trim() : "";
+    const messageStr = formData.get("message") ? formData.get("message").trim() : "";
+
+    if (!nameStr || !messageStr) {
+      btnText.textContent = "Fields Required!";
+      btn.style.background = "#c62828";
+      btn.style.borderColor = "#c62828";
+      icon.className = "fas fa-times-circle";
+      
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        btn.style.background = "";
+        btn.style.borderColor = "";
+        icon.className = "fas fa-paper-plane";
+        btn.disabled = false;
+      }, 3000);
+      
+      return; // Block form submission
+    }
 
     // Email Validation Regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -695,6 +776,15 @@ if (contactForm) {
                 plane.remove(); // Cleanup clone
                 icon.style.opacity = '1'; // Restore original icon
                 icon.className = "fas fa-check"; // Set to checkmark
+                
+                // Trigger button reset after flight completes (500ms after flight ends)
+                setTimeout(() => {
+                  btnText.textContent = originalText;
+                  btn.style.background = "";
+                  btn.style.borderColor = "";
+                  icon.className = "fas fa-paper-plane";
+                  btn.disabled = false;
+                }, 500);
               }
             });
           } else {
@@ -719,15 +809,6 @@ if (contactForm) {
       btn.style.borderColor = "#c62828";
       icon.className = "fas fa-wifi";
     }
-
-    // Reset button back to normal after 3 seconds
-    setTimeout(() => {
-      btnText.textContent = originalText;
-      btn.style.background = "";
-      btn.style.borderColor = "";
-      icon.className = "fas fa-paper-plane";
-      btn.disabled = false;
-    }, 3000);
   });
 }
 
@@ -814,6 +895,12 @@ try {
     if (certModalOverlay) {
       certModalOverlay.addEventListener("click", closeModal);
     }
+    
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && certModal.classList.contains("active")) {
+        closeModal();
+      }
+    });
   }
 } catch (e) {
   console.error("Certificate modal initialization error:", e);
@@ -1018,6 +1105,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loadingIndicator) {
         loadingIndicator.innerHTML = "<p>Unable to load GitHub repositories at the moment. (API Rate Limit)</p>";
       }
+      const vercelLoading = document.getElementById("vercel-loading");
+      if (vercelLoading) {
+        vercelLoading.innerHTML = `<div class="error-loading-box">
+          <i class="fas fa-exclamation-triangle" style="color:var(--accent-color);"></i>
+          <p>Could not load live projects at this time.</p>
+        </div>`;
+      }
     });
 });
 
@@ -1125,6 +1219,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll('.tagcloud--item').forEach(item => {
         item.innerHTML = item.textContent;
       });
+      // Show container
+      const wrapper = document.querySelector('.tagcloud-wrapper');
+      if (wrapper) wrapper.classList.add('loaded');
     }, 100);
   }
 });

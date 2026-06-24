@@ -18,7 +18,9 @@
   
   --font-display: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-main: 'Inter', sans-serif;
   --font-accent: 'Pacifico', cursive;
+  --accent-color-rgb: 224, 96, 49;
   
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
@@ -98,6 +100,12 @@ img {
 }
 
 /* --- CUSTOM CURSOR --- */
+@media (min-width: 769px) {
+  html, body, a, button, input, textarea, select, iframe {
+    cursor: none !important;
+  }
+}
+
 #custom-cursor {
   position: fixed;
   width: 8px;
@@ -1257,10 +1265,6 @@ footer {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .awards-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
   .about-photo {
     max-width: 240px;
     margin: 0 auto 24px auto;
@@ -1310,7 +1314,7 @@ html.lenis, html.lenis body {
 }
 
 /* --- DECK OF CARDS FANNING LAYOUT & MODAL SYSTEM --- */
-.awards-grid {
+#certifications .awards-grid {
   display: flex !important;
   flex-direction: row;
   justify-content: center;
@@ -1320,13 +1324,27 @@ html.lenis, html.lenis body {
   margin-top: 60px;
   padding: 40px 100px;
   overflow: visible !important;
+  transition: transform 0.3s ease;
 }
 
-.award-card {
+/* Responsive scaling for the 14-card fanning deck on laptops */
+@media (max-width: 1440px) and (min-width: 1025px) {
+  #certifications .awards-grid {
+    transform: scale(0.85);
+  }
+}
+@media (max-width: 1250px) and (min-width: 1025px) {
+  #certifications .awards-grid {
+    transform: scale(0.7);
+  }
+}
+
+#certifications .award-card {
   width: 250px;
   height: 330px;
-  margin-left: -170px; /* Overlap stacking effect for 13 cards */
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1), box-shadow 0.6s ease, z-index 0.3s ease;
+  margin-left: -170px; /* Overlap stacking effect */
+  /* Ultra-fast 0.05s transition for both hover-in and hover-out (instant preview) */
+  transition: transform 0.05s ease-out, box-shadow 0.05s ease-out;
   cursor: pointer;
   transform-origin: bottom center;
   position: relative;
@@ -1338,34 +1356,36 @@ html.lenis, html.lenis body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.award-card:first-child {
+#certifications .award-card:first-child {
   margin-left: 0;
 }
 
-/* Symmetrical Fan Rotation & Y-Translation offsets for 13 cards */
-.award-card:nth-child(1) { transform: rotate(-18deg) translateY(55px); }
-.award-card:nth-child(2) { transform: rotate(-15deg) translateY(38px); }
-.award-card:nth-child(3) { transform: rotate(-12deg) translateY(24px); }
-.award-card:nth-child(4) { transform: rotate(-9deg) translateY(13px); }
-.award-card:nth-child(5) { transform: rotate(-6deg) translateY(6px); }
-.award-card:nth-child(6) { transform: rotate(-3deg) translateY(2px); }
-.award-card:nth-child(7) { transform: rotate(0deg) translateY(0px); }
-.award-card:nth-child(8) { transform: rotate(3deg) translateY(2px); }
-.award-card:nth-child(9) { transform: rotate(6deg) translateY(6px); }
-.award-card:nth-child(10) { transform: rotate(9deg) translateY(13px); }
-.award-card:nth-child(11) { transform: rotate(12deg) translateY(24px); }
-.award-card:nth-child(12) { transform: rotate(15deg) translateY(38px); }
-.award-card:nth-child(13) { transform: rotate(18deg) translateY(55px); }
+/* Symmetrical Fan Rotation & Y-Translation offsets for 14 cards */
+#certifications .award-card:nth-child(1) { transform: rotate(-19.5deg) translateY(65px); }
+#certifications .award-card:nth-child(2) { transform: rotate(-16.5deg) translateY(48px); }
+#certifications .award-card:nth-child(3) { transform: rotate(-13.5deg) translateY(33px); }
+#certifications .award-card:nth-child(4) { transform: rotate(-10.5deg) translateY(20px); }
+#certifications .award-card:nth-child(5) { transform: rotate(-7.5deg) translateY(10px); }
+#certifications .award-card:nth-child(6) { transform: rotate(-4.5deg) translateY(3px); }
+#certifications .award-card:nth-child(7) { transform: rotate(-1.5deg) translateY(0px); }
+#certifications .award-card:nth-child(8) { transform: rotate(1.5deg) translateY(0px); }
+#certifications .award-card:nth-child(9) { transform: rotate(4.5deg) translateY(3px); }
+#certifications .award-card:nth-child(10) { transform: rotate(7.5deg) translateY(10px); }
+#certifications .award-card:nth-child(11) { transform: rotate(10.5deg) translateY(20px); }
+#certifications .award-card:nth-child(12) { transform: rotate(13.5deg) translateY(33px); }
+#certifications .award-card:nth-child(13) { transform: rotate(16.5deg) translateY(48px); }
+#certifications .award-card:nth-child(14) { transform: rotate(19.5deg) translateY(65px); }
 
 /* Premium Roll-out hover effect (straighten, scale, pop up, front z-index) */
-.award-card:hover {
-  transform: translateY(-80px) scale(1.22) rotate(0deg) !important;
-  z-index: 150 !important;
-  box-shadow: 0 25px 60px rgba(var(--accent-color-rgb), 0.25), 0 20px 45px rgba(0, 0, 0, 0.4);
+#certifications .award-card:hover {
+  /* BIGGER PREVIEW SCALE (1.5x) and higher Y translation so it doesn't clip */
+  transform: translateY(-140px) scale(1.5) rotate(0deg) !important;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(224, 96, 49, 0.3);
+  z-index: 50 !important;
 }
 
 /* Mobile rollout state (when clicked, before opening modal) */
-.award-card.rolling-out {
+#certifications .award-card.rolling-out {
   transform: translateY(-120px) scale(1.3) rotate(0deg) !important;
   z-index: 9999 !important;
   box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 20px 50px rgba(var(--accent-color-rgb), 0.35);
@@ -1480,6 +1500,14 @@ html.lenis, html.lenis body {
   cursor: pointer;
   color: #fff;
 }
+.tagcloud-wrapper {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.tagcloud-wrapper.loaded {
+  opacity: 1;
+}
+
 /* Style the icons inside the TagCloud */
 .tagcloud {
   display: inline-block;
@@ -1883,7 +1911,7 @@ html.lenis, html.lenis body {
   .mobile-nav-toggle { display: block !important; }
 
   /* Awards / certifications horizontal scroll */
-  .awards-grid {
+  #certifications .awards-grid {
     flex-wrap: nowrap !important;
     justify-content: flex-start !important;
     overflow-x: auto !important;
@@ -1891,22 +1919,26 @@ html.lenis, html.lenis body {
     min-height: 440px !important;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    gap: 0;
+    gap: 16px !important;
   }
-  .awards-grid::-webkit-scrollbar { height: 6px; }
-  .awards-grid::-webkit-scrollbar-thumb {
+  #certifications .awards-grid::-webkit-scrollbar { height: 6px; }
+  #certifications .awards-grid::-webkit-scrollbar-thumb {
     background: rgba(255,255,255,0.15);
     border-radius: 10px;
   }
-  .award-card {
+  #certifications .award-card {
     flex: 0 0 230px !important;
     height: 310px !important;
-    margin-left: -90px !important;
+    margin-left: 0 !important;
     scroll-snap-align: center;
-    transform: rotate(0deg) translateY(0px) !important;
+    transform: none !important;
   }
-  .award-card:first-child { margin-left: 0 !important; }
-  .award-card:hover { transform: translateY(-20px) scale(1.08) !important; }
+  #certifications .award-card:first-child { margin-left: 0 !important; }
+  #certifications .award-card:hover {
+    box-shadow: 0 20px 40px rgba(224, 96, 49, 0.15);
+    border-color: var(--accent-color);
+    z-index: 10;
+  }
 
   .cert-modal-content { width: 95vw; height: 90vh; }
 }
@@ -2024,6 +2056,39 @@ html.lenis, html.lenis body {
     will-change: transform;
   }
 
+  /* Certifications — smooth horizontal swipe carousel */
+  #certifications .awards-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px !important;
+    padding: 16px 4px 24px !important;
+    min-height: unset !important;
+    margin-top: 0 !important;
+    scrollbar-width: none;
+    /* GPU acceleration for buttery scrolling */
+    will-change: scroll-position;
+    transform: translate3d(0,0,0);
+  }
+  #certifications .awards-grid::-webkit-scrollbar { display: none; }
+  #certifications .award-card {
+    flex: 0 0 72vw !important;
+    max-width: 280px !important;
+    height: 300px !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    scroll-snap-align: start;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    border-radius: 16px;
+  }
+  #certifications .award-card:active {
+    transform: scale(0.97) !important;
+  }
+
   /* Contact */
   .contact-wrapper { grid-template-columns: 1fr; gap: 36px; }
   .form-group-row { grid-template-columns: 1fr; }
@@ -2043,39 +2108,6 @@ html.lenis, html.lenis body {
   .hero-subtitle { font-size: 9px; letter-spacing: 0.1em; }
 
   .resume-tab-btn { padding: 10px 14px; font-size: 12px; }
-
-  /* Certifications — smooth horizontal swipe carousel */
-  .awards-grid {
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px !important;
-    padding: 16px 4px 24px !important;
-    min-height: unset !important;
-    margin-top: 0 !important;
-    scrollbar-width: none;
-    /* GPU acceleration for buttery scrolling */
-    will-change: scroll-position;
-    transform: translate3d(0,0,0);
-  }
-  .awards-grid::-webkit-scrollbar { display: none; }
-  .award-card {
-    flex: 0 0 72vw !important;
-    max-width: 280px !important;
-    height: 300px !important;
-    margin-left: 0 !important;
-    transform: none !important;
-    scroll-snap-align: start;
-    will-change: transform;
-    transform: translate3d(0,0,0);
-    border-radius: 16px;
-  }
-  .award-card:active {
-    transform: scale(0.97) !important;
-  }
 
   .glass-card { padding: 22px; }
   .contact-form-box, .contact-details-box { padding: 0; }
