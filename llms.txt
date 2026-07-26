@@ -1,6 +1,6 @@
 # Vishwak Pullepu
 
-Computational Scientist & Creative Developer. Currently pursuing B.Tech in Computational Science at CVR College of Engineering (Class of 2029). Formerly Campus Ambassador at SkillHigh.
+Computational Scientist & Creative Developer. Currently pursuing B.Tech in Computational Science at CVR College of Engineering (Class of 2029).
 
 ## Contact Information
 - **Location**: Hyderabad, Telangana, India
@@ -15,11 +15,6 @@ Computational Scientist & Creative Developer. Currently pursuing B.Tech in Compu
 - **Core Skills**: VLAN, Thinking Skills, Computer Science Education, Student Engagement, Collaboration
 - **Tools & Tech**: Generative AI, Microsoft Excel, Google AdMob, Google Ad Manager, C++, HTML & CSS, MongoDB, DSA with Java, SQL
 
-## Professional Experience
-- **SkillHigh** — Campus Ambassador (Oct 2025 - Dec 2025)
-  - Represented SkillHigh at the campus level to foster student tech education.
-  - Promoted technical programs, workshops, and learning opportunities.
-  - Facilitated student engagement via strategic campaigns.
 
 ## Education
 - **CVR College of Engineering, Hyderabad** — Bachelor of Technology, Computational Science (Sept 2025 - Sept 2029)
