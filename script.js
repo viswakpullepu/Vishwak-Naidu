@@ -542,11 +542,106 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// --- CONTACT FORM SUCCESS UI STATE MORPH ---
+// --- CONTACT FORM WITH RATE LIMITING & SECURITY DEFENSES ---
 const contactForm = document.getElementById("portfolio-contact-form");
+const feedbackMsg = document.getElementById("form-feedback-msg");
+
+// Rate limiting config: Max 3 submissions per 60 seconds
+const MAX_SUBMISSIONS = 3;
+const TIME_WINDOW_MS = 60 * 1000;
+const COOLDOWN_MS = 15 * 1000; // 15 seconds mandatory cooldown between submits
+
+function showFeedback(text, isError = false) {
+  if (!feedbackMsg) return;
+  feedbackMsg.style.display = "block";
+  feedbackMsg.style.color = isError ? "#f43f5e" : "#4ade80";
+  feedbackMsg.textContent = text;
+}
+
+function sanitizeInput(str) {
+  if (!str) return "";
+  return str.replace(/[&<>"']/g, function(m) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[m];
+  }).trim();
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
 if (contactForm) {
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    if (feedbackMsg) feedbackMsg.style.display = "none";
+
+    // 1. Bot Trap Honeypot Check
+    const honeypot = document.getElementById("form-website-hp");
+    if (honeypot && honeypot.value !== "") {
+      // Quietly block bot submissions
+      showFeedback("Message sent!", false);
+      contactForm.reset();
+      return;
+    }
+
+    // 2. Client-Side Rate Limiting
+    const now = Date.now();
+    let submissionHistory = JSON.parse(localStorage.getItem("form_sub_history") || "[]");
+    
+    // Filter history to current time window
+    submissionHistory = submissionHistory.filter(timestamp => now - timestamp < TIME_WINDOW_MS);
+
+    // Check last submission timestamp for mandatory cooldown
+    const lastSubTime = submissionHistory[submissionHistory.length - 1] || 0;
+    if (now - lastSubTime < COOLDOWN_MS) {
+      const waitSecs = Math.ceil((COOLDOWN_MS - (now - lastSubTime)) / 1000);
+      showFeedback(`Please wait ${waitSecs} seconds before sending another message.`, true);
+      return;
+    }
+
+    // Check submission frequency in window
+    if (submissionHistory.length >= MAX_SUBMISSIONS) {
+      const oldestSub = submissionHistory[0];
+      const resetSecs = Math.ceil((TIME_WINDOW_MS - (now - oldestSub)) / 1000);
+      showFeedback(`Rate limit exceeded. You can send up to ${MAX_SUBMISSIONS} messages per minute. Try again in ${resetSecs}s.`, true);
+      return;
+    }
+
+    // 3. Input Validation & XSS Sanitization
+    const nameInput = document.getElementById("form-name");
+    const emailInput = document.getElementById("form-email");
+    const messageInput = document.getElementById("form-message");
+
+    const cleanName = sanitizeInput(nameInput ? nameInput.value : "");
+    const cleanEmail = sanitizeInput(emailInput ? emailInput.value : "");
+    const cleanMessage = sanitizeInput(messageInput ? messageInput.value : "");
+
+    if (!cleanName || cleanName.length < 2) {
+      showFeedback("Please enter a valid name (at least 2 characters).", true);
+      return;
+    }
+
+    if (!isValidEmail(cleanEmail)) {
+      showFeedback("Please enter a valid email address.", true);
+      return;
+    }
+
+    if (!cleanMessage || cleanMessage.length < 5) {
+      showFeedback("Please enter a message (at least 5 characters).", true);
+      return;
+    }
+
+    // Record valid submission timestamp in localStorage
+    submissionHistory.push(now);
+    localStorage.setItem("form_sub_history", JSON.stringify(submissionHistory));
+
+    // UI state feedback
     const btn = contactForm.querySelector(".submit-btn");
     const btnText = btn.querySelector("span");
     const originalText = btnText.textContent;
@@ -558,17 +653,17 @@ if (contactForm) {
       btnText.textContent = "Message Sent!";
       btn.style.background = "#2e7d32";
       btn.style.borderColor = "#2e7d32";
-      btn.querySelector("i").className = "fas fa-check";
+      if (btn.querySelector("i")) btn.querySelector("i").className = "fas fa-check";
       contactForm.reset();
 
       setTimeout(() => {
         btnText.textContent = originalText;
         btn.style.background = "";
         btn.style.borderColor = "";
-        btn.querySelector("i").className = "fas fa-paper-plane";
+        if (btn.querySelector("i")) btn.querySelector("i").className = "fas fa-paper-plane";
         btn.disabled = false;
       }, 3000);
-    }, 1500);
+    }, 1200);
   });
 }
 
