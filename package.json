@@ -1,0 +1,15 @@
+{
+  "name": "vishwak-naidu",
+  "version": "1.0.0",
+  "description": "Portfolio website",
+  "main": "script.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.44.1"
+  }
+}

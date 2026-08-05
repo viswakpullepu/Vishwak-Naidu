@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script>window.onerror = function(message, source, lineno, colno, error) { document.body.innerHTML += "<div style='position:fixed;top:0;left:0;z-index:999999;background:red;color:white;padding:20px;font-size:20px;'>ERROR: " + message + " at " + lineno + ":" + colno + "</div>"; };</script>
   <meta charset="UTF-8" />
-  <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com;" />
-  <meta name="referrer" content="strict-origin-when-downgrade" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VN | Creative Developer</title>
   <meta name="description" content="Vishwak Pullepu – Computational Scientist & Emerging Tech Ambassador. Experience in VLAN, Generative AI, and tech leadership." />
-
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/avatar.png" />
+  <link rel="stylesheet" href="style.css?v=10" />
   <!-- Font Awesome for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  
+  <!-- GitHub Calendar CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+  
+  <!-- Devicon for 3D Skill Logos -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 <body>
 
@@ -60,24 +63,30 @@
     <nav class="desktop-nav">
       <ul>
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#academics">Academic Background</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#gallery">Art</a></li>
+        <li><a href="#github-activity">GitHub</a></li>
+        <li><a href="#vercel">Live Apps</a></li>
+        <li><a href="#highlights">Highlights</a></li>
         <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
       </ul>
     </nav>
-    <button class="mobile-nav-toggle"><i class="fas fa-bars"></i></button>
+    <button class="mobile-nav-toggle" aria-label="Open Navigation Menu" aria-controls="mobile-nav-menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
   </header>
 
   <div class="mobile-nav-menu">
-    <button class="close-mobile-btn"><i class="fas fa-times"></i></button>
+    <button class="close-mobile-btn" aria-label="Close Navigation Menu"><i class="fas fa-times"></i></button>
     <ul>
       <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#academics">Academic Background</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#gallery">Art</a></li>
+      <li><a href="#github-activity">GitHub</a></li>
+      <li><a href="#vercel">Live Apps</a></li>
+      <li><a href="#highlights">Highlights</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -109,7 +118,8 @@
             <span class="hero-letter" style="animation-delay: 0.75s">u</span>
           </span>
         </h1>
-        <p class="hero-subtitle">Computer Science & Computational Science • CVRH 2K29</p>
+        <p class="hero-subtitle">Cybersecurity Enthusiast • AI Explorer • Web Developer</p>
+        <p class="hero-statement">Building secure, intelligent, and scalable digital experiences through cybersecurity, artificial intelligence, and modern web technologies.</p>
         <a href="#about" class="hero-btn"><span>Explore Portfolio</span><i class="fas fa-arrow-down"></i></a>
       </div>
       <canvas id="three-bg-canvas"></canvas>
@@ -125,125 +135,134 @@
       <div class="about-grid">
         <div class="about-image-container glass-card">
           <div class="card-glare"></div>
-          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image" loading="lazy" />
+          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image"  />
           <div class="about-image-overlay"></div>
         </div>
         
         <div class="about-info-blocks">
-          <p class="bio-text">
-            I am currently pursuing a Bachelor of Technology in Computer Science at CVR College of Engineering, Hyderabad. Most recently, worked as a Campus Ambassador at SkillHigh, where efforts were focused on promoting technical programs, workshops, and supporting student engagement initiatives. Developed skills in computer science education, thinking skills, and VLAN, complemented by certifications in generative AI and advertising technologies.
-          </p>
-          <p class="bio-text">
-            At SkillHigh, I contributed to fostering student learning experiences by representing the organization at the campus level and promoting educational opportunities in technology. I value collaboration and strive to inspire peers through innovative engagement strategies while bringing a passion for computational science and emerging tech to academic and professional environments.
-          </p>
-          
-          <div class="info-cards-grid">
-            <!-- Education Sub-Card -->
-            <div class="glass-card info-sub-card">
-              <div class="card-glare"></div>
-              <h4><i class="fas fa-graduation-cap"></i> Education</h4>
-              
-              <div class="timeline-item">
-                <div class="timeline-meta">Sept 2025 - Sept 2029</div>
-                <div class="timeline-title">CVR College of Engineering, Hyderabad</div>
-                <div class="timeline-desc">Bachelor of Technology, Computational Science</div>
-              </div>
-              
-              <div class="timeline-item">
-                <div class="timeline-meta">2024 - 2025</div>
-                <div class="timeline-title">Excellencia Junior College</div>
-                <div class="timeline-desc">High School Diploma</div>
-              </div>
-              
-              <div class="timeline-item">
-                <div class="timeline-meta">2023 - 2024</div>
-                <div class="timeline-title">Sri Chaitanya College of Education</div>
-                <div class="timeline-desc">Intermediate/Higher Education</div>
-              </div>
-              
-              <div class="timeline-item">
-                <div class="timeline-meta">2012 - 2022</div>
-                <div class="timeline-title">Sri Chaitanya Techno School</div>
-                <div class="timeline-desc">Secondary Education (10th)</div>
-              </div>
-            </div>
-            
-            <!-- Skills Sub-Card -->
-            <div class="glass-card info-sub-card">
-              <div class="card-glare"></div>
-              <h4><i class="fas fa-tools"></i> Skills & Tech</h4>
-              
-              <div class="timeline-item">
-                <div class="timeline-title" style="color: var(--accent-color); margin-bottom: 8px;">Top Skills</div>
-                <div class="skills-list">
-                  <span class="skill-badge">VLAN</span>
-                  <span class="skill-badge">Thinking Skills</span>
-                  <span class="skill-badge">Computer Science Education</span>
-                </div>
-              </div>
-              
-              <div class="timeline-item" style="margin-top: 16px;">
-                <div class="timeline-title" style="color: var(--accent-color); margin-bottom: 8px;">Soft Skills</div>
-                <div class="skills-list">
-                  <span class="skill-badge">Collaboration</span>
-                  <span class="skill-badge">Student Engagement</span>
-                  <span class="skill-badge">Strategic Promotion</span>
-                </div>
-              </div>
-              
-              <div class="timeline-item" style="margin-top: 16px;">
-                <div class="timeline-title" style="color: var(--accent-color); margin-bottom: 8px;">Tools & Technologies</div>
-                <div class="skills-list">
-                  <span class="skill-badge">Generative AI</span>
-                  <span class="skill-badge">Microsoft Excel</span>
-                  <span class="skill-badge">Google AdMob</span>
-                  <span class="skill-badge">Google Ad Manager</span>
-                </div>
-              </div>
-            </div>
+          <div class="quick-facts-grid">
+            <div class="fact-item"><i class="fas fa-user-graduate"></i> <span>B.Tech Computer Science Student</span></div>
+            <div class="fact-item"><i class="fas fa-shield-alt"></i> <span>Cybersecurity Enthusiast</span></div>
+            <div class="fact-item"><i class="fas fa-robot"></i> <span>AI Explorer</span></div>
+            <div class="fact-item"><i class="fas fa-code"></i> <span>Full-Stack Web Developer</span></div>
+            <div class="fact-item"><i class="fas fa-rocket"></i> <span>Continuous Learner</span></div>
           </div>
+          <p class="bio-text">
+            I am a Computer Science student passionate about Cybersecurity, Artificial Intelligence, and Web Development. I enjoy building secure digital solutions, exploring emerging technologies, and solving real-world problems through practical projects and continuous learning.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="reveal-on-scroll">
+    <!-- Skills Section -->
+    <section id="skills" class="reveal-on-scroll">
       <div class="section-header">
-        <span class="section-tag">Professional History</span>
-        <h2 class="section-title">Work Experience</h2>
+        <span class="section-tag">Technologies & Tools</span>
+        <h2 class="section-title">My Arsenal</h2>
       </div>
       
-      <div class="community-grid">
-        <div class="glass-card community-card">
-          <div class="card-glare"></div>
-          <div class="community-image-box">
-            <img src="assets/community1.png" alt="SkillHigh Campus" loading="lazy" />
+      <div class="skills-container">
+        <!-- LEFT COLUMN: 3D Sphere -->
+        <div class="sphere-wrapper">
+          <div id="skill-sphere"></div>
+        </div>
+
+        <!-- RIGHT COLUMN: Categorized Cards -->
+        <div class="skills-cards-column">
+          <!-- Card 1: AI Models -->
+          <div class="glass-card skill-category-card">
+            <h4 class="skill-category-title">AI Models & Tools</h4>
+            <div class="skill-grid-items">
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://chatgpt.com&size=64" alt="ChatGPT" style="width: 32px; height: 32px; border-radius: 6px;" /><span>ChatGPT</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://gemini.google.com&size=64" alt="Gemini" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Gemini</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://claude.ai&size=64" alt="Claude" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Claude</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://github.com/features/copilot&size=64" alt="Copilot" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Copilot</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://huggingface.co&size=64" alt="Hugging Face" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Hugging Face</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://midjourney.com&size=64" alt="Midjourney" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Midjourney</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://meta.ai&size=64" alt="LLaMA" style="width: 32px; height: 32px; border-radius: 6px;" /><span>LLaMA</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://openai.com/dall-e-3&size=64" alt="DALL-E" style="width: 32px; height: 32px; border-radius: 6px;" /><span>DALL-E</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://perplexity.ai&size=64" alt="Perplexity" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Perplexity</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://stability.ai&size=64" alt="Stable Diffusion" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Stable Diffusion</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://notion.so&size=64" alt="Notion AI" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Notion AI</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://jasper.ai&size=64" alt="Jasper AI" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Jasper AI</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://runwayml.com&size=64" alt="RunwayML" style="width: 32px; height: 32px; border-radius: 6px;" /><span>RunwayML</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://v0.dev&size=64" alt="v0" style="width: 32px; height: 32px; border-radius: 6px;" /><span>v0</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://mistral.ai&size=64" alt="Mistral" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Mistral</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://leonardo.ai&size=64" alt="Leonardo" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Leonardo</span></div>
+              <div class="skill-item-box"><img src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://copy.ai&size=64" alt="Copy.ai" style="width: 32px; height: 32px; border-radius: 6px;" /><span>Copy.ai</span></div>
+            </div>
           </div>
-          <div class="community-info">
-            <div class="community-date">Oct 2025 - Dec 2025 (3 Months)</div>
-            <h3 class="community-role">Campus Ambassador</h3>
-            <p class="community-org">SkillHigh • Hyderabad, Telangana</p>
-            <ul style="margin-top: 12px; margin-left: 18px; color: var(--text-secondary); font-size: 13px; line-height: 1.6;">
-              <li>Represented SkillHigh at the campus level to foster student learning experiences.</li>
-              <li>Promoted technical programs and workshops to the student body.</li>
-              <li>Supported student engagement initiatives and innovative engagement strategies.</li>
-            </ul>
+          
+          <!-- Card 2: Frameworks & Tools -->
+          <div class="glass-card skill-category-card">
+            <h4 class="skill-category-title">Frameworks & Tools</h4>
+            <div class="skill-grid-items">
+              <div class="skill-item-box"><i class="devicon-react-original colored"></i><span>React</span></div>
+              <div class="skill-item-box"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+              <div class="skill-item-box"><i class="devicon-nextjs-original"></i><span>Next.js</span></div>
+              <div class="skill-item-box"><i class="devicon-tailwindcss-original colored"></i><span>Tailwind</span></div>
+              <div class="skill-item-box"><i class="devicon-express-original"></i><span>Express</span></div>
+              <div class="skill-item-box"><i class="devicon-spring-original colored"></i><span>Spring Boot</span></div>
+              <div class="skill-item-box"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+              <div class="skill-item-box"><i class="devicon-github-original"></i><span>GitHub</span></div>
+              <div class="skill-item-box"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
+              <div class="skill-item-box"><i class="devicon-figma-plain colored"></i><span>Figma</span></div>
+              <div class="skill-item-box"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
+              <div class="skill-item-box"><i class="devicon-postman-plain colored"></i><span>Postman</span></div>
+              <div class="skill-item-box"><i class="devicon-vuejs-plain colored"></i><span>Vue.js</span></div>
+              <div class="skill-item-box"><i class="devicon-angularjs-plain colored"></i><span>Angular</span></div>
+              <div class="skill-item-box"><i class="devicon-svelte-plain colored"></i><span>Svelte</span></div>
+              <div class="skill-item-box"><i class="devicon-jquery-plain colored"></i><span>jQuery</span></div>
+              <div class="skill-item-box"><i class="devicon-android-plain colored"></i><span>Android</span></div>
+              <div class="skill-item-box"><i class="devicon-apple-original"></i><span>iOS</span></div>
+              <div class="skill-item-box"><i class="devicon-chrome-plain colored"></i><span>Chrome</span></div>
+              <div class="skill-item-box"><i class="devicon-slack-plain colored"></i><span>Slack</span></div>
+              <div class="skill-item-box"><i class="devicon-trello-plain colored"></i><span>Trello</span></div>
+              <div class="skill-item-box"><i class="devicon-jira-plain colored"></i><span>Jira</span></div>
+              <div class="skill-item-box"><i class="devicon-markdown-original"></i><span>Markdown</span></div>
+              <div class="skill-item-box"><i class="devicon-json-plain colored"></i><span>JSON</span></div>
+              <div class="skill-item-box"><i class="devicon-wordpress-plain colored"></i><span>WordPress</span></div>
+              <div class="skill-item-box"><i class="devicon-webflow-original"></i><span>Webflow</span></div>
+              <div class="skill-item-box"><i class="devicon-discord-plain colored"></i><span>Discord</span></div>
+              <div class="skill-item-box"><i class="devicon-gitlab-plain colored"></i><span>GitLab</span></div>
+              <div class="skill-item-box"><i class="devicon-bitbucket-original colored"></i><span>Bitbucket</span></div>
+            </div>
           </div>
+
+          <!-- Card 3: Cloud, AI & Security -->
+          <div class="glass-card skill-category-card">
+            <h4 class="skill-category-title">Cloud, AI & Security</h4>
+            <div class="skill-grid-items">
+              <div class="skill-item-box"><i class="devicon-amazonwebservices-plain-wordmark colored"></i><span>AWS</span></div>
+              <div class="skill-item-box"><i class="devicon-azure-plain colored"></i><span>Azure</span></div>
+              <div class="skill-item-box"><i class="devicon-mongodb-plain colored"></i><span>MongoDB</span></div>
+              <div class="skill-item-box"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
+              <div class="skill-item-box"><i class="devicon-firebase-plain colored"></i><span>Firebase</span></div>
+              <div class="skill-item-box"><i class="devicon-tensorflow-original colored"></i><span>TensorFlow</span></div>
+              <div class="skill-item-box"><i class="devicon-pytorch-original colored"></i><span>PyTorch</span></div>
+              <div class="skill-item-box"><i class="devicon-opencv-plain colored"></i><span>OpenCV</span></div>
+              <div class="skill-item-box"><i class="devicon-numpy-original colored"></i><span>NumPy</span></div>
+              <div class="skill-item-box"><i class="devicon-pandas-original colored"></i><span>Pandas</span></div>
+              <div class="skill-item-box"><i class="devicon-linux-plain"></i><span>Linux</span></div>
+              <div class="skill-item-box"><i class="devicon-networkx-plain colored"></i><span>Security</span></div>
+              <div class="skill-item-box"><i class="devicon-oracle-original colored"></i><span>Oracle</span></div>
+              <div class="skill-item-box"><i class="devicon-sqlite-plain colored"></i><span>SQLite</span></div>
+              <div class="skill-item-box"><i class="devicon-debian-plain colored"></i><span>Debian</span></div>
+              <div class="skill-item-box"><i class="devicon-ubuntu-plain colored"></i><span>Ubuntu</span></div>
+              <div class="skill-item-box"><i class="devicon-nginx-original colored"></i><span>Nginx</span></div>
+              <div class="skill-item-box"><i class="devicon-apache-plain colored"></i><span>Apache</span></div>
+              <div class="skill-item-box"><i class="devicon-heroku-original colored"></i><span>Heroku</span></div>
+              <div class="skill-item-box"><i class="devicon-digitalocean-plain colored"></i><span>DigitalOcean</span></div>
+              <div class="skill-item-box"><i class="devicon-kubernetes-plain colored"></i><span>K8s</span></div>
+            </div>
+          </div>
+
         </div>
       </div>
+
     </section>
 
-    <!-- Tech Stack / Tools Sphere Section -->
-    <section id="tools" class="reveal-on-scroll">
-      <div class="section-header">
-        <span class="section-tag">Tech Stack</span>
-        <h2 class="section-title">Frameworks & Tools</h2>
-      </div>
-      <div class="tools-container">
-        <!-- TagCloud will be injected here by script.js -->
-        <span class="tools-sphere"></span>
-      </div>
-    </section>
+
 
     <!-- Certifications Section -->
     <section id="certifications" class="reveal-on-scroll">
@@ -253,23 +272,11 @@
       </div>
       
       <div class="awards-grid">
-        <!-- Certification 1 -->
-        <div class="glass-card award-card" data-pdf="assets/prompt_eng_genai.png">
-          <div class="card-glare"></div>
-          <div class="award-image-box">
-            <img src="assets/prompt_eng_genai.png" alt="Prompt Engineering for Generative AI" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
-          </div>
-          <div class="award-info">
-            <div class="award-badge">LinkedIn Learning</div>
-            <div class="award-name">Introduction to Prompt Engineering for Generative AI</div>
-          </div>
-        </div>
-
-        <!-- Certification 2 -->
+        <!-- Certification: Coursera Palo Alto Networks Cybersecurity Foundation -->
         <div class="glass-card award-card" data-pdf="assets/paloalto_cybersec.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/paloalto_cybersec.png" alt="Palo Alto Networks Cybersecurity Foundation" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/paloalto_cybersec.png" alt="Palo Alto Networks Cybersecurity Foundation"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -277,11 +284,11 @@
           </div>
         </div>
 
-        <!-- Certification 3 -->
+        <!-- Certification: Coursera Getting Started with Microsoft Excel -->
         <div class="glass-card award-card" data-pdf="assets/excel_started.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/excel_started.png" alt="Getting Started with Microsoft Excel" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/excel_started.png" alt="Getting Started with Microsoft Excel"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -289,11 +296,11 @@
           </div>
         </div>
 
-        <!-- Certification 4 -->
+        <!-- Certification: Coursera Google Ads for Beginners -->
         <div class="glass-card award-card" data-pdf="assets/google_ads_beginner.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/google_ads_beginner.png" alt="Google Ads for Beginners" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/google_ads_beginner.png" alt="Google Ads for Beginners"  style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -301,33 +308,7 @@
           </div>
         </div>
 
-        <!-- Certification 5 -->
-        <div class="glass-card award-card" data-pdf="assets/1742541444638.pdf">
-          <div class="card-glare"></div>
-          <div class="award-image-box">
-            <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></div>
-            <embed src="assets/1742541444638.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" width="100%" height="100%" style="pointer-events:none; border:none; object-fit:cover;" />
-          </div>
-          <div class="award-info">
-            <div class="award-badge">Google</div>
-            <div class="award-name">Google Ad Manager</div>
-          </div>
-        </div>
-
-        <!-- Certification 6 -->
-        <div class="glass-card award-card" data-pdf="assets/1742710226328.pdf">
-          <div class="card-glare"></div>
-          <div class="award-image-box">
-            <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></div>
-            <embed src="assets/1742710226328.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" width="100%" height="100%" style="pointer-events:none; border:none; object-fit:cover;" />
-          </div>
-          <div class="award-info">
-            <div class="award-badge">Google</div>
-            <div class="award-name">Google AdMob</div>
-          </div>
-        </div>
-
-        <!-- Certification 7 -->
+        <!-- Certification: Internship Studio Common Internship Test -->
         <div class="glass-card award-card" data-pdf="assets/1742488126154.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -340,7 +321,33 @@
           </div>
         </div>
 
-        <!-- Certification 8 -->
+        <!-- Certification: Google Ad Manager -->
+        <div class="glass-card award-card" data-pdf="assets/1742541444638.pdf">
+          <div class="card-glare"></div>
+          <div class="award-image-box">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></div>
+            <embed src="assets/1742541444638.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" width="100%" height="100%" style="pointer-events:none; border:none; object-fit:cover;" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">Google</div>
+            <div class="award-name">Google Ad Manager</div>
+          </div>
+        </div>
+
+        <!-- Certification: Google AdMob -->
+        <div class="glass-card award-card" data-pdf="assets/1742710226328.pdf">
+          <div class="card-glare"></div>
+          <div class="award-image-box">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></div>
+            <embed src="assets/1742710226328.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" width="100%" height="100%" style="pointer-events:none; border:none; object-fit:cover;" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">Google</div>
+            <div class="award-name">Google AdMob</div>
+          </div>
+        </div>
+
+        <!-- Certification: LetsUpgrade C++ Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1743837154867.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -353,7 +360,7 @@
           </div>
         </div>
 
-        <!-- Certification 9 -->
+        <!-- Certification: LetsUpgrade HTML & CSS Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1743837652088.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -366,7 +373,19 @@
           </div>
         </div>
 
-        <!-- Certification 10 -->
+        <!-- Certification: LinkedIn Learning Prompt Engineering -->
+        <div class="glass-card award-card" data-pdf="assets/prompt_eng_genai.png">
+          <div class="card-glare"></div>
+          <div class="award-image-box">
+            <img src="assets/prompt_eng_genai.png" alt="Prompt Engineering for Generative AI"  style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">LinkedIn Learning</div>
+            <div class="award-name">Introduction to Prompt Engineering for Generative AI</div>
+          </div>
+        </div>
+
+        <!-- Certification: LetsUpgrade Social Media Marketing Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749357503589.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -379,7 +398,7 @@
           </div>
         </div>
 
-        <!-- Certification 11 -->
+        <!-- Certification: LetsUpgrade Excel Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749357767653.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -392,7 +411,20 @@
           </div>
         </div>
 
-        <!-- Certification 12 -->
+        <!-- Certification: LetsUpgrade MongoDB Bootcamp -->
+        <div class="glass-card award-card" data-pdf="assets/1749358055824.pdf">
+          <div class="card-glare"></div>
+          <div class="award-image-box">
+            <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></div>
+            <embed src="assets/1749358055824.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" width="100%" height="100%" style="pointer-events:none; border:none; object-fit:cover;" />
+          </div>
+          <div class="award-info">
+            <div class="award-badge">LetsUpgrade</div>
+            <div class="award-name">MongoDB Bootcamp</div>
+          </div>
+        </div>
+
+        <!-- Certification: LetsUpgrade DSA with Java Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749612942272.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -405,16 +437,55 @@
           </div>
         </div>
 
-        <!-- Certification 13 -->
-        <div class="glass-card award-card" data-pdf="assets/1749358055824.pdf">
+        <!-- Certification: NVIDIA Jetson Nano -->
+        <div class="glass-card award-card" data-pdf="assets/1749357767653.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></div>
-            <embed src="assets/1749358055824.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf" width="100%" height="100%" style="pointer-events:none; border:none; object-fit:cover;" />
+            <div style="width:100%; height:100%; background:linear-gradient(45deg, #76b900, #111); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-display); font-weight:800; font-size:24px; text-transform:uppercase; letter-spacing:2px;">NVIDIA</div>
           </div>
           <div class="award-info">
-            <div class="award-badge">LetsUpgrade</div>
-            <div class="award-name">MongoDB Bootcamp</div>
+            <div class="award-badge">NVIDIA</div>
+            <div class="award-name">Getting Started with AI on Jetson Nano</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic Background Section -->
+    <section id="academics" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">My Journey</span>
+        <h2 class="section-title">Academic Background</h2>
+      </div>
+      
+      <div class="timeline-container">
+        <!-- Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">B.Tech in Computer Science</h3>
+            <div class="timeline-meta">CVR College of Engineering • 2022 - 2026</div>
+            <p class="timeline-desc">Specializing in Computational Science, Cybersecurity, VLAN networking, and AI models. Campus ambassador and technical hackathon host.</p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Intermediate/Higher Education</h3>
+            <div class="timeline-meta">Sri Chaitanya College of Education • 2020 - 2022</div>
+            <p class="timeline-desc">Focused on mathematics and physical sciences. Built a strong foundational understanding for advanced computational logic and engineering.</p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Secondary Education (10th)</h3>
+            <div class="timeline-meta">Sri Chaitanya Techno School • Graduated 2020</div>
+            <p class="timeline-desc">Developed an early passion for technology, problem-solving, and logic-based disciplines.</p>
           </div>
         </div>
       </div>
@@ -432,7 +503,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project1.png" alt="VLAN Setup & Simulation" loading="lazy" />
+            <img src="assets/project1.png" alt="VLAN Setup & Simulation"  />
             <div class="project-tags">
               <span class="project-tag">Networking</span>
               <span class="project-tag">VLAN</span>
@@ -451,7 +522,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project2.png" alt="Generative AI Prompt Lab" loading="lazy" />
+            <img src="assets/project2.png" alt="Generative AI Prompt Lab"  />
             <div class="project-tags">
               <span class="project-tag">AI / LLM</span>
               <span class="project-tag">Prompt Eng</span>
@@ -470,7 +541,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project3.png" alt="Computational Model" loading="lazy" />
+            <img src="assets/project3.png" alt="Computational Model"  />
             <div class="project-tags">
               <span class="project-tag">Computer Science</span>
               <span class="project-tag">Algorithms</span>
@@ -487,73 +558,93 @@
       </div>
     </section>
 
-    <!-- Art Gallery Section -->
-    <section id="gallery" class="reveal-on-scroll">
+    <!-- GitHub Open Source Section -->
+    <section id="github-activity" class="reveal-on-scroll">
       <div class="section-header">
-        <span class="section-tag">Creative Corner</span>
-        <h2 class="section-title">Digital Art Gallery</h2>
+        <span class="section-tag">Open Source</span>
+        <h2 class="section-title">GitHub Activity</h2>
       </div>
       
-      <div class="art-marquee-container">
-        <div class="art-marquee-track">
-          <!-- Slide 1 -->
-          <div class="art-slide">
-            <img src="assets/art1.png" alt="Artwork 1" loading="lazy" />
-            <div class="art-slide-overlay">Abstract Fluid</div>
-          </div>
-          <!-- Slide 2 -->
-          <div class="art-slide">
-            <img src="assets/art2.png" alt="Artwork 2" loading="lazy" />
-            <div class="art-slide-overlay">Neon Geometry</div>
-          </div>
-          <!-- Slide 3 -->
-          <div class="art-slide">
-            <img src="assets/art3.png" alt="Artwork 3" loading="lazy" />
-            <div class="art-slide-overlay">Generative Waves</div>
-          </div>
-          <!-- Slide 4 -->
-          <div class="art-slide">
-            <img src="assets/art4.png" alt="Artwork 4" loading="lazy" />
-            <div class="art-slide-overlay">Digital Portrait</div>
-          </div>
-          <!-- Slide 5 -->
-          <div class="art-slide">
-            <img src="assets/art5.png" alt="Artwork 5" loading="lazy" />
-            <div class="art-slide-overlay">Cyber Cityscape</div>
-          </div>
-          <!-- Slide 6 -->
-          <div class="art-slide">
-            <img src="assets/art6.png" alt="Artwork 6" loading="lazy" />
-            <div class="art-slide-overlay">Future Vision</div>
-          </div>
-          <!-- Duplicate set for seamless infinite loop scroll -->
-          <div class="art-slide">
-            <img src="assets/art1.png" alt="Artwork 1" loading="lazy" />
-            <div class="art-slide-overlay">Abstract Fluid</div>
-          </div>
-          <div class="art-slide">
-            <img src="assets/art2.png" alt="Artwork 2" loading="lazy" />
-            <div class="art-slide-overlay">Neon Geometry</div>
-          </div>
-          <div class="art-slide">
-            <img src="assets/art3.png" alt="Artwork 3" loading="lazy" />
-            <div class="art-slide-overlay">Generative Waves</div>
-          </div>
-          <div class="art-slide">
-            <img src="assets/art4.png" alt="Artwork 4" loading="lazy" />
-            <div class="art-slide-overlay">Digital Portrait</div>
-          </div>
-          <div class="art-slide">
-            <img src="assets/art5.png" alt="Artwork 5" loading="lazy" />
-            <div class="art-slide-overlay">Cyber Cityscape</div>
-          </div>
-          <div class="art-slide">
-            <img src="assets/art6.png" alt="Artwork 6" loading="lazy" />
-            <div class="art-slide-overlay">Future Vision</div>
+      <!-- GitHub Contribution Graph -->
+      <div class="glass-card" style="margin-bottom: 40px; padding: 30px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto;">
+        <h3 style="font-family: var(--font-display); font-size: 20px; color: #fff; margin-bottom: 20px;"><i class="fab fa-github" style="margin-right: 10px;"></i>Contributions in the last year</h3>
+        <div class="calendar" style="width: 100%; min-height: 150px; font-size: 12px; color: var(--text-secondary);">
+          <!-- Loading state -->
+          <div style="text-align: center; padding: 40px;">
+            <i class="fas fa-circle-notch fa-spin fa-2x" style="color: var(--accent-color);"></i>
+            <p style="margin-top: 15px;">Fetching GitHub contributions...</p>
           </div>
         </div>
       </div>
+
+      <div id="github-loading" style="text-align: center; color: var(--text-muted); padding: 40px;">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p style="margin-top: 15px;">Synchronizing with GitHub Repositories...</p>
+      </div>
+      <div id="github-repos" class="github-repos-grid" style="display: none;">
+        <!-- Repositories will be dynamically injected here -->
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="glow-button">View Full Profile <i class="fab fa-github" style="margin-left:8px;"></i></a>
+      </div>
     </section>
+
+    <!-- Vercel Deployments Section -->
+    <section id="vercel" class="reveal-on-scroll">
+      <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+        <span class="section-tag" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">Live Apps</span>
+        <h2 class="section-title" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+          <svg viewBox="0 0 116 100" fill="#fff" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.5 0L115 100H0L57.5 0z"/></svg>
+          Vercel Deployments
+        </h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 20px auto 0; font-size: 1.1rem; line-height: 1.6;">
+          Automatically tracking live production deployments mapped from my GitHub repositories.
+        </p>
+      </div>
+      <div id="vercel-loading" style="text-align: center; color: var(--text-muted); padding: 40px;">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p style="margin-top: 15px;">Locating Deployments...</p>
+      </div>
+      <div id="vercel-deployments" class="vercel-grid" style="display: none;">
+        <!-- Vercel projects will be dynamically injected here -->
+      </div>
+    </section>
+
+    <!-- Career Highlights Section -->
+    <section id="highlights" class="reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Beyond Code</span>
+        <h2 class="section-title">Career Highlights & Initiatives</h2>
+      </div>
+      
+      <div class="awards-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+        <!-- Highlight 1 -->
+        <div class="glass-card award-card" style="padding: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;">
+          <div class="card-glare"></div>
+          <div style="font-size: 36px; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-robot"></i></div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; line-height: 1.3;">Generative AI Integration</h3>
+          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6;">As CTO at Lorven Enterprises, I spearheaded the integration of advanced Generative AI and prompt engineering techniques into modern web platforms to dramatically enhance interactive user experiences.</p>
+        </div>
+
+        <!-- Highlight 2 -->
+        <div class="glass-card award-card" style="padding: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;">
+          <div class="card-glare"></div>
+          <div style="font-size: 36px; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-users"></i></div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; line-height: 1.3;">Hackathon Hosting & Leadership</h3>
+          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6;">Successfully managed and hosted highly competitive technical hackathons and events, fostering student engagement, collaborative problem solving, and innovation within the campus tech community.</p>
+        </div>
+        
+        <!-- Highlight 3 -->
+        <div class="glass-card award-card" style="padding: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;">
+          <div class="card-glare"></div>
+          <div style="font-size: 36px; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-shield-alt"></i></div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; line-height: 1.3;">Cybersecurity Focus</h3>
+          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6;">Applied rigorous expertise in Firewalls, VLANs, and Network Traffic Analysis to study robust security systems, backed by foundational certifications from Palo Alto Networks.</p>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- Contact Section -->
     <section id="contact" class="reveal-on-scroll">
@@ -571,12 +662,16 @@
             <div class="form-group-row">
               <div class="form-group">
                 <label for="form-name">Your Name</label>
-                <input type="text" id="form-name" name="name" required />
+                <input type="text" id="form-name" name="name" required autocomplete="name" />
               </div>
               <div class="form-group">
                 <label for="form-email">Your Email</label>
-                <input type="email" id="form-email" name="email" required />
+                <input type="email" id="form-email" name="email" required autocomplete="email" />
               </div>
+            </div>
+            <div class="form-group">
+              <label for="form-phone">Your Phone Number</label>
+              <input type="tel" id="form-phone" name="phone" required placeholder="e.g. +1 234 567 8900" autocomplete="tel" />
             </div>
             <div class="form-group">
               <label for="form-message">Your Message</label>
@@ -632,12 +727,18 @@
               <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
               <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
             </div>
+            <div style="margin-top: 24px;">
+              <a href="assets/1749357767653.pdf" target="_blank" rel="noopener noreferrer" class="hero-btn download-resume-btn">
+                <span>Download Resume</span>
+                <i class="fas fa-download"></i>
+              </a>
+            </div>
           </div>
           
           <div class="glass-card availability-card">
             <div class="card-glare"></div>
             <div class="availability-header">
-              <i class="fas fa-circle-notch fa-spin"></i>
+              <div class="status-dot"></div>
               <h4>Current Availability</h4>
             </div>
             <p class="availability-desc">Open for research collaborations, computational projects, and networking opportunities at CVR College of Engineering.</p>
@@ -648,12 +749,28 @@
 
     <!-- Footer -->
     <footer>
+      <div class="footer-socials">
+        <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
       <p class="footer-text">&copy; <span id="year"></span> Vishwak Pullepu. All rights reserved. Designed with passion.</p>
+      <div style="margin-top: 20px; margin-bottom: 10px;">
+        <a href="https://websitelaunches.com/site/vishwak.tech" target="_blank" rel="noopener noreferrer" rel="noopener">
+          <img
+            src="https://websitelaunches.com/badge/vishwak.tech.svg"
+            alt="Established online - Public launch record"
+            width="255"
+            height="55"
+          >
+        </a> 
+      </div>
     </footer>
   </main>
 
+  <script src="assets.js"></script>
   <!-- Certificate Modal Overlay -->
-  <div id="cert-modal" class="cert-modal">
+  <div id="cert-modal" class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
     <div class="cert-modal-overlay"></div>
     <div class="cert-modal-content">
       <button class="cert-modal-close" aria-label="Close Certificate"><i class="fas fa-times"></i></button>
@@ -667,8 +784,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-  <!-- TagCloud for 3D Sphere -->
+  
+  <!-- TagCloud.js for 3D Sphere -->
   <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
-  <script src="script.js"></script>
+  
+  <!-- GitHub Calendar for Contribution Graph -->
+  <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+  
+  <!-- Full Screen Success Overlay -->
+  <div id="success-overlay" class="success-overlay">
+    <div class="success-content">
+      <i class="fas fa-check-circle"></i>
+      <h2>Message Sent!</h2>
+    </div>
+  </div>
+
+  <!-- Custom Tooltip for GitHub Calendar -->
+  <div id="gh-tooltip" class="gh-tooltip hidden"></div>
+
+  <script src="script.js?v=24"></script>
 </body>
 </html>

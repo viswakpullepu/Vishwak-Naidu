@@ -20,7 +20,7 @@ $mimeTypes = @{
     ".ttf"  = "font/ttf"
 }
 
-$root = "C:\Users\sahithi\.gemini\antigravity\scratch\VISHWAK NAIDU"
+$root = $PSScriptRoot
 
 while ($listener.IsListening) {
     $context = $listener.GetContext()
