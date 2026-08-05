@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script>window.onerror = function(message, source, lineno, colno, error) { document.body.innerHTML += "<div style='position:fixed;top:0;left:0;z-index:999999;background:red;color:white;padding:20px;font-size:20px;'>ERROR: " + message + " at " + lineno + ":" + colno + "</div>"; };</script>
+<head>
   <meta charset="UTF-8" />
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com;" />
+  <meta name="referrer" content="strict-origin-when-downgrade" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VN | Creative Developer</title>
@@ -47,9 +50,9 @@
 
   <!-- Side Social bar -->
   <div class="floating-socials">
-    <a href="https://github.com/viswakpullepu" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+    <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
   </div>
 
   <header>
@@ -427,7 +430,7 @@
             <h3 class="project-title">VLAN Network Infrastructure</h3>
             <p class="project-desc">A secure, simulated virtual LAN layout designing segmented subnetworks for corporate environments to optimize data throughput and reinforce system-wide firewalls.</p>
             <div class="project-links">
-              <a href="https://github.com/viswakpullepu" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </article>
@@ -446,7 +449,7 @@
             <h3 class="project-title">Generative AI Prompt Lab</h3>
             <p class="project-desc">Interactive experimental playground exploring context window parameters, prompt chains, and system instructions to maximize reasoning and safety in LLMs.</p>
             <div class="project-links">
-              <a href="https://github.com/viswakpullepu" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </article>
@@ -465,7 +468,7 @@
             <h3 class="project-title">Computational Science Simulator</h3>
             <p class="project-desc">Interactive graphical simulation mapping algorithmic problem-solving and thinking strategies to simplify complex data science concepts.</p>
             <div class="project-links">
-              <a href="https://github.com/viswakpullepu" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </article>
@@ -538,6 +541,7 @@
           </div>
         </div>
       </div>
+
     </section>
 
     <!-- Contact Section -->
@@ -613,10 +617,11 @@
           <div class="social-connect">
             <div class="social-connect-title">Social Links</div>
             <div class="social-icons-row">
-              <a href="https://github.com/viswakpullepu" target="_blank" class="social-icon-btn"><i class="fab fa-github"></i></a>
-              <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
             </div>
+
           </div>
           
           <div class="glass-card availability-card">
@@ -634,6 +639,7 @@
     <!-- Footer -->
     <footer>
       <p class="footer-text">&copy; <span id="year"></span> Vishwak Pullepu. All rights reserved. Designed with passion.</p>
+
     </footer>
   </main>
 
