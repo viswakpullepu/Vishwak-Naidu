@@ -659,3 +659,33 @@ try {
 } catch (e) {
   console.error("Certificate modal initialization error:", e);
 }
+
+// --- 3D TECH STACK SPHERE (TagCloud.js) ---
+try {
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = ".tools-sphere";
+    const texts = [
+      // Frameworks & Tools
+      "React", "Node.js", "Express", "MongoDB", "Git", "Docker", "VLAN",
+      // AI Models & Tech
+      "GPT-4", "Claude", "LLaMA", "Gemini", "HuggingFace", "Prompt Engineering",
+      // Cloud & AI Security
+      "AWS", "Azure", "Google Cloud", "IAM", "Palo Alto", "AdMob"
+    ];
+    
+    const options = {
+      radius: window.innerWidth < 768 ? 150 : 250,
+      maxSpeed: "fast",
+      initSpeed: "normal",
+      direction: 135,
+      keep: true
+    };
+    
+    // Initialize TagCloud
+    if (typeof TagCloud !== "undefined") {
+      TagCloud(container, texts, options);
+    }
+  });
+} catch (e) {
+  console.error("Tech sphere initialization error:", e);
+}

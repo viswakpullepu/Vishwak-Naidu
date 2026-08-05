@@ -1116,6 +1116,35 @@ footer {
   transform: translateY(0);
 }
 
+/* --- TECH STACK SPHERE --- */
+.tools-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  width: 100%;
+  overflow: hidden; /* Prevent horizontal scroll on small devices */
+}
+.tools-sphere {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+}
+.tagcloud {
+  display: inline-block;
+  margin: 0 auto;
+}
+.tagcloud--item {
+  padding: 2px 4px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.tagcloud--item:hover {
+  color: #fff;
+  text-shadow: 0 0 15px var(--accent-color);
+}
+
 /* --- RESPONSIVE SCREEN OPTIMIZATIONS (ALL BREAKPOINTS) --- */
 
 /* 1. Ultra-Wide Monitors & Large Screens (1600px and up) */
