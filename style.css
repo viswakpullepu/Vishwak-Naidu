@@ -445,7 +445,7 @@ nav a:hover, nav a.active {
 }
 
 /* --- 3D PERSPECTIVE SYSTEM FOR CARDS --- */
-.about-grid, .projects-grid, .awards-grid {
+.about-grid, .projects-grid, .awards-grid, .community-grid {
   perspective: 1000px; /* Activates 3D depth field for children */
 }
 
@@ -864,7 +864,54 @@ nav a:hover, nav a.active {
   100% { transform: translateX(calc(-50% - 10px)); }
 }
 
+/* --- COMMUNITY INVOLVEMENT SECTION --- */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+}
 
+.community-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.community-image-box {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+.community-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+.community-card:hover .community-image-box img {
+  transform: scale(1.05);
+}
+
+.community-info {
+  padding: 24px;
+}
+.community-date {
+  font-size: 12px;
+  color: var(--accent-color);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.community-role {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+.community-org {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
 
 /* --- CONTACT ME SECTION --- */
 .contact-wrapper {
@@ -1124,8 +1171,13 @@ footer {
   .info-cards-grid {
     grid-template-columns: 1fr;
   }
+  .community-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
   /* Centering stacked card elements to keep visual balance */
-  .project-card, .award-card {
+  .project-card, .award-card, .community-card {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -1360,47 +1412,6 @@ html.lenis, html.lenis body {
   background: #111;
 }
 
-/* PDF Card Preview Placeholder */
-.pdf-placeholder-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: linear-gradient(135deg, rgba(224, 96, 49, 0.1) 0%, rgba(20, 20, 20, 0.8) 100%);
-  border: 1px solid rgba(224, 96, 49, 0.2);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.pdf-card-icon {
-  font-size: 38px;
-  color: var(--accent-color);
-  filter: drop-shadow(0 0 8px var(--accent-glow));
-  transition: transform 0.3s ease;
-}
-
-.pdf-preview-text {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(0, 0, 0, 0.4);
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.award-card:hover .pdf-card-icon {
-  transform: scale(1.15) translateY(-2px);
-}
-
-.award-card:hover .pdf-placeholder-box {
-  border-color: var(--accent-color);
-  background: linear-gradient(135deg, rgba(224, 96, 49, 0.2) 0%, rgba(30, 30, 30, 0.9) 100%);
-}
-
 /* Responsiveness: Horizontal overlapping scroll for Mobile/Tablets */
 @media (max-width: 1024px) {
   .awards-grid {
@@ -1444,150 +1455,4 @@ html.lenis, html.lenis body {
     height: 90vh;
   }
 }
-
-/* --- STANDALONE EDUCATION SECTION STYLES --- */
-.edu-timeline-wrapper {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.edu-timeline-line {
-  position: absolute;
-  left: 28px;
-  top: 20px;
-  bottom: 20px;
-  width: 2px;
-  background: linear-gradient(180deg, var(--accent-color) 0%, rgba(255, 255, 255, 0.05) 100%);
-  z-index: 1;
-}
-
-.edu-card {
-  position: relative;
-  margin-left: 60px;
-  padding: 30px;
-  border-radius: 20px;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.edu-card::before {
-  content: '';
-  position: absolute;
-  left: -40px;
-  top: 32px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--bg-dark);
-  border: 2px solid var(--accent-color);
-  box-shadow: 0 0 12px var(--accent-glow);
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-
-.edu-card:hover {
-  transform: translateX(10px) translateY(-4px);
-  border-color: rgba(224, 96, 49, 0.4);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(224, 96, 49, 0.15);
-}
-
-.edu-card:hover::before {
-  background: var(--accent-color);
-  transform: scale(1.3);
-}
-
-.edu-card.active-degree {
-  border-color: rgba(224, 96, 49, 0.4);
-  background: linear-gradient(135deg, rgba(224, 96, 49, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-}
-
-.edu-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--accent-color), #ff8a5c);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 15px var(--accent-glow);
-}
-
-.edu-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.edu-institution {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-
-.edu-location {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 4px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.edu-period {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent-color);
-  background: rgba(224, 96, 49, 0.1);
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(224, 96, 49, 0.2);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.edu-degree {
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  margin-top: 6px;
-  margin-bottom: 10px;
-}
-
-.edu-details {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-@media (max-width: 600px) {
-  .edu-timeline-line {
-    left: 18px;
-  }
-  .edu-card {
-    margin-left: 40px;
-    padding: 20px;
-  }
-  .edu-card::before {
-    left: -28px;
-  }
-  .edu-institution {
-    font-size: 18px;
-  }
-}
-
 

@@ -1,9 +1,0 @@
-# Vishwak Pullepu
-
-- **B.Tech Student (Computational Science)**: CVR College of Engineering (Class of 2029)
-- **Domain**: https://vishwak.tech/
-- **GitHub**: https://github.com/viswakpullepu
-- **LinkedIn**: https://www.linkedin.com/in/vishwakpullepu/
-- **Skills**: VLAN, Thinking Skills, Computer Science Education, Generative AI, Microsoft Excel, Google Ad Manager, AdMob, C++, DSA, MongoDB, Web Development.
-
-See [llms.txt](https://vishwak.tech/llms.txt) for detailed profile history, timeline, full list of certifications, and featured project descriptions.
