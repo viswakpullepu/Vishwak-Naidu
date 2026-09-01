@@ -92,36 +92,40 @@ img {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 32px;
-  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .glass-card:hover {
   border-color: var(--border-color-hover);
   box-shadow: 0 10px 30px -10px rgba(224, 96, 49, 0.08);
 }
 
-/* --- CUSTOM CURSOR --- */
+/* --- CUSTOM CURSOR (Hardware Accelerated with translate3d) --- */
 #custom-cursor {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 8px;
   height: 8px;
   background-color: var(--accent-color);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  will-change: transform;
 }
 
 #custom-cursor-ring {
   position: fixed;
-  width: 40px;
-  height: 40px;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
   border: 1px solid var(--accent-color);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+  will-change: transform;
 }
 
 /* Cursor Hover states */
