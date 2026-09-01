@@ -12,8 +12,14 @@ Motivated **Computer Science Undergraduate & AI-Powered Builder** at CVR College
 ### EDUCATION
 
 **CVR College of Engineering** | Hyderabad, Telangana, India  
-**Bachelor of Technology (B.Tech) in Computer Science and Engineering** | *2022 – 2026*  
-- **Foundational Coursework:** Operating Systems, Computer Networks, Database Concepts, Computer Science Fundamentals, Web Technologies.
+**Bachelor of Technology (B.Tech) in Computer Science and Engineering** | *2025 – 2029*  
+- **Focus Areas:** Web Technologies, AI Tools & Prompt Engineering, Operating Systems, Networking Concepts.
+
+**Sri Chaitanya Junior College** | Hyderabad, Telangana, India  
+**Intermediate (Higher Secondary, MPC)** | *2023 – 2025*
+
+**Sri Chaitanya Techno School** | Telangana, India  
+**Secondary School Certificate (10th)** | *Graduated 2023*
 
 ---
 
