@@ -1335,6 +1335,24 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show container
       const wrapper = document.querySelector('.tagcloud-wrapper');
       if (wrapper) wrapper.classList.add('loaded');
+
+      // Scroll-driven sphere depth & subtle speed boost without tilting the 2D projection
+      if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+        ScrollTrigger.create({
+          trigger: '#skills',
+          start: 'top center',
+          end: 'bottom center',
+          onUpdate: (self) => {
+            const sphere = document.querySelector('#skill-sphere');
+            if (sphere) {
+              const velocity = self.getVelocity();
+              const scale = 1 + Math.min(Math.abs(velocity) / 6000, 0.05);
+              gsap.to(sphere, { scale: scale, duration: 0.2, overwrite: 'auto' });
+            }
+          }
+        });
+        setTimeout(() => ScrollTrigger.refresh(), 300);
+      }
     }, 100);
   }
 });

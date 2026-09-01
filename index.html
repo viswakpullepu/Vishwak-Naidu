@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script>window.onerror = function(message, source, lineno, colno, error) { document.body.innerHTML += "<div style='position:fixed;top:0;left:0;z-index:999999;background:red;color:white;padding:20px;font-size:20px;'>ERROR: " + message + " at " + lineno + ":" + colno + "</div>"; };</script>
+<head>
+  <script>window.onerror = function(message, source, lineno, colno, error) { console.error("Global Error: " + message + " at " + lineno + ":" + colno); };</script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VN | Creative Developer</title>
-  <meta name="description" content="Vishwak Pullepu – Computational Scientist & Emerging Tech Ambassador. Experience in VLAN, Generative AI, and tech leadership." />
+  <title>Vishwak Pullepu | Creative Developer & AI Explorer</title>
+  <meta name="description" content="Vishwak Pullepu – Creative Developer, AI Explorer & Cybersecurity Enthusiast. Building secure, intelligent, and scalable digital experiences." />
   <link rel="icon" type="image/png" href="assets/avatar.png" />
-  <link rel="stylesheet" href="style.css?v=10" />
-  <!-- Font Awesome for social icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  
+  <!-- Google Fonts: Inter, Outfit, Pacifico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&family=Pacifico&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css?v=25" />
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
   <!-- GitHub Calendar CSS -->
   <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
   
-  <!-- Devicon for 3D Skill Logos -->
+  <!-- Devicon for Tech Logos -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 <body>
@@ -53,36 +61,42 @@
 
   <!-- Side Social bar -->
   <div class="floating-socials">
-    <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-    <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
   </div>
 
+  <!-- Main Navbar Header -->
   <header>
-    <div class="logo"><a href="#"><span>VN |</span> Creative Developer</a></div>
+    <div class="logo">
+      <a href="#hero"><span>VN |</span> Creative Developer</a>
+    </div>
     <nav class="desktop-nav">
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#academics">Academic Background</a></li>
+        <li><a href="#academics">Academics</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#github-activity">GitHub</a></li>
         <li><a href="#vercel">Live Apps</a></li>
         <li><a href="#highlights">Highlights</a></li>
-        <li><a href="#contact" class="nav-contact-btn">Contact</a></li>
+        <li><a href="#contact" class="nav-contact-btn liquid-glass">Contact</a></li>
       </ul>
     </nav>
-    <button class="mobile-nav-toggle" aria-label="Open Navigation Menu" aria-controls="mobile-nav-menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <button class="mobile-nav-toggle" aria-label="Open Navigation Menu" aria-controls="mobile-nav-menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
   </header>
 
-  <div class="mobile-nav-menu">
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-menu" id="mobile-nav-menu">
     <button class="close-mobile-btn" aria-label="Close Navigation Menu"><i class="fas fa-times"></i></button>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#academics">Academic Background</a></li>
+      <li><a href="#academics">Academics</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#github-activity">GitHub</a></li>
       <li><a href="#vercel">Live Apps</a></li>
@@ -91,38 +105,93 @@
     </ul>
   </div>
 
-  <!-- Main content (hidden until preloader finishes) -->
+  <!-- Main content (revealed after preloader) -->
   <main class="content hidden">
-    <!-- Hero Section -->
-    <section id="hero">
-      <div class="hero-content">
-        <p class="hero-subtitle-top">Hello, I'm</p>
-        <h1 class="hero-title">
-          <!-- Wrapped each word in a .hero-word container with white-space: nowrap to prevent mid-word letter splitting -->
-          <span class="hero-word">
-            <span class="hero-letter" style="animation-delay: 0.1s">V</span>
-            <span class="hero-letter" style="animation-delay: 0.15s">i</span>
-            <span class="hero-letter" style="animation-delay: 0.2s">s</span>
-            <span class="hero-letter" style="animation-delay: 0.25s">h</span>
-            <span class="hero-letter" style="animation-delay: 0.3s">w</span>
-            <span class="hero-letter" style="animation-delay: 0.35s">a</span>
-            <span class="hero-letter" style="animation-delay: 0.4s">k</span>
-          </span>
-          <span class="hero-word">
-            <span class="hero-letter" style="animation-delay: 0.45s">P</span>
-            <span class="hero-letter" style="animation-delay: 0.5s">u</span>
-            <span class="hero-letter" style="animation-delay: 0.55s">l</span>
-            <span class="hero-letter" style="animation-delay: 0.6s">l</span>
-            <span class="hero-letter" style="animation-delay: 0.65s">e</span>
-            <span class="hero-letter" style="animation-delay: 0.7s">p</span>
-            <span class="hero-letter" style="animation-delay: 0.75s">u</span>
-          </span>
-        </h1>
-        <p class="hero-subtitle">Cybersecurity Enthusiast • AI Explorer • Web Developer</p>
-        <p class="hero-statement">Building secure, intelligent, and scalable digital experiences through cybersecurity, artificial intelligence, and modern web technologies.</p>
-        <a href="#about" class="hero-btn"><span>Explore Portfolio</span><i class="fas fa-arrow-down"></i></a>
+    
+    <!-- Cinematic Hero Section -->
+    <section id="hero" class="cinematic-hero">
+      <!-- Full-Screen Video Background -->
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="cinematic-hero-video"
+        src="https://zxdefgavgwfxastwmmjm.supabase.co/storage/v1/object/public/assets/cinematic.mp4"
+      ></video>
+
+      <!-- Bottom Blur Overlay Mask (No dark gradient overlay, purely backdrop blur with CSS mask) -->
+      <div class="bottom-blur-overlay"></div>
+
+      <!-- Hero Content Container (Bottom-Aligned) -->
+      <div class="cinematic-hero-container">
+        <div class="cinematic-hero-content">
+          <!-- Left Column -->
+          <div class="cinematic-left">
+            <!-- Metadata Row -->
+            <div class="cinematic-metadata-row animate-blur-fade-up" style="animation-delay: 300ms;">
+              <div class="cinematic-meta-item">
+                <i class="fas fa-laptop-code" style="color: #e06031;"></i>
+                <span>Full-Stack Web & GenAI</span>
+              </div>
+              <div class="cinematic-meta-item">
+                <i class="fas fa-shield-alt" style="color: #e06031;"></i>
+                <span>Cybersecurity & Systems</span>
+              </div>
+              <div class="cinematic-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Hyderabad & Visakhapatnam</span>
+              </div>
+            </div>
+
+            <!-- Intro / Greeting -->
+            <p class="animate-blur-fade-up" style="animation-delay: 350ms; font-family: 'Pacifico', cursive; color: #e06031; font-size: clamp(20px, 2.2vw, 28px); margin-bottom: 6px;">
+              Hello, I'm
+            </p>
+
+            <!-- Personalized Cinematic Title -->
+            <h1 class="cinematic-title animate-blur-fade-up" style="animation-delay: 400ms; margin-bottom: 8px;">
+              Vishwak Pullepu
+            </h1>
+
+            <!-- Subtitle / Tagline -->
+            <p class="animate-blur-fade-up" style="animation-delay: 450ms; font-family: 'Outfit', sans-serif; font-size: clamp(14px, 1.6vw, 20px); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #e5e7eb; margin-bottom: 16px;">
+              Creative Developer • AI Explorer • Hardware Security Builder
+            </p>
+
+            <!-- Personalized Statement -->
+            <p class="cinematic-description animate-blur-fade-up" style="animation-delay: 500ms; max-width: 720px; margin-bottom: 28px;">
+              Building secure, intelligent, and scalable digital experiences through modern web engineering, generative artificial intelligence, and hardware cybersecurity.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="cinematic-cta-row">
+              <a href="#projects" class="cinematic-btn-primary animate-blur-fade-up" style="animation-delay: 600ms;">
+                <i class="fas fa-layer-group" style="font-size: 14px;"></i>
+                <span>Explore Projects</span>
+              </a>
+              <a href="assets/1749357767653.pdf" target="_blank" rel="noopener noreferrer" class="cinematic-btn-glass liquid-glass animate-blur-fade-up" style="animation-delay: 700ms;">
+                <i class="fas fa-file-pdf"></i>
+                <span>Download Resume</span>
+              </a>
+              <a href="#contact" class="cinematic-btn-glass liquid-glass animate-blur-fade-up" style="animation-delay: 750ms;">
+                <i class="fas fa-paper-plane"></i>
+                <span>Get In Touch</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Navigation Controls -->
+          <div class="cinematic-right-controls">
+            <a href="#about" class="cinematic-nav-arrow liquid-glass animate-blur-fade-up" style="animation-delay: 800ms;" aria-label="Scroll to About Me" title="About Me">
+              <i class="fas fa-chevron-down"></i>
+            </a>
+            <a href="#projects" class="cinematic-nav-arrow liquid-glass animate-blur-fade-up" style="animation-delay: 900ms;" aria-label="Jump to Featured Projects" title="Featured Projects">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
       </div>
-      <canvas id="three-bg-canvas"></canvas>
     </section>
 
     <!-- About Section -->
@@ -135,7 +204,7 @@
       <div class="about-grid">
         <div class="about-image-container glass-card">
           <div class="card-glare"></div>
-          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image"  />
+          <img src="assets/profile.jpg" alt="Vishwak Pullepu" class="about-image" />
           <div class="about-image-overlay"></div>
         </div>
         
@@ -256,13 +325,9 @@
               <div class="skill-item-box"><i class="devicon-kubernetes-plain colored"></i><span>K8s</span></div>
             </div>
           </div>
-
         </div>
       </div>
-
     </section>
-
-
 
     <!-- Certifications Section -->
     <section id="certifications" class="reveal-on-scroll">
@@ -272,11 +337,10 @@
       </div>
       
       <div class="awards-grid">
-        <!-- Certification: Coursera Palo Alto Networks Cybersecurity Foundation -->
         <div class="glass-card award-card" data-pdf="assets/paloalto_cybersec.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/paloalto_cybersec.png" alt="Palo Alto Networks Cybersecurity Foundation"  style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/paloalto_cybersec.png" alt="Palo Alto Networks Cybersecurity Foundation" style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -284,11 +348,10 @@
           </div>
         </div>
 
-        <!-- Certification: Coursera Getting Started with Microsoft Excel -->
         <div class="glass-card award-card" data-pdf="assets/excel_started.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/excel_started.png" alt="Getting Started with Microsoft Excel"  style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/excel_started.png" alt="Getting Started with Microsoft Excel" style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -296,11 +359,10 @@
           </div>
         </div>
 
-        <!-- Certification: Coursera Google Ads for Beginners -->
         <div class="glass-card award-card" data-pdf="assets/google_ads_beginner.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/google_ads_beginner.png" alt="Google Ads for Beginners"  style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/google_ads_beginner.png" alt="Google Ads for Beginners" style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">Coursera</div>
@@ -308,7 +370,6 @@
           </div>
         </div>
 
-        <!-- Certification: Internship Studio Common Internship Test -->
         <div class="glass-card award-card" data-pdf="assets/1742488126154.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -321,7 +382,6 @@
           </div>
         </div>
 
-        <!-- Certification: Google Ad Manager -->
         <div class="glass-card award-card" data-pdf="assets/1742541444638.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -334,7 +394,6 @@
           </div>
         </div>
 
-        <!-- Certification: Google AdMob -->
         <div class="glass-card award-card" data-pdf="assets/1742710226328.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -347,7 +406,6 @@
           </div>
         </div>
 
-        <!-- Certification: LetsUpgrade C++ Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1743837154867.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -360,7 +418,6 @@
           </div>
         </div>
 
-        <!-- Certification: LetsUpgrade HTML & CSS Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1743837652088.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -373,11 +430,10 @@
           </div>
         </div>
 
-        <!-- Certification: LinkedIn Learning Prompt Engineering -->
         <div class="glass-card award-card" data-pdf="assets/prompt_eng_genai.png">
           <div class="card-glare"></div>
           <div class="award-image-box">
-            <img src="assets/prompt_eng_genai.png" alt="Prompt Engineering for Generative AI"  style="width:100%; height:100%; object-fit:cover;" />
+            <img src="assets/prompt_eng_genai.png" alt="Prompt Engineering for Generative AI" style="width:100%; height:100%; object-fit:cover;" />
           </div>
           <div class="award-info">
             <div class="award-badge">LinkedIn Learning</div>
@@ -385,7 +441,6 @@
           </div>
         </div>
 
-        <!-- Certification: LetsUpgrade Social Media Marketing Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749357503589.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -398,7 +453,6 @@
           </div>
         </div>
 
-        <!-- Certification: LetsUpgrade Excel Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749357767653.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -411,7 +465,6 @@
           </div>
         </div>
 
-        <!-- Certification: LetsUpgrade MongoDB Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749358055824.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -424,7 +477,6 @@
           </div>
         </div>
 
-        <!-- Certification: LetsUpgrade DSA with Java Bootcamp -->
         <div class="glass-card award-card" data-pdf="assets/1749612942272.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -437,7 +489,6 @@
           </div>
         </div>
 
-        <!-- Certification: NVIDIA Jetson Nano -->
         <div class="glass-card award-card" data-pdf="assets/1749357767653.pdf">
           <div class="card-glare"></div>
           <div class="award-image-box">
@@ -473,7 +524,7 @@
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <h3 class="timeline-title">Intermediate/Higher Education</h3>
+            <h3 class="timeline-title">Intermediate / Higher Education</h3>
             <div class="timeline-meta">Sri Chaitanya College of Education • 2020 - 2022</div>
             <p class="timeline-desc">Focused on mathematics and physical sciences. Built a strong foundational understanding for advanced computational logic and engineering.</p>
           </div>
@@ -491,7 +542,7 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Featured Projects Section -->
     <section id="projects" class="reveal-on-scroll">
       <div class="section-header">
         <span class="section-tag">My Work</span>
@@ -503,7 +554,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project1.png" alt="VLAN Setup & Simulation"  />
+            <img src="assets/project1.png" alt="VLAN Setup & Simulation" />
             <div class="project-tags">
               <span class="project-tag">Networking</span>
               <span class="project-tag">VLAN</span>
@@ -513,7 +564,7 @@
             <h3 class="project-title">VLAN Network Infrastructure</h3>
             <p class="project-desc">A secure, simulated virtual LAN layout designing segmented subnetworks for corporate environments to optimize data throughput and reinforce system-wide firewalls.</p>
             <div class="project-links">
-              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </article>
@@ -522,7 +573,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project2.png" alt="Generative AI Prompt Lab"  />
+            <img src="assets/project2.png" alt="Generative AI Prompt Lab" />
             <div class="project-tags">
               <span class="project-tag">AI / LLM</span>
               <span class="project-tag">Prompt Eng</span>
@@ -532,7 +583,7 @@
             <h3 class="project-title">Generative AI Prompt Lab</h3>
             <p class="project-desc">Interactive experimental playground exploring context window parameters, prompt chains, and system instructions to maximize reasoning and safety in LLMs.</p>
             <div class="project-links">
-              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </article>
@@ -541,7 +592,7 @@
         <article class="glass-card project-card">
           <div class="card-glare"></div>
           <div class="project-image-box">
-            <img src="assets/project3.png" alt="Computational Model"  />
+            <img src="assets/project3.png" alt="Computational Model" />
             <div class="project-tags">
               <span class="project-tag">Computer Science</span>
               <span class="project-tag">Algorithms</span>
@@ -551,7 +602,7 @@
             <h3 class="project-title">Computational Science Simulator</h3>
             <p class="project-desc">Interactive graphical simulation mapping algorithmic problem-solving and thinking strategies to simplify complex data science concepts.</p>
             <div class="project-links">
-              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </article>
@@ -617,34 +668,56 @@
         <h2 class="section-title">Career Highlights & Initiatives</h2>
       </div>
       
-      <div class="awards-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
-        <!-- Highlight 1 -->
-        <div class="glass-card award-card" style="padding: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;">
+      <div class="community-grid">
+        <!-- Highlight 1: Lorven AI -->
+        <div class="glass-card community-card">
           <div class="card-glare"></div>
-          <div style="font-size: 36px; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-robot"></i></div>
-          <h3 style="font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; line-height: 1.3;">Generative AI Integration</h3>
-          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6;">As CTO at Lorven Enterprises, I spearheaded the integration of advanced Generative AI and prompt engineering techniques into modern web platforms to dramatically enhance interactive user experiences.</p>
+          <div class="community-image-box">
+            <img src="assets/community1.png" alt="Generative AI Integration" />
+          </div>
+          <div class="community-info">
+            <span class="community-date">2024 – Present</span>
+            <h3 class="community-role">Generative AI Integration</h3>
+            <div class="community-org">Lorven Enterprises • CTO & AI Lead</div>
+            <p class="community-desc">
+              Spearheaded the integration of advanced Generative AI and prompt engineering pipelines into production web platforms, boosting interactive engagement and intelligent user workflows.
+            </p>
+          </div>
         </div>
 
-        <!-- Highlight 2 -->
-        <div class="glass-card award-card" style="padding: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;">
+        <!-- Highlight 2: Hackathons -->
+        <div class="glass-card community-card">
           <div class="card-glare"></div>
-          <div style="font-size: 36px; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-users"></i></div>
-          <h3 style="font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; line-height: 1.3;">Hackathon Hosting & Leadership</h3>
-          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6;">Successfully managed and hosted highly competitive technical hackathons and events, fostering student engagement, collaborative problem solving, and innovation within the campus tech community.</p>
+          <div class="community-image-box">
+            <img src="assets/community2.png" alt="Hackathon Hosting & Leadership" />
+          </div>
+          <div class="community-info">
+            <span class="community-date">2023 – 2024</span>
+            <h3 class="community-role">Hackathon Hosting & Leadership</h3>
+            <div class="community-org">CVR College of Engineering • Campus Ambassador</div>
+            <p class="community-desc">
+              Organized and hosted competitive campus hackathons and technical symposiums, mentoring student teams in rapid prototyping, full-stack architecture, and collaborative problem-solving.
+            </p>
+          </div>
         </div>
         
-        <!-- Highlight 3 -->
-        <div class="glass-card award-card" style="padding: 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;">
+        <!-- Highlight 3: Cybersecurity -->
+        <div class="glass-card community-card">
           <div class="card-glare"></div>
-          <div style="font-size: 36px; color: var(--accent-color); margin-bottom: 20px;"><i class="fas fa-shield-alt"></i></div>
-          <h3 style="font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; line-height: 1.3;">Cybersecurity Focus</h3>
-          <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6;">Applied rigorous expertise in Firewalls, VLANs, and Network Traffic Analysis to study robust security systems, backed by foundational certifications from Palo Alto Networks.</p>
+          <div class="community-image-box">
+            <img src="assets/community3.png" alt="Cybersecurity Research" />
+          </div>
+          <div class="community-info">
+            <span class="community-date">2023 – Present</span>
+            <h3 class="community-role">Cybersecurity & Systems Research</h3>
+            <div class="community-org">Palo Alto Networks Certified • CTF Participant</div>
+            <p class="community-desc">
+              Applied rigorous network traffic analysis, firewall configurations, and VLAN segmentation while conducting hardware security research on ESP32 embedded wireless setups.
+            </p>
+          </div>
         </div>
       </div>
     </section>
-
-
 
     <!-- Contact Section -->
     <section id="contact" class="reveal-on-scroll">
@@ -723,9 +796,9 @@
           <div class="social-connect">
             <div class="social-connect-title">Social Links</div>
             <div class="social-icons-row">
-              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-github"></i></a>
-              <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/viswakpullepu" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/vishwak_pullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/vishwakpullepu/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <div style="margin-top: 24px;">
               <a href="assets/1749357767653.pdf" target="_blank" rel="noopener noreferrer" class="hero-btn download-resume-btn">
@@ -769,6 +842,7 @@
   </main>
 
   <script src="assets.js"></script>
+  
   <!-- Certificate Modal Overlay -->
   <div id="cert-modal" class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
     <div class="cert-modal-overlay"></div>
@@ -779,7 +853,7 @@
     </div>
   </div>
 
-  <!-- Loaded Elite Animation and Smooth Scrolling CDNs -->
+  <!-- Loaded Animation and Smooth Scrolling CDNs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -802,6 +876,6 @@
   <!-- Custom Tooltip for GitHub Calendar -->
   <div id="gh-tooltip" class="gh-tooltip hidden"></div>
 
-  <script src="script.js?v=24"></script>
+  <script src="script.js?v=35"></script>
 </body>
 </html>
