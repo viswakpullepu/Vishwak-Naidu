@@ -11,9 +11,7 @@
       --primary: #111827;
       --secondary: #374151;
       --muted: #6b7280;
-      --accent: #2563eb;
       --border: #e5e7eb;
-      --bg: #ffffff;
     }
 
     * {
@@ -86,7 +84,7 @@
     }
 
     .section-title {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -114,7 +112,7 @@
       color: var(--primary);
     }
 
-    .entry-title .company {
+    .entry-title .institution {
       font-weight: 600;
     }
 
@@ -166,7 +164,7 @@
     .skill-category {
       font-weight: 700;
       color: var(--primary);
-      min-width: 140px;
+      min-width: 150px;
       display: inline-block;
     }
 
@@ -244,10 +242,25 @@
 
     <!-- Professional Summary -->
     <section>
-      <div class="section-title">Professional Summary</div>
+      <div class="section-title">Objective / Profile</div>
       <p style="color: var(--secondary); font-size: 12.5px; line-height: 1.45;">
-        High-performing <strong>Full-Stack Software Engineer & Cloud Architect</strong> with hands-on leadership experience as <strong>Chief Technology Officer</strong> at Lorven Enterprises. Proven expertise in architecting resilient distributed systems, modern full-stack web platforms, and automated cloud infrastructure with <strong>Next.js, TypeScript, Node.js, Python, PostgreSQL, and AWS/GCP</strong>. Passionate about system scalability, cybersecurity hardening, and production-grade software engineering.
+        Motivated <strong>Computer Science Undergraduate</strong> at CVR College of Engineering with strong practical experience building full-stack web applications, Python automation scripts, and exploring AI and cybersecurity fundamentals. Passionate about learning new technologies, writing clean code, solving algorithmic problems, and collaborating on impactful software projects.
       </p>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <div class="section-title">Education</div>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title"><span class="institution">CVR College of Engineering</span> — B.Tech in Computer Science and Engineering</span>
+          <span class="entry-date">2022 – 2026</span>
+        </div>
+        <div class="entry-subtitle">Hyderabad, Telangana, India</div>
+        <p style="color: var(--secondary); font-size: 12px; margin-top: 2px;">
+          <strong>Relevant Coursework:</strong> Data Structures & Algorithms, Database Management Systems (DBMS), Operating Systems, Computer Networks, Object-Oriented Programming (Java/C++), Web Technologies.
+        </p>
+      </div>
     </section>
 
     <!-- Technical Skills -->
@@ -256,141 +269,103 @@
       <div class="skills-block">
         <div class="skill-row">
           <span class="skill-category">Programming Languages:</span>
-          TypeScript, JavaScript, Python, Java, C, C++, SQL, Go, HTML5, CSS3, Bash
+          Python, JavaScript, TypeScript, C, C++, Java, SQL, HTML5, CSS3, Bash
         </div>
         <div class="skill-row">
-          <span class="skill-category">Frontend & UI:</span>
-          React.js, Next.js (App Router, Server Actions), Tailwind CSS, Redux Toolkit, WebSockets
+          <span class="skill-category">Web Frameworks & Libs:</span>
+          React.js, Node.js, Express.js, FastAPI, Tailwind CSS, WebSockets
         </div>
         <div class="skill-row">
-          <span class="skill-category">Backend & APIs:</span>
-          Node.js, Express.js, FastAPI, RESTful APIs, GraphQL, Microservices, JWT/OAuth Authentication
+          <span class="skill-category">Databases & Storage:</span>
+          MongoDB, PostgreSQL, MySQL, Supabase
         </div>
         <div class="skill-row">
-          <span class="skill-category">Databases & Caching:</span>
-          PostgreSQL, MongoDB, MySQL, Redis, Supabase, Prisma ORM
+          <span class="skill-category">Developer Tools:</span>
+          Git, GitHub, VS Code, Postman, Vercel, Linux
         </div>
         <div class="skill-row">
-          <span class="skill-category">Cloud, DevOps & Security:</span>
-          AWS (EC2, S3, Lambda), Google Cloud (GCP), Docker, Kubernetes, CI/CD (GitHub Actions), Nginx, Linux, VLANs, Firewalls
+          <span class="skill-category">Core Concepts:</span>
+          RESTful APIs, Network Fundamentals (VLANs, Firewalls), Basic Cybersecurity, LLM Prompting
         </div>
       </div>
     </section>
 
-    <!-- Experience -->
+    <!-- Technical Projects -->
     <section>
-      <div class="section-title">Professional Experience</div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span class="entry-title"><span class="company">Lorven Enterprises</span> — Chief Technology Officer (CTO) & Lead Architect</span>
-          <span class="entry-date">2023 – Present</span>
-        </div>
-        <div class="entry-subtitle">Hyderabad, India</div>
-        <ul class="bullet-list">
-          <li>Architected and deployed multi-tenant business platforms and automated internal ERP portals, reducing operational turnaround times by <strong>40%</strong>.</li>
-          <li>Engineered resilient backend services and REST APIs with <strong>Next.js 14, Node.js, TypeScript, PostgreSQL</strong>, and <strong>Redis</strong>, achieving 99.9% uptime.</li>
-          <li>Implemented automated <strong>CI/CD pipelines via GitHub Actions and Docker</strong>, accelerating release cycles by <strong>45%</strong>.</li>
-          <li>Instituted strict security standards including Role-Based Access Control (RBAC), multi-factor authentication, and encrypted data pipelines complying with OWASP guidelines.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span class="entry-title"><span class="company">CVRCE Technical Community</span> — Technical Lead & Hackathon Host</span>
-          <span class="entry-date">2023 – Present</span>
-        </div>
-        <div class="entry-subtitle">CVR College of Engineering, Hyderabad, India</div>
-        <ul class="bullet-list">
-          <li>Organized and hosted competitive inter-collegiate hackathons engaging <strong>1,000+ student participants</strong> and 150+ teams.</li>
-          <li>Engineered real-time submission evaluation and leaderboard platforms with WebSockets and Supabase.</li>
-          <li>Mentored over <strong>500+ developers</strong> in full-stack architecture, Git workflows, database modeling, and cloud deployments.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section>
-      <div class="section-title">Key Projects</div>
+      <div class="section-title">Projects</div>
 
       <div class="entry">
         <div class="entry-header">
           <span class="entry-title">AI PPT Reviewer Agent</span>
-          <span class="entry-date">Python, FastAPI, OpenAI GPT-4, LangChain, REST APIs</span>
+          <span class="entry-date">Python, FastAPI, OpenAI API, LangChain</span>
         </div>
         <ul class="bullet-list">
-          <li>Engineered an automated presentation deck analyzer evaluating slide readability, hierarchy, and content clarity, providing instant actionable design suggestions.</li>
-          <li>Implemented asynchronous FastAPI endpoints and structured Pydantic validation schemas to process multi-slide decks with sub-second feedback response.</li>
+          <li>Developed an AI-powered tool that analyzes presentation slides and provides actionable feedback on slide flow, readability, and design balance.</li>
+          <li>Built backend endpoints with FastAPI to process presentation metadata and integrate prompt-engineered evaluation routines.</li>
         </ul>
       </div>
 
       <div class="entry">
         <div class="entry-header">
-          <span class="entry-title">Canarytoken Security Trap & Cryptographic Checker</span>
-          <span class="entry-date">Python, Cryptography, Network Analysis, Webhooks, Linux</span>
+          <span class="entry-title">Canarytoken Security Trap & Password Analyzer</span>
+          <span class="entry-date">Python, Cryptography, Security Auditing</span>
         </div>
         <ul class="bullet-list">
-          <li>Built digital decoy tokens and intrusion alert triggers to detect unauthorized infrastructure access in real-time.</li>
-          <li>Developed an entropy-based password auditing utility evaluating password entropy against common dictionary vulnerability patterns.</li>
+          <li>Created digital decoy tokens that trigger instant alert notifications when unauthorized access is detected.</li>
+          <li>Built a Python-based password entropy checker evaluating password strength and resilience against common pattern dictionary attacks.</li>
         </ul>
       </div>
 
       <div class="entry">
         <div class="entry-header">
-          <span class="entry-title">Full-Stack Restaurant Ordering & Management System</span>
+          <span class="entry-title">Full-Stack Restaurant Ordering System</span>
           <span class="entry-date">Node.js, Express.js, MongoDB, React, Tailwind CSS</span>
         </div>
         <ul class="bullet-list">
-          <li>Architected end-to-end restaurant management and customer ordering platform with relational data modeling, order status workflows, and responsive UI.</li>
-          <li>Designed RESTful APIs handling menu data, cart calculations, and order persistence with robust input sanitization.</li>
+          <li>Implemented a full-stack web application featuring separate customer ordering and administrative menu management interfaces.</li>
+          <li>Constructed RESTful API endpoints for handling cart operations, order states, and database persistence with MongoDB.</li>
         </ul>
       </div>
 
       <div class="entry">
         <div class="entry-header">
-          <span class="entry-title">Real-Time Anonymous Messaging Platform (anon-chat)</span>
-          <span class="entry-date">JavaScript, Node.js, WebSockets, Express, HTML5/CSS3</span>
+          <span class="entry-title">Real-Time Anonymous Chat Application</span>
+          <span class="entry-date">JavaScript, Node.js, WebSockets, Express</span>
         </div>
         <ul class="bullet-list">
-          <li>Created a zero-log, ephemeral multi-room messaging platform with instantaneous WebSocket event broadcasting and lightweight responsive frontend.</li>
+          <li>Built a lightweight, zero-log web application supporting ephemeral multi-room messaging with instant WebSocket event broadcasting.</li>
         </ul>
       </div>
 
       <div class="entry">
         <div class="entry-header">
-          <span class="entry-title">High-Performance Portfolio & Live Ecosystem (vishwak.tech)</span>
-          <span class="entry-date">JavaScript (ES6+), GSAP ScrollTrigger, GitHub REST API, Vercel Edge</span>
+          <span class="entry-title">Personal Developer Portfolio (vishwak.tech)</span>
+          <span class="entry-date">JavaScript (ES6+), GSAP, GitHub API, Vercel</span>
         </div>
         <ul class="bullet-list">
-          <li>Built and published portfolio featuring dynamic GitHub contribution calendar visualizer and automatic live Vercel deployment tracking.</li>
+          <li>Created a responsive personal portfolio integrating live GitHub contribution graphs and automated Vercel deployment tracking.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Education -->
+    <!-- Certifications & Learning -->
     <section>
-      <div class="section-title">Education</div>
-      <div class="entry">
-        <div class="entry-header">
-          <span class="entry-title"><span class="company">CVR College of Engineering (CVRCE)</span> — B.Tech in Computer Science and Engineering</span>
-          <span class="entry-date">2022 – 2026</span>
-        </div>
-        <div class="entry-subtitle">Hyderabad, Telangana, India</div>
-        <p style="color: var(--secondary); font-size: 12px; margin-top: 2px;">
-          <strong>Core Coursework:</strong> Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Distributed Computing, Cloud Architecture, Object-Oriented Analysis & Design.
-        </p>
-      </div>
-    </section>
-
-    <!-- Certifications -->
-    <section>
-      <div class="section-title">Certifications & Honors</div>
+      <div class="section-title">Certifications & Training</div>
       <ul class="bullet-list">
-        <li><strong>Palo Alto Networks:</strong> Certified Cybersecurity & Network Defense Specialist</li>
-        <li><strong>NVIDIA Deep Learning Institute (DLI):</strong> Fundamentals of Deep Learning & Accelerated Computing</li>
-        <li><strong>Google Cloud:</strong> Cloud Computing Foundations & Infrastructure Essentials</li>
-        <li><strong>MongoDB University:</strong> Certified Developer Associate (Node.js & Aggregation)</li>
+        <li><strong>Palo Alto Networks:</strong> Fundamentals of Cybersecurity & Network Security</li>
+        <li><strong>NVIDIA Deep Learning Institute (DLI):</strong> Getting Started with AI on Jetson Nano / Deep Learning Basics</li>
+        <li><strong>Google Cloud:</strong> Cloud Computing Foundations</li>
+        <li><strong>MongoDB University:</strong> Developer Associate / Document Database Fundamentals</li>
         <li><strong>Postman:</strong> API Fundamentals Student Expert</li>
+      </ul>
+    </section>
+
+    <!-- Activities -->
+    <section>
+      <div class="section-title">Activities & Interests</div>
+      <ul class="bullet-list">
+        <li>Active participant in collegiate hackathons and coding challenges at CVR College of Engineering.</li>
+        <li>Passionate open-source contributor and experimenter in emerging GenAI developer tools and IoT/security setups.</li>
       </ul>
     </section>
   </div>
