@@ -5,7 +5,7 @@
 ---
 
 ### PROFESSIONAL SUMMARY
-High-performing **Full-Stack Software Engineer & Cloud Architect** with hands-on leadership experience as **Chief Technology Officer** at Lorven Enterprises. Skilled in designing scalable, fault-tolerant distributed systems, modern full-stack web platforms, and automated cloud deployments utilizing **Next.js, TypeScript, Node.js, Python, PostgreSQL, and AWS/GCP**. Proven track record of leading engineering sprints, organizing university hackathons, and architecting production-grade enterprise software.
+High-performing **Full-Stack Software Engineer & Cloud Architect** with hands-on leadership experience as **Chief Technology Officer** at Lorven Enterprises. Proven expertise in architecting resilient distributed systems, modern full-stack web platforms, and automated cloud infrastructure with **Next.js, TypeScript, Node.js, Python, PostgreSQL, and AWS/GCP**. Passionate about system scalability, cybersecurity hardening, and production-grade software engineering.
 
 ---
 
@@ -29,7 +29,7 @@ High-performing **Full-Stack Software Engineer & Cloud Architect** with hands-on
 - Instituted security best practices including Role-Based Access Control (RBAC), multi-factor authentication, and encrypted data pipelines complying with OWASP standards.
 - Managed technical roadmaps, conducted architectural reviews, and mentored junior developers across cross-functional engineering sprints.
 
-#### **CVR College of Engineering / Developer Community** | Hyderabad, India  
+#### **CVRCE Technical Community** | Hyderabad, India  
 **Technical Lead & Hackathon Host** | *2023 – Present*
 - Conceptualized and organized university-level hackathons and technical symposiums engaging **1,000+ participants** and 150+ teams.
 - Engineered a real-time hackathon management platform with automated GitHub repository validation, live leaderboard tracking, and WebSocket score broadcasts.
@@ -37,20 +37,25 @@ High-performing **Full-Stack Software Engineer & Cloud Architect** with hands-on
 
 ---
 
-### FEATURED PROJECTS
+### KEY PROJECTS
 
-#### **Enterprise Multi-Tenant ERP Platform** | *Next.js, TypeScript, PostgreSQL, Prisma, Redis, AWS*
-- Developed an end-to-end multi-tenant business management system handling real-time inventory synchronization, automated billing, and role-based client portals.
-- Implemented high-speed Redis caching and optimized complex SQL queries, decreasing query latency by **60%**.
-- Deployed on AWS with containerized Docker services, CloudFront CDN caching, and automated daily backup routines.
+#### **AI PPT Reviewer Agent** | *Python, FastAPI, OpenAI GPT-4, LangChain, REST APIs* | [GitHub](https://github.com/viswakpullepu/ppt-reviewer-agent)
+- Engineered an automated presentation deck analyzer evaluating slide readability, hierarchy, and content clarity, providing instant actionable design suggestions.
+- Implemented asynchronous FastAPI endpoints and structured Pydantic validation schemas to process multi-slide decks with sub-second feedback response.
 
-#### **Intelligent Context-Aware AI Knowledge Hub** | *Python, FastAPI, LangChain, OpenAI GPT-4, Pinecone, Next.js*
-- Built an enterprise RAG (Retrieval-Augmented Generation) application allowing automated parsing, semantic search, and QA over technical repositories and documents.
-- Achieved sub-second semantic retrieval using vector embeddings, Pinecone indexing, and asynchronous FastAPI microservices.
+#### **Canarytoken Security Trap & Cryptographic Checker** | *Python, Cryptography, Network Analysis, Webhooks, Linux* | [GitHub](https://github.com/viswakpullepu/Canarytoken)
+- Built digital decoy tokens and intrusion alert triggers to detect unauthorized infrastructure access in real-time.
+- Developed an entropy-based password auditing utility evaluating password entropy against common dictionary vulnerability patterns.
 
-#### **Interactive High-Performance Portfolio (vishwak.tech)** | *Next.js, TypeScript, Tailwind CSS, Vercel*
-- Designed and published [vishwak.tech](https://vishwak.tech), achieving **100/100 Lighthouse performance and SEO scores**.
-- Built modular UI components with interactive animations, accessible layouts, and integrated developer case studies.
+#### **Full-Stack Restaurant Ordering & Management System** | *Node.js, Express.js, MongoDB, React, Tailwind CSS* | [GitHub](https://github.com/viswakpullepu/demo-restaurant-backend)
+- Architected end-to-end restaurant management and customer ordering platform with relational data modeling, order status workflows, and responsive UI.
+- Designed RESTful APIs handling menu data, cart calculations, and order persistence with robust input sanitization.
+
+#### **Real-Time Anonymous Messaging Platform (anon-chat)** | *JavaScript, Node.js, WebSockets, Express, HTML5/CSS3* | [GitHub](https://github.com/viswakpullepu/anon-chat)
+- Created a zero-log, ephemeral multi-room messaging platform with instantaneous WebSocket event broadcasting and lightweight responsive frontend.
+
+#### **High-Performance Portfolio & Live Ecosystem (vishwak.tech)** | *JavaScript (ES6+), GSAP ScrollTrigger, GitHub REST API, Vercel Edge* | [Live](https://vishwak.tech)
+- Built and published portfolio featuring dynamic GitHub contribution calendar visualizer and automatic live Vercel deployment tracking.
 
 ---
 
