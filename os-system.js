@@ -247,7 +247,8 @@
   - projects     : List authentic GitHub projects
   - skills       : Show AI and Web toolbelt
   - education    : Academic timeline (CVRCE 2025-2029)
-  - apk          : Download bouu.apk Android Music Player
+  - apk          : Download BOUU-Music-v1.0.0.apk (Android)
+  - bouu         : Open live BOUU Music Web app (bouu-gamma.vercel.app)
   - browser      : Open Safari / Web Browser
   - resume       : View / Download PDF resume
   - whoami       : Current user information
@@ -267,11 +268,12 @@
                      \x1b[33mSecurity:\x1b[0m Palo Alto Certified, Canarytoken Traps`,
 
       projects: `Authentic GitHub Projects:
-  1. \x1b[32mppt-reviewer-agent\x1b[0m : AI Presentation Reviewer Agent (FastAPI + LLM)
-  2. \x1b[32mCanarytoken\x1b[0m        : Cyber Trap & Intrusion Detection Alerts
-  3. \x1b[32manon-chat\x1b[0m          : Real-time ephemeral anonymous chat (WebSockets)
-  4. \x1b[32mdemo-restaurant\x1b[0m    : Full-stack ordering platform (Node.js + React)
-  5. \x1b[32mvishwak.tech\x1b[0m       : Creative Developer Portfolio & Live Deployments`,
+  1. \x1b[35mBOUU Music\x1b[0m         : Ad-free Streaming Web App & Android APK (bouu-gamma.vercel.app)
+  2. \x1b[32mppt-reviewer-agent\x1b[0m : AI Presentation Reviewer Agent (FastAPI + LLM)
+  3. \x1b[32mCanarytoken\x1b[0m        : Cyber Trap & Intrusion Detection Alerts
+  4. \x1b[32manon-chat\x1b[0m          : Real-time ephemeral anonymous chat (WebSockets)
+  5. \x1b[32mdemo-restaurant\x1b[0m    : Full-stack ordering platform (Node.js + React)
+  6. \x1b[32mvishwak.tech\x1b[0m       : Creative Developer Portfolio & Live Deployments`,
 
       skills: `Tools & Technical Focus:
   - \x1b[36mAI & LLMs\x1b[0m       : ChatGPT, Gemini, Claude, Copilot, Perplexity, v0.dev
@@ -295,6 +297,8 @@
       resume: `Opening Resume Viewer application...`,
 
       apk: `Opening Package Installer for BOUU-Music-v1.0.0.apk (7.33 MB)...`,
+
+      bouu: `Opening BOUU Music Web (https://bouu-gamma.vercel.app)...`,
 
       browser: `Opening Safari Web Browser...`,
 
@@ -327,6 +331,16 @@
 
         if (cmdText === 'apk') {
           openApp('win-apk');
+        }
+
+        if (cmdText === 'bouu') {
+          openApp('win-browser');
+          const urlInput = document.getElementById('browser-url-input');
+          const iframe = document.getElementById('browser-frame');
+          if (urlInput && iframe) {
+            urlInput.value = 'https://bouu-gamma.vercel.app';
+            iframe.src = 'https://bouu-gamma.vercel.app';
+          }
         }
 
         if (cmdText === 'browser' || cmdText === 'safari' || cmdText === 'web') {

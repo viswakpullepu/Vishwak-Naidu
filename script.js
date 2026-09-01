@@ -1038,7 +1038,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "demo-restaurant-frontend": { type: "Web App", image: "assets/repo_rest_frontend.png", desc: "An elegant, responsive customer-facing interface for a restaurant ordering system." },
     "interior-design": { type: "Website", image: "assets/repo_interior.png", desc: "A visually stunning landing page for premium interior design and architectural services." },
     "kotha-s-atelier": { type: "Web App", image: "assets/repo_atelier.png", desc: "A sophisticated web application tailored for an atelier, focusing on premium digital presentation." },
-    "LORVEN": { type: "Digital Agency", image: "assets/repo_lorven.png", desc: "Corporate portfolio and service showcase for a comprehensive digital services company." },
+    "BOUU-Music": { type: "Live Streaming App", image: "assets/repo_music.png", desc: "An ad-free music streaming web application and Android client with synchronized lyrics and background playback." },
     "ngl---clone": { type: "Web App", image: "assets/repo_ngl.png", desc: "A functional frontend clone of the popular NGL anonymous Q&A platform." },
     "password-strength-checker": { type: "Security Utility", image: "assets/repo_python.png", desc: "A Python-based cryptographic tool for evaluating and validating password entropy." },
     "ppt-reviewer-agent": { type: "AI Tool", image: "assets/project1.png", desc: "An AI-powered analyzer built with FastAPI that reviews presentations and provides actionable design suggestions." },
@@ -1054,6 +1054,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getInferredVercelUrl(repoName) {
     let slug = repoName.toLowerCase();
+    if (slug.includes('bouu')) return 'https://bouu-gamma.vercel.app';
     slug = slug.replace(/---+/g, '-');
     slug = slug.replace(/kotha-s-atelier/g, 'kothas-atelier');
     return `https://${slug}.vercel.app`;
