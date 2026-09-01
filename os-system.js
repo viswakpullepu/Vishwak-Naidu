@@ -294,7 +294,7 @@
 
       resume: `Opening Resume Viewer application...`,
 
-      apk: `Opening Package Installer for bouu.apk (23.42 MB)...`,
+      apk: `Opening Package Installer for BOUU-Music-v1.0.0.apk (7.33 MB)...`,
 
       browser: `Opening Safari Web Browser...`,
 
