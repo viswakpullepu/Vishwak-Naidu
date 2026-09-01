@@ -5,7 +5,7 @@
 ---
 
 ### OBJECTIVE / PROFILE
-Motivated **Computer Science Undergraduate** at CVR College of Engineering with practical hands-on experience building full-stack web applications, Python automation scripts, and exploring AI and cybersecurity fundamentals. Passionate about learning new technologies, writing clean code, solving algorithmic problems, and collaborating on impactful software projects.
+Motivated **Computer Science Undergraduate & AI-Powered Builder** at CVR College of Engineering. Experienced in leveraging modern Generative AI models, prompt engineering, and low-code/web deployment platforms to rapidly build, design, and host interactive digital projects. Passionate about exploring emerging tech workflows, cybersecurity awareness, and collegiate innovation.
 
 ---
 
@@ -13,50 +13,48 @@ Motivated **Computer Science Undergraduate** at CVR College of Engineering with 
 
 **CVR College of Engineering** | Hyderabad, Telangana, India  
 **Bachelor of Technology (B.Tech) in Computer Science and Engineering** | *2022 – 2026*  
-- **Relevant Coursework:** Data Structures & Algorithms, Database Management Systems (DBMS), Operating Systems, Computer Networks, Object-Oriented Programming (Java/C++), Web Technologies.
+- **Foundational Coursework:** Operating Systems, Computer Networks, Database Concepts, Computer Science Fundamentals, Web Technologies.
 
 ---
 
-### TECHNICAL SKILLS
-- **Programming Languages:** Python, JavaScript, TypeScript, C, C++, Java, SQL, HTML5, CSS3, Bash
-- **Web Frameworks & Libraries:** React.js, Node.js, Express.js, FastAPI, Tailwind CSS, WebSockets
-- **Databases & Storage:** MongoDB, PostgreSQL, MySQL, Supabase
-- **Developer Tools:** Git, GitHub, VS Code, Postman, Vercel, Linux
-- **Core Concepts:** RESTful APIs, Network Fundamentals (VLANs, Firewalls), Basic Cybersecurity, LLM Prompting
+### TOOLS & TECHNICAL EXPERTISE
+- **Generative AI & LLM Tools:** ChatGPT, Google Gemini, Claude, GitHub Copilot, Perplexity AI, Midjourney, v0.dev, RunwayML, Prompt Engineering
+- **Web & Cloud Platforms:** Vercel, Supabase, WordPress, Webflow, Git, GitHub, VS Code, HTML5, CSS3, Postman
+- **Design & Productivity:** Figma, Canva, Microsoft Excel, Google Workspace, Linux / Terminal Basics
+- **Domains of Focus:** AI-Assisted Prototyping, Prompt Engineering, Web Deployment, Cybersecurity Awareness, Network Basics (VLANs, Firewalls)
 
 ---
 
-### PROJECTS
+### FEATURED PROJECTS & BUILDS
 
-#### **AI PPT Reviewer Agent** | *Python, FastAPI, OpenAI API, LangChain* | [GitHub](https://github.com/viswakpullepu/ppt-reviewer-agent)
-- Developed an AI-powered tool that analyzes presentation slides and provides actionable feedback on slide flow, readability, and design balance.
-- Built backend endpoints with FastAPI to process presentation metadata and integrate prompt-engineered evaluation routines.
+#### **AI PPT Reviewer Agent** | *FastAPI, OpenAI API, Prompt Engineering* | [GitHub](https://github.com/viswakpullepu/ppt-reviewer-agent)
+- Built an AI-assisted presentation analyzer that reviews slide decks and provides instant recommendations on structure, layout balance, and readability.
+- Utilized prompt-engineered evaluation chains and backend API routing to generate structured design feedback.
 
-#### **Canarytoken Security Trap & Password Analyzer** | *Python, Cryptography, Security Auditing* | [GitHub](https://github.com/viswakpullepu/Canarytoken)
-- Created digital decoy tokens that trigger instant alert notifications when unauthorized access is detected.
-- Built a Python-based password entropy checker evaluating password strength and resilience against common pattern dictionary attacks.
+#### **Canarytoken Security Trap & Password Analyzer** | *Python Scripts, Security Concepts, Cryptography* | [GitHub](https://github.com/viswakpullepu/Canarytoken)
+- Configured digital decoy tokens that trigger instant alert notifications when unauthorized access is detected on files or networks.
+- Constructed a password entropy analyzer script evaluating password strength against pattern vulnerabilities.
 
-#### **Full-Stack Restaurant Ordering System** | *Node.js, Express.js, MongoDB, React, Tailwind CSS* | [GitHub](https://github.com/viswakpullepu/demo-restaurant-backend)
-- Implemented a full-stack web application featuring separate customer ordering and administrative menu management interfaces.
-- Constructed RESTful API endpoints for handling cart operations, order states, and database persistence with MongoDB.
+#### **Full-Stack Restaurant Ordering System** | *Node.js, Express, MongoDB, React, Tailwind CSS* | [GitHub](https://github.com/viswakpullepu/demo-restaurant-backend)
+- Assembled a functional restaurant application featuring client ordering menus, cart state management, and backend database storage.
 
-#### **Real-Time Anonymous Chat Application** | *JavaScript, Node.js, WebSockets, Express* | [GitHub](https://github.com/viswakpullepu/anon-chat)
-- Built a lightweight, zero-log web application supporting ephemeral multi-room messaging with instant WebSocket event broadcasting.
+#### **Real-Time Anonymous Chat Application** | *JavaScript, Node.js, WebSockets* | [GitHub](https://github.com/viswakpullepu/anon-chat)
+- Deployed an ephemeral multi-room messaging platform supporting instant live text broadcasting across temporary sessions.
 
-#### **Personal Developer Portfolio (vishwak.tech)** | *JavaScript (ES6+), GSAP, GitHub API, Vercel* | [Live](https://vishwak.tech)
-- Created a responsive personal portfolio integrating live GitHub contribution graphs and automated Vercel deployment tracking.
+#### **Personal Developer Portfolio (vishwak.tech)** | *HTML5, CSS3, GSAP, GitHub API, Vercel* | [Live](https://vishwak.tech)
+- Designed and launched a personal portfolio on Vercel with responsive layouts, glassmorphic UI components, and dynamic GitHub contribution data.
 
 ---
 
 ### CERTIFICATIONS & TRAINING
-- **Palo Alto Networks:** Fundamentals of Cybersecurity & Network Security
-- **NVIDIA Deep Learning Institute (DLI):** Getting Started with AI on Jetson Nano / Deep Learning Basics
+- **Palo Alto Networks:** Fundamentals of Cybersecurity & Network Defense
+- **NVIDIA Deep Learning Institute (DLI):** Getting Started with AI on Jetson Nano / AI Fundamentals
 - **Google Cloud:** Cloud Computing Foundations
-- **MongoDB University:** Developer Associate / Document Database Fundamentals
+- **MongoDB University:** Document Database Fundamentals
 - **Postman:** API Fundamentals Student Expert
 
 ---
 
-### ACTIVITIES & INTERESTS
-- Active participant in collegiate hackathons and coding challenges at CVR College of Engineering.
-- Passionate open-source contributor and experimenter in emerging GenAI developer tools and IoT/security setups.
+### COLLEGIATE ACTIVITIES
+- Active participant in campus hackathons and collegiate coding challenges at CVR College of Engineering.
+- Passionate explorer of emerging AI tools, prompt workflows, and digital design trends.
