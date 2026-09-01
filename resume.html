@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vishwak Pullepu - Resume</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #111827;
+      --secondary: #374151;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+      --bg: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--primary);
+      background: #f3f4f6;
+      line-height: 1.45;
+      font-size: 13px;
+      padding: 30px 15px;
+    }
+
+    .page {
+      background: #ffffff;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 48px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1.5px solid var(--primary);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #000000;
+    }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--secondary);
+      font-weight: 400;
+    }
+
+    .contact-line a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .contact-line a:hover {
+      text-decoration: underline;
+    }
+
+    .separator {
+      color: var(--muted);
+    }
+
+    /* Section Styling */
+    section {
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #000000;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+
+    /* Entry Blocks */
+    .entry {
+      margin-bottom: 12px;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .entry-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .entry-title .company {
+      font-weight: 600;
+    }
+
+    .entry-date {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .entry-subtitle {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--secondary);
+      margin-bottom: 4px;
+    }
+
+    /* Bullet lists */
+    ul.bullet-list {
+      list-style-type: disc;
+      margin-left: 18px;
+      margin-top: 4px;
+    }
+
+    ul.bullet-list li {
+      margin-bottom: 3.5px;
+      color: var(--secondary);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    ul.bullet-list li strong {
+      color: var(--primary);
+    }
+
+    /* Skills Grid */
+    .skills-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .skill-row {
+      font-size: 12.5px;
+      line-height: 1.4;
+      color: var(--secondary);
+    }
+
+    .skill-category {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 140px;
+      display: inline-block;
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+        margin: 0;
+      }
+      .page {
+        box-shadow: none;
+        padding: 24px 28px;
+        max-width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Action bar */
+    .action-bar {
+      max-width: 820px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn {
+      background: #111827;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: #374151;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="action-bar no-print">
+    <button class="btn" onclick="window.print()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="page">
+    <!-- Header -->
+    <header>
+      <h1>VISHWAK PULLEPU</h1>
+      <div class="contact-line">
+        <span>Hyderabad, Telangana, India</span>
+        <span class="separator">•</span>
+        <a href="mailto:viswakpullepu1@gmail.com">viswakpullepu1@gmail.com</a>
+        <span class="separator">•</span>
+        <a href="https://vishwak.tech" target="_blank">vishwak.tech</a>
+        <span class="separator">•</span>
+        <a href="https://linkedin.com/in/vishwakpullepu" target="_blank">linkedin.com/in/vishwakpullepu</a>
+        <span class="separator">•</span>
+        <a href="https://github.com/viswakpullepu" target="_blank">github.com/viswakpullepu</a>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section>
+      <div class="section-title">Professional Summary</div>
+      <p style="color: var(--secondary); font-size: 12.5px; line-height: 1.45;">
+        High-performing <strong>Full-Stack Software Engineer & Cloud Architect</strong> with hands-on leadership experience as <strong>Chief Technology Officer</strong> at Lorven Enterprises. Proven expertise in architecting resilient distributed systems, modern full-stack web platforms, and automated cloud infrastructure with <strong>Next.js, TypeScript, Node.js, Python, PostgreSQL, and AWS/GCP</strong>. Passionate about system scalability, cybersecurity hardening, and production-grade software engineering.
+      </p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-block">
+        <div class="skill-row">
+          <span class="skill-category">Programming Languages:</span>
+          TypeScript, JavaScript, Python, Java, C, C++, SQL, Go, HTML5, CSS3, Bash
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Frontend & UI:</span>
+          React.js, Next.js (App Router, Server Actions), Tailwind CSS, Redux Toolkit, WebSockets
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Backend & APIs:</span>
+          Node.js, Express.js, FastAPI, RESTful APIs, GraphQL, Microservices, JWT/OAuth Authentication
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Databases & Caching:</span>
+          PostgreSQL, MongoDB, MySQL, Redis, Supabase, Prisma ORM
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Cloud, DevOps & Security:</span>
+          AWS (EC2, S3, Lambda), Google Cloud (GCP), Docker, Kubernetes, CI/CD (GitHub Actions), Nginx, Linux, VLANs, Firewalls
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <div class="section-title">Professional Experience</div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title"><span class="company">Lorven Enterprises</span> — Chief Technology Officer (CTO) & Lead Architect</span>
+          <span class="entry-date">2023 – Present</span>
+        </div>
+        <div class="entry-subtitle">Hyderabad, India</div>
+        <ul class="bullet-list">
+          <li>Architected and deployed multi-tenant business platforms and automated internal ERP portals, reducing operational turnaround times by <strong>40%</strong>.</li>
+          <li>Engineered resilient backend services and REST APIs with <strong>Next.js 14, Node.js, TypeScript, PostgreSQL</strong>, and <strong>Redis</strong>, achieving 99.9% uptime.</li>
+          <li>Implemented automated <strong>CI/CD pipelines via GitHub Actions and Docker</strong>, accelerating release cycles by <strong>45%</strong>.</li>
+          <li>Instituted strict security standards including Role-Based Access Control (RBAC), multi-factor authentication, and encrypted data pipelines complying with OWASP guidelines.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title"><span class="company">CVRCE Technical Community</span> — Technical Lead & Hackathon Host</span>
+          <span class="entry-date">2023 – Present</span>
+        </div>
+        <div class="entry-subtitle">CVR College of Engineering, Hyderabad, India</div>
+        <ul class="bullet-list">
+          <li>Organized and hosted competitive inter-collegiate hackathons engaging <strong>1,000+ student participants</strong> and 150+ teams.</li>
+          <li>Engineered real-time submission evaluation and leaderboard platforms with WebSockets and Supabase.</li>
+          <li>Mentored over <strong>500+ developers</strong> in full-stack architecture, Git workflows, database modeling, and cloud deployments.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section>
+      <div class="section-title">Key Projects</div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Enterprise Multi-Tenant ERP System</span>
+          <span class="entry-date">Next.js, TypeScript, PostgreSQL, Prisma, Redis, AWS</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Developed an end-to-end multi-tenant business management system handling real-time inventory synchronization and automated billing.</li>
+          <li>Implemented high-speed Redis caching and query indexing, reducing database query latency by <strong>60%</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Context-Aware AI Knowledge Hub</span>
+          <span class="entry-date">Python, FastAPI, LangChain, OpenAI APIs, Vector DB, Next.js</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Built an enterprise RAG (Retrieval-Augmented Generation) application allowing automated semantic search over technical document repositories.</li>
+          <li>Achieved sub-second semantic retrieval using vector embeddings, Pinecone indexing, and asynchronous FastAPI microservices.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">High-Performance Portfolio & Developer Sandbox (vishwak.tech)</span>
+          <span class="entry-date">Next.js, TypeScript, Tailwind CSS, Vercel</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Designed and published production portfolio achieving <strong>100/100 Lighthouse performance and SEO scores</strong> with dynamic GitHub API & Vercel deployment tracking.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <div class="section-title">Education</div>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title"><span class="company">CVR College of Engineering (CVRCE)</span> — B.Tech in Computer Science and Engineering</span>
+          <span class="entry-date">2022 – 2026</span>
+        </div>
+        <div class="entry-subtitle">Hyderabad, Telangana, India</div>
+        <p style="color: var(--secondary); font-size: 12px; margin-top: 2px;">
+          <strong>Core Coursework:</strong> Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Distributed Computing, Cloud Architecture, Object-Oriented Analysis & Design.
+        </p>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+      <div class="section-title">Certifications & Honors</div>
+      <ul class="bullet-list">
+        <li><strong>Palo Alto Networks:</strong> Certified Cybersecurity & Network Defense Specialist</li>
+        <li><strong>NVIDIA Deep Learning Institute (DLI):</strong> Fundamentals of Deep Learning & Accelerated Computing</li>
+        <li><strong>Google Cloud:</strong> Cloud Computing Foundations & Infrastructure Essentials</li>
+        <li><strong>MongoDB University:</strong> Certified Developer Associate (Node.js & Aggregation)</li>
+        <li><strong>Postman:</strong> API Fundamentals Student Expert</li>
+      </ul>
+    </section>
+  </div>
+
+</body>
+</html>
