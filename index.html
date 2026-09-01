@@ -866,31 +866,147 @@
   <div id="gh-tooltip" class="gh-tooltip hidden"></div>
 
   <!-- ==========================================================================
-       VISHWAKOS - INTERACTIVE LIQUID GLASS DESKTOP ENVIRONMENT
+       VISHWAKOS v2.5 - REFINED LIQUID GLASS DESKTOP ENVIRONMENT
        ========================================================================== -->
   <div id="vishwak-os">
-    <!-- Ambient Canvas Glow & Grid -->
-    <div class="os-background-canvas"></div>
+    <!-- Dynamic Wallpaper Layer -->
+    <div class="os-wallpaper-layer wp-monterey" id="os-wallpaper-layer"></div>
     <div class="os-grid-overlay"></div>
+
+    <!-- Desktop Selection Box -->
+    <div class="os-selection-box" id="os-selection-box"></div>
+
+    <!-- Right-Click Context Menu -->
+    <div class="os-context-menu" id="os-context-menu">
+      <div class="os-dropdown-item" onclick="openApp('win-terminal')"><i class="fas fa-terminal" style="margin-right:6px;"></i> New Terminal <span class="shortcut">⌘T</span></div>
+      <div class="os-dropdown-item" onclick="openApp('win-finder')"><i class="far fa-folder" style="margin-right:6px;"></i> Open Finder <span class="shortcut">⌘F</span></div>
+      <div class="os-dropdown-item" onclick="openApp('win-settings')"><i class="fas fa-desktop" style="margin-right:6px;"></i> Change Wallpaper...</div>
+      <div class="os-dropdown-divider"></div>
+      <div class="os-dropdown-item" onclick="openApp('win-browser')"><i class="fas fa-compass" style="margin-right:6px;"></i> Safari Browser</div>
+      <div class="os-dropdown-item" onclick="openApp('win-apk')"><i class="fab fa-android" style="margin-right:6px;"></i> Install BOUU APK</div>
+      <div class="os-dropdown-divider"></div>
+      <div class="os-dropdown-item" onclick="toggleVishwakOS(false)" style="color:#f87171;"><i class="fas fa-power-off" style="margin-right:6px;"></i> Exit VishwakOS</div>
+    </div>
+
+    <!-- Spotlight Search Overlay -->
+    <div class="os-spotlight-overlay" id="os-spotlight">
+      <div class="os-spotlight-box">
+        <div class="os-spotlight-header">
+          <i class="fas fa-search" style="color:var(--accent-color); font-size:16px;"></i>
+          <input type="text" id="os-spotlight-input" class="os-spotlight-input" placeholder="Spotlight Search (Type app name or command...)" autocomplete="off" />
+        </div>
+        <div class="os-spotlight-results" id="os-spotlight-results"></div>
+      </div>
+    </div>
+
+    <!-- Control Center Panel -->
+    <div class="os-control-center" id="os-control-center">
+      <div class="cc-grid">
+        <div class="cc-tile active" id="cc-wifi-tile">
+          <div class="cc-tile-icon"><i class="fas fa-wifi"></i></div>
+          <div>
+            <div style="font-size:12px; font-weight:700;">Wi-Fi</div>
+            <div style="font-size:10px; opacity:0.8;">CVRCE-Net 5G</div>
+          </div>
+        </div>
+        <div class="cc-tile active" id="cc-sound-tile">
+          <div class="cc-tile-icon"><i class="fas fa-volume-up"></i></div>
+          <div>
+            <div style="font-size:12px; font-weight:700;">OS Audio</div>
+            <div style="font-size:10px; opacity:0.8;">Synthesizer On</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cc-slider-box">
+        <div class="cc-slider-label"><span>Display Glass Opacity</span> <span>85%</span></div>
+        <input type="range" class="cc-slider" min="30" max="100" value="85" />
+      </div>
+
+      <div class="cc-slider-box">
+        <div class="cc-slider-label"><span>System Volume</span> <span>100%</span></div>
+        <input type="range" class="cc-slider" min="0" max="100" value="100" />
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.04); padding:8px 12px; border-radius:8px; font-size:11px;">
+        <span>Battery Health</span>
+        <span style="color:#34d399; font-weight:700;"><i class="fas fa-bolt"></i> 100% (Plugged In)</span>
+      </div>
+    </div>
 
     <!-- Top Glass Menu Bar -->
     <div class="os-menubar">
       <div class="os-menu-left">
-        <div class="os-logo-btn" onclick="toggleVishwakOS(false)" title="Return to Portfolio">
-          <span></span> VishwakOS
+        <!--  Apple Menu -->
+        <div class="os-menu-btn os-logo-btn">
+          <span></span>
+          <div class="os-dropdown">
+            <div class="os-dropdown-item" onclick="openApp('win-settings')"><i class="fas fa-info-circle"></i> About VishwakOS</div>
+            <div class="os-dropdown-item" onclick="openApp('win-settings')"><i class="fas fa-sliders-h"></i> System Settings...</div>
+            <div class="os-dropdown-divider"></div>
+            <div class="os-dropdown-item" onclick="openApp('win-finder')"><i class="far fa-folder"></i> App Store / Projects</div>
+            <div class="os-dropdown-divider"></div>
+            <div class="os-dropdown-item" onclick="toggleVishwakOS(false)" style="color:#f87171;"><i class="fas fa-power-off"></i> Exit OS Mode</div>
+          </div>
         </div>
-        <div class="os-menu-item" data-os-menu-app="win-finder">Projects</div>
-        <div class="os-menu-item" data-os-menu-app="win-terminal">Terminal</div>
-        <div class="os-menu-item" data-os-menu-app="win-skills">AI & Tools</div>
-        <div class="os-menu-item" data-os-menu-app="win-canary">Canary Security</div>
-        <div class="os-menu-item" data-os-menu-app="win-resume">Resume</div>
+
+        <!-- File Menu -->
+        <div class="os-menu-btn">
+          <span>File</span>
+          <div class="os-dropdown">
+            <div class="os-dropdown-item" onclick="openApp('win-terminal')">New Terminal <span class="shortcut">⌘T</span></div>
+            <div class="os-dropdown-item" onclick="openApp('win-finder')">New Finder Window <span class="shortcut">⌘N</span></div>
+            <div class="os-dropdown-item" onclick="openApp('win-browser')">New Browser Tab <span class="shortcut">⌘B</span></div>
+            <div class="os-dropdown-divider"></div>
+            <div class="os-dropdown-item" onclick="openApp('win-resume')">View Resume PDF</div>
+          </div>
+        </div>
+
+        <!-- Edit Menu -->
+        <div class="os-menu-btn">
+          <span>Edit</span>
+          <div class="os-dropdown">
+            <div class="os-dropdown-item" onclick="openApp('win-terminal'); document.getElementById('term-input').value='clear'; const e = new KeyboardEvent('keydown', {'key':'Enter'}); document.getElementById('term-input').dispatchEvent(e);">Clear Terminal</div>
+            <div class="os-dropdown-item" onclick="openApp('win-skills')">View Skills Toolbelt</div>
+          </div>
+        </div>
+
+        <!-- View Menu -->
+        <div class="os-menu-btn">
+          <span>View</span>
+          <div class="os-dropdown">
+            <div class="os-dropdown-item" onclick="openApp('win-settings')">Change Wallpaper...</div>
+            <div class="os-dropdown-item" onclick="document.querySelectorAll('.os-window').forEach(w => w.classList.remove('open'))">Show Desktop</div>
+          </div>
+        </div>
+
+        <!-- Window Menu -->
+        <div class="os-menu-btn">
+          <span>Window</span>
+          <div class="os-dropdown">
+            <div class="os-dropdown-item" onclick="document.querySelectorAll('.os-window').forEach(w => w.classList.add('minimized'))">Minimize All</div>
+            <div class="os-dropdown-item" onclick="document.querySelectorAll('.os-window').forEach(w => w.classList.remove('minimized'))">Bring All to Front</div>
+          </div>
+        </div>
+
+        <!-- Help Menu -->
+        <div class="os-menu-btn">
+          <span>Help</span>
+          <div class="os-dropdown">
+            <div class="os-dropdown-item" onclick="openApp('win-terminal'); document.getElementById('term-input').value='help'; const e = new KeyboardEvent('keydown', {'key':'Enter'}); document.getElementById('term-input').dispatchEvent(e);">Terminal Help</div>
+            <div class="os-dropdown-item" onclick="openApp('win-browser')">Vishwak Portfolio Help</div>
+          </div>
+        </div>
       </div>
+
       <div class="os-menu-right">
-        <div class="os-tray-item"><i class="fas fa-wifi"></i></div>
-        <div class="os-tray-item"><i class="fas fa-battery-full"></i> 100%</div>
-        <div class="os-tray-item" id="os-live-clock">--:-- --</div>
-        <button class="os-exit-btn" onclick="toggleVishwakOS(false)">
-          <i class="fas fa-times"></i> Exit OS Mode
+        <div class="os-menu-btn" id="os-search-icon" title="Spotlight Search (⌘+Space)"><i class="fas fa-search"></i></div>
+        <div class="os-menu-btn" id="os-cc-toggle" title="Control Center"><i class="fas fa-sliders-h"></i></div>
+        <div class="os-menu-btn" title="CVRCE-Net Wi-Fi"><i class="fas fa-wifi"></i></div>
+        <div class="os-menu-btn" title="Battery 100%"><i class="fas fa-battery-full"></i></div>
+        <div class="os-menu-btn" id="os-live-clock" style="font-weight:600;">--:-- --</div>
+        <button class="os-exit-btn" onclick="toggleVishwakOS(false)" title="Return to classic web portfolio">
+          <i class="fas fa-times"></i> Exit OS
         </button>
       </div>
     </div>
@@ -906,6 +1022,14 @@
         <div class="os-icon" data-app="win-finder">
           <div class="os-icon-img bg-finder"><i class="far fa-folder-open"></i></div>
           <span class="os-icon-label">Projects</span>
+        </div>
+        <div class="os-icon" data-app="win-browser">
+          <div class="os-icon-img bg-safari"><i class="fas fa-compass"></i></div>
+          <span class="os-icon-label">Safari</span>
+        </div>
+        <div class="os-icon" data-app="win-apk">
+          <div class="os-icon-img bg-android"><i class="fab fa-android"></i></div>
+          <span class="os-icon-label">BOUU.apk</span>
         </div>
         <div class="os-icon" data-app="win-skills">
           <div class="os-icon-img bg-skills"><i class="fas fa-bolt"></i></div>
@@ -923,13 +1047,9 @@
           <div class="os-icon-img bg-resume"><i class="fas fa-file-pdf"></i></div>
           <span class="os-icon-label">Resume.pdf</span>
         </div>
-        <div class="os-icon" data-app="win-apk">
-          <div class="os-icon-img bg-android"><i class="fab fa-android"></i></div>
-          <span class="os-icon-label">bouu.apk</span>
-        </div>
-        <div class="os-icon" data-app="win-browser">
-          <div class="os-icon-img bg-safari"><i class="fas fa-compass"></i></div>
-          <span class="os-icon-label">Browser</span>
+        <div class="os-icon" data-app="win-settings">
+          <div class="os-icon-img bg-settings"><i class="fas fa-cog"></i></div>
+          <span class="os-icon-label">Settings</span>
         </div>
       </div>
 
@@ -951,7 +1071,7 @@
   \ \    / (_)___| |____ __ ____ _ _| |__/ _ \/ __|
    \ \/\/ /| (_-< ' \ V  V / _` | / / / / // \__ \
     \_/\_/ |_/__/_||_\_/\_/\__,_|_\_\_\_\___/|___/
-               [VishwakOS v2.0 Liquid Glass]
+               [VishwakOS v2.5 Liquid Glass]
             </div>
             <div id="term-history">
               <div class="term-line">Welcome to <strong>VishwakOS Interactive Terminal</strong>!</div>
@@ -1179,6 +1299,7 @@
           <iframe src="assets/resume.pdf" style="width:100%; height:400px; border:none; background:#ffffff;"></iframe>
         </div>
       </div>
+
       <!-- WINDOW 7: APK INSTALLER / VIEWER -->
       <div class="os-window" id="win-apk">
         <div class="os-window-header">
@@ -1218,6 +1339,7 @@
           </div>
         </div>
       </div>
+
       <!-- WINDOW 8: SAFARI / WEB BROWSER -->
       <div class="os-window" id="win-browser">
         <div class="os-window-header">
@@ -1235,9 +1357,9 @@
             <button id="browser-reload-btn" class="btn" style="padding: 4px 8px; font-size: 11px;" title="Reload"><i class="fas fa-redo"></i></button>
             <div style="flex: 1; display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 4px 10px; gap: 6px;">
               <i class="fas fa-lock" style="font-size: 10px; color: #34d399;"></i>
-              <input type="text" id="browser-url-input" value="https://vishwak.tech" style="background: transparent; border: none; outline: none; color: #f3f4f6; font-size: 12px; width: 100%;" />
+              <input type="text" id="browser-url-input" value="https://bouu-gamma.vercel.app" style="background: transparent; border: none; outline: none; color: #f3f4f6; font-size: 12px; width: 100%;" />
             </div>
-            <a id="browser-opentab-btn" href="https://vishwak.tech" target="_blank" class="btn" style="padding: 4px 10px; font-size: 11px;" title="Open in new browser tab">
+            <a id="browser-opentab-btn" href="https://bouu-gamma.vercel.app" target="_blank" class="btn" style="padding: 4px 10px; font-size: 11px;" title="Open in new browser tab">
               <i class="fas fa-external-link-alt"></i>
             </a>
           </div>
@@ -1253,7 +1375,56 @@
           </div>
 
           <!-- Browser Iframe Body -->
-          <iframe id="browser-frame" src="http://localhost:8000/" style="width: 100%; height: 380px; border: none; background: #ffffff;"></iframe>
+          <iframe id="browser-frame" src="https://bouu-gamma.vercel.app" style="width: 100%; height: 380px; border: none; background: #ffffff;"></iframe>
+        </div>
+      </div>
+
+      <!-- WINDOW 9: SYSTEM SETTINGS -->
+      <div class="os-window" id="win-settings">
+        <div class="os-window-header">
+          <div class="os-traffic-lights">
+            <span class="os-btn-light os-btn-close"></span>
+            <span class="os-btn-light os-btn-min"></span>
+            <span class="os-btn-light os-btn-max"></span>
+          </div>
+          <div class="os-window-title"><i class="fas fa-cog"></i> System Settings — VishwakOS</div>
+          <div class="os-window-actions"></div>
+        </div>
+        <div class="os-window-body" style="padding: 0;">
+          <div class="settings-layout">
+            <div class="settings-sidebar">
+              <div class="settings-nav-item active"><i class="fas fa-desktop"></i> Appearance</div>
+              <div class="settings-nav-item"><i class="fas fa-info-circle"></i> About System</div>
+              <div class="settings-nav-item"><i class="fas fa-volume-up"></i> Sound Effects</div>
+            </div>
+            <div class="settings-content-pane">
+              <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Wallpaper Gallery</div>
+              <div style="font-size: 12px; color: #9ca3af; margin-bottom: 12px;">Choose a backdrop for your VishwakOS workspace:</div>
+
+              <div class="wallpaper-grid">
+                <div class="wp-choice-card active" data-wp="monterey" style="background: linear-gradient(135deg, #4c1d95, #be185d);">
+                  <span>Monterey Dark</span>
+                </div>
+                <div class="wp-choice-card" data-wp="cyber" style="background: linear-gradient(135deg, #0f766e, #e06031);">
+                  <span>Cyber Aurora</span>
+                </div>
+                <div class="wp-choice-card" data-wp="sunset" style="background: linear-gradient(135deg, #ea580c, #7c3aed);">
+                  <span>Neon Sunset</span>
+                </div>
+                <div class="wp-choice-card" data-wp="space" style="background: linear-gradient(135deg, #1e1b4b, #090814);">
+                  <span>Deep Space</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <div style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">Developer Information</div>
+                <div style="font-size: 11px; color: #9ca3af; line-height: 1.5;">
+                  VishwakOS Runtime v2.5 • Developed by Vishwak Pullepu<br />
+                  B.Tech in Computer Science & Engineering (CVR College of Engineering, 2025–2029)
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1267,6 +1438,14 @@
       <div class="os-dock-item bg-finder" data-app="win-finder">
         <i class="far fa-folder-open"></i>
         <span class="os-dock-tooltip">Projects</span>
+      </div>
+      <div class="os-dock-item bg-safari" data-app="win-browser">
+        <i class="fas fa-compass"></i>
+        <span class="os-dock-tooltip">Safari Browser</span>
+      </div>
+      <div class="os-dock-item bg-android" data-app="win-apk">
+        <i class="fab fa-android"></i>
+        <span class="os-dock-tooltip">BOUU APK</span>
       </div>
       <div class="os-dock-item bg-skills" data-app="win-skills">
         <i class="fas fa-bolt"></i>
@@ -1284,13 +1463,14 @@
         <i class="fas fa-file-pdf"></i>
         <span class="os-dock-tooltip">Resume</span>
       </div>
-      <div class="os-dock-item bg-android" data-app="win-apk">
-        <i class="fab fa-android"></i>
-        <span class="os-dock-tooltip">Bouu APK</span>
+      <div class="os-dock-divider"></div>
+      <div class="os-dock-item bg-settings" data-app="win-settings">
+        <i class="fas fa-cog"></i>
+        <span class="os-dock-tooltip">Settings</span>
       </div>
-      <div class="os-dock-item bg-safari" data-app="win-browser">
-        <i class="fas fa-compass"></i>
-        <span class="os-dock-tooltip">Safari Browser</span>
+      <div class="os-dock-item bg-trash" onclick="playSystemSound('close')">
+        <i class="fas fa-trash-alt"></i>
+        <span class="os-dock-tooltip">Trash</span>
       </div>
     </div>
   </div>

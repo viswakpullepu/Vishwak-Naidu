@@ -1,35 +1,87 @@
 /**
- * VISHWAKOS - INTERACTIVE DESKTOP RUNTIME & WINDOW MANAGER
+ * VISHWAKOS v2.5 - ULTRA-REFINED DESKTOP RUNTIME & WINDOW MANAGER
  */
 
 (function () {
   let highestZIndex = 100;
   let activeWindows = new Set();
+  let currentFocusedWin = null;
   let audioContext = null;
+  let isSoundEnabled = true;
   let isPlayingMusic = false;
   let equalizerInterval = null;
 
-  // Window default positions
+  // Window default positions & sizes
   const defaultPositions = {
-    'win-terminal': { top: 70, left: 120, width: 580, height: 380 },
-    'win-finder': { top: 100, left: 280, width: 640, height: 420 },
-    'win-skills': { top: 90, left: 220, width: 560, height: 390 },
-    'win-canary': { top: 120, left: 340, width: 500, height: 340 },
-    'win-music': { top: 140, left: 380, width: 420, height: 360 },
-    'win-resume': { top: 60, left: 160, width: 720, height: 480 },
-    'win-apk': { top: 110, left: 240, width: 520, height: 360 },
-    'win-browser': { top: 75, left: 180, width: 720, height: 460 }
+    'win-terminal': { top: 60, left: 100, width: 620, height: 400 },
+    'win-finder': { top: 90, left: 240, width: 680, height: 440 },
+    'win-skills': { top: 80, left: 200, width: 580, height: 400 },
+    'win-canary': { top: 110, left: 300, width: 520, height: 360 },
+    'win-music': { top: 130, left: 340, width: 440, height: 380 },
+    'win-resume': { top: 50, left: 140, width: 740, height: 500 },
+    'win-apk': { top: 100, left: 220, width: 540, height: 380 },
+    'win-browser': { top: 70, left: 160, width: 760, height: 480 },
+    'win-settings': { top: 90, left: 220, width: 580, height: 400 }
   };
+
+  // Sound Synthesizer (Web Audio API - zero external assets required)
+  function playSystemSound(type) {
+    if (!isSoundEnabled) return;
+    try {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      const now = audioContext.currentTime;
+
+      if (type === 'click') {
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(400, now + 0.04);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'open') {
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(640, now + 0.08);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else if (type === 'close') {
+        osc.frequency.setValueAtTime(540, now);
+        osc.frequency.exponentialRampToValueAtTime(220, now + 0.06);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
+      }
+    } catch (e) {}
+  }
 
   // Init VishwakOS
   function initVishwakOS() {
     initClock();
-    initWindowDragging();
+    initMenuBarsAndDropdowns();
+    initWindowDraggingAndSnapping();
+    initWindowResizing();
     initAppLaunchers();
+    initDesktopSelectionBox();
+    initContextMenu();
+    initSpotlight();
     initTerminalCLI();
     initMusicPlayer();
     initCanaryLogs();
     initBrowser();
+    initSettings();
   }
 
   // Live Clock in Menu Bar
@@ -60,20 +112,32 @@
     if (open) {
       osContainer.classList.add('active');
       document.body.style.overflow = 'hidden';
-      // Open Terminal and Finder by default if first time
+      playSystemSound('open');
       if (activeWindows.size === 0) {
         openApp('win-terminal');
       }
     } else {
       osContainer.classList.remove('active');
       document.body.style.overflow = '';
+      playSystemSound('close');
+      closeAllMenus();
     }
   };
 
-  // Open App Window
-  function openApp(winId) {
+  // Open App Window with Dock Bounce Animation
+  window.openApp = function (winId) {
     const win = document.getElementById(winId);
     if (!win) return;
+
+    playSystemSound('open');
+    closeAllMenus();
+
+    // Trigger dock bounce animation
+    const dockItem = document.querySelector(`.os-dock-item[data-app="${winId}"]`);
+    if (dockItem) {
+      dockItem.classList.add('bouncing');
+      setTimeout(() => dockItem.classList.remove('bouncing'), 1200);
+    }
 
     win.classList.remove('minimized');
     win.classList.add('open');
@@ -84,7 +148,6 @@
     // Set initial position if not already placed
     if (!win.dataset.placed && defaultPositions[winId]) {
       const pos = defaultPositions[winId];
-      // Responsive check
       const maxWidth = window.innerWidth - 40;
       const width = Math.min(pos.width, maxWidth);
       const left = Math.max(20, Math.min(pos.left, window.innerWidth - width - 20));
@@ -95,38 +158,46 @@
       win.style.height = `${pos.height}px`;
       win.dataset.placed = "true";
     }
-  }
+  };
 
   // Close App Window
-  function closeApp(winId) {
+  window.closeApp = function (winId) {
     const win = document.getElementById(winId);
     if (!win) return;
-    win.classList.remove('open', 'maximized', 'minimized');
+    playSystemSound('close');
+    win.classList.remove('open', 'maximized', 'snapped-left', 'snapped-right', 'minimized', 'focused');
     activeWindows.delete(winId);
     updateDockDots();
-  }
+  };
 
   // Minimize App Window
-  function minimizeApp(winId) {
+  window.minimizeApp = function (winId) {
     const win = document.getElementById(winId);
     if (!win) return;
+    playSystemSound('click');
     win.classList.add('minimized');
-  }
+  };
 
   // Maximize / Restore App Window
-  function toggleMaximizeApp(winId) {
+  window.toggleMaximizeApp = function (winId) {
     const win = document.getElementById(winId);
     if (!win) return;
+    playSystemSound('click');
+    win.classList.remove('snapped-left', 'snapped-right');
     win.classList.toggle('maximized');
-  }
+  };
 
   // Bring Window to Front
   function bringToFront(win) {
     highestZIndex += 2;
     win.style.zIndex = highestZIndex;
+
+    document.querySelectorAll('.os-window').forEach(w => w.classList.remove('focused'));
+    win.classList.add('focused');
+    currentFocusedWin = win;
   }
 
-  // Update Dock running app indicators
+  // Update Dock running app indicator dots
   function updateDockDots() {
     document.querySelectorAll('.os-dock-item').forEach(item => {
       const target = item.getAttribute('data-app');
@@ -138,22 +209,90 @@
     });
   }
 
-  // Dragging System
-  function initWindowDragging() {
+  // Close all open dropdown menus & control center
+  function closeAllMenus() {
+    document.querySelectorAll('.os-dropdown').forEach(d => d.classList.remove('show'));
+    document.querySelectorAll('.os-menu-btn').forEach(b => b.classList.remove('active-dropdown'));
+    const cc = document.getElementById('os-control-center');
+    if (cc) cc.classList.remove('show');
+    const ctxMenu = document.getElementById('os-context-menu');
+    if (ctxMenu) ctxMenu.classList.remove('show');
+  }
+
+  // ==========================================================================
+  // MENUBAR & DROPDOWNS SYSTEM
+  // ==========================================================================
+  function initMenuBarsAndDropdowns() {
+    document.querySelectorAll('.os-menu-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = btn.querySelector('.os-dropdown');
+        const isShown = dropdown && dropdown.classList.contains('show');
+
+        closeAllMenus();
+
+        if (dropdown && !isShown) {
+          dropdown.classList.add('show');
+          btn.classList.add('active-dropdown');
+          playSystemSound('click');
+        }
+      });
+    });
+
+    // Control Center Toggle
+    const ccBtn = document.getElementById('os-cc-toggle');
+    const cc = document.getElementById('os-control-center');
+    if (ccBtn && cc) {
+      ccBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isShown = cc.classList.contains('show');
+        closeAllMenus();
+        if (!isShown) {
+          cc.classList.add('show');
+          playSystemSound('click');
+        }
+      });
+    }
+
+    // Sound Tile Toggle
+    const soundTile = document.getElementById('cc-sound-tile');
+    if (soundTile) {
+      soundTile.addEventListener('click', () => {
+        isSoundEnabled = !isSoundEnabled;
+        soundTile.classList.toggle('active', isSoundEnabled);
+        playSystemSound('click');
+      });
+    }
+
+    // Global document click closes dropdowns
+    document.addEventListener('click', () => {
+      closeAllMenus();
+    });
+  }
+
+  // ==========================================================================
+  // DRAGGING, SNAPPING & DOUBLE CLICK MAXIMIZE
+  // ==========================================================================
+  function initWindowDraggingAndSnapping() {
     const windows = document.querySelectorAll('.os-window');
 
     windows.forEach(win => {
       const header = win.querySelector('.os-window-header');
       if (!header) return;
 
-      // Bring to front on click
       win.addEventListener('mousedown', () => bringToFront(win));
+
+      // Double-click header to toggle maximize
+      header.addEventListener('dblclick', (e) => {
+        if (e.target.closest('.os-btn-light')) return;
+        toggleMaximizeApp(win.id);
+      });
 
       let isDragging = false;
       let startX, startY, initialLeft, initialTop;
 
       header.addEventListener('mousedown', (e) => {
-        if (e.target.closest('.os-btn-light')) return; // Ignore traffic lights
+        if (e.target.closest('.os-btn-light')) return;
         if (win.classList.contains('maximized')) return;
 
         isDragging = true;
@@ -171,23 +310,39 @@
           let newLeft = initialLeft + dx;
           let newTop = initialTop + dy;
 
-          // Boundary checks
-          newTop = Math.max(34, newTop); // Keep below menu bar
+          newTop = Math.max(30, newTop); // Keep below menu bar
+
+          // Screen Snapping Previews
+          if (moveEvent.clientX <= 4) {
+            win.classList.add('snapped-left');
+            return;
+          } else if (moveEvent.clientX >= window.innerWidth - 6) {
+            win.classList.add('snapped-right');
+            return;
+          } else {
+            win.classList.remove('snapped-left', 'snapped-right');
+          }
+
           win.style.left = `${newLeft}px`;
           win.style.top = `${newTop}px`;
         }
 
-        function onMouseUp() {
+        function onMouseUp(upEvent) {
           isDragging = false;
           window.removeEventListener('mousemove', onMouseMove);
           window.removeEventListener('mouseup', onMouseUp);
+
+          // Top edge drag to maximize
+          if (upEvent.clientY <= 34) {
+            toggleMaximizeApp(win.id);
+          }
         }
 
         window.addEventListener('mousemove', onMouseMove);
         window.addEventListener('mouseup', onMouseUp);
       });
 
-      // Window Action Buttons
+      // Window Controls
       const closeBtn = win.querySelector('.os-btn-close');
       const minBtn = win.querySelector('.os-btn-min');
       const maxBtn = win.querySelector('.os-btn-max');
@@ -198,17 +353,253 @@
     });
   }
 
-  // App Launcher event listeners
+  // ==========================================================================
+  // RESIZING HANDLES SYSTEM
+  // ==========================================================================
+  function initWindowResizing() {
+    const windows = document.querySelectorAll('.os-window');
+
+    windows.forEach(win => {
+      // Append resize handles
+      const handleR = document.createElement('div');
+      handleR.className = 'os-resize-handle os-resize-r';
+      const handleB = document.createElement('div');
+      handleB.className = 'os-resize-handle os-resize-b';
+      const handleBR = document.createElement('div');
+      handleBR.className = 'os-resize-handle os-resize-br';
+
+      win.appendChild(handleR);
+      win.appendChild(handleB);
+      win.appendChild(handleBR);
+
+      function attachResize(handle, type) {
+        handle.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          bringToFront(win);
+
+          const startX = e.clientX;
+          const startY = e.clientY;
+          const startW = win.offsetWidth;
+          const startH = win.offsetHeight;
+
+          function onMouseMove(m) {
+            if (type.includes('r')) {
+              const newW = Math.max(320, startW + (m.clientX - startX));
+              win.style.width = `${newW}px`;
+            }
+            if (type.includes('b')) {
+              const newH = Math.max(200, startH + (m.clientY - startY));
+              win.style.height = `${newH}px`;
+            }
+          }
+
+          function onMouseUp() {
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+          }
+
+          window.addEventListener('mousemove', onMouseMove);
+          window.addEventListener('mouseup', onMouseUp);
+        });
+      }
+
+      attachResize(handleR, 'r');
+      attachResize(handleB, 'b');
+      attachResize(handleBR, 'rb');
+    });
+  }
+
+  // ==========================================================================
+  // DESKTOP LASSO SELECTION BOX
+  // ==========================================================================
+  function initDesktopSelectionBox() {
+    const desktop = document.querySelector('.os-desktop');
+    const selBox = document.getElementById('os-selection-box');
+    if (!desktop || !selBox) return;
+
+    let isSelecting = false;
+    let startX, startY;
+
+    desktop.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.os-window') || e.target.closest('.os-icon') || e.target.closest('.os-dock-container')) {
+        return;
+      }
+      isSelecting = true;
+      startX = e.clientX;
+      startY = e.clientY;
+
+      selBox.style.left = `${startX}px`;
+      selBox.style.top = `${startY}px`;
+      selBox.style.width = '0px';
+      selBox.style.height = '0px';
+      selBox.style.display = 'block';
+
+      // Clear icon selections
+      document.querySelectorAll('.os-icon').forEach(icon => icon.classList.remove('selected'));
+
+      function onMouseMove(m) {
+        if (!isSelecting) return;
+        const currentX = m.clientX;
+        const currentY = m.clientY;
+
+        const left = Math.min(startX, currentX);
+        const top = Math.min(startY, currentY);
+        const width = Math.abs(currentX - startX);
+        const height = Math.abs(currentY - startY);
+
+        selBox.style.left = `${left}px`;
+        selBox.style.top = `${top}px`;
+        selBox.style.width = `${width}px`;
+        selBox.style.height = `${height}px`;
+
+        // Check intersect with icons
+        document.querySelectorAll('.os-icon').forEach(icon => {
+          const rect = icon.getBoundingClientRect();
+          if (left < rect.right && left + width > rect.left &&
+              top < rect.bottom && top + height > rect.top) {
+            icon.classList.add('selected');
+          } else {
+            icon.classList.remove('selected');
+          }
+        });
+      }
+
+      function onMouseUp() {
+        isSelecting = false;
+        selBox.style.display = 'none';
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+      }
+
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    });
+  }
+
+  // ==========================================================================
+  // RIGHT-CLICK DESKTOP CONTEXT MENU
+  // ==========================================================================
+  function initContextMenu() {
+    const desktop = document.querySelector('.os-desktop');
+    const ctxMenu = document.getElementById('os-context-menu');
+    if (!desktop || !ctxMenu) return;
+
+    desktop.addEventListener('contextmenu', (e) => {
+      if (e.target.closest('.os-window') || e.target.closest('.os-dock-container')) {
+        return;
+      }
+      e.preventDefault();
+      closeAllMenus();
+
+      const x = Math.min(e.clientX, window.innerWidth - 200);
+      const y = Math.min(e.clientY, window.innerHeight - 200);
+
+      ctxMenu.style.left = `${x}px`;
+      ctxMenu.style.top = `${y}px`;
+      ctxMenu.classList.add('show');
+      playSystemSound('click');
+    });
+  }
+
+  // ==========================================================================
+  // SPOTLIGHT SEARCH (Cmd+Space / Ctrl+Space)
+  // ==========================================================================
+  function initSpotlight() {
+    const spotlightOverlay = document.getElementById('os-spotlight');
+    const spotlightInput = document.getElementById('os-spotlight-input');
+    const spotlightResults = document.getElementById('os-spotlight-results');
+    if (!spotlightOverlay || !spotlightInput) return;
+
+    const apps = [
+      { name: 'Terminal', icon: 'fas fa-terminal', id: 'win-terminal', desc: 'Command line terminal' },
+      { name: 'Projects Explorer', icon: 'far fa-folder-open', id: 'win-finder', desc: 'Browse GitHub repositories' },
+      { name: 'BOUU Music Web', icon: 'fas fa-music', id: 'win-browser', desc: 'Live music streaming client' },
+      { name: 'BOUU Android APK', icon: 'fab fa-android', id: 'win-apk', desc: 'Package installer for Android' },
+      { name: 'AI Skills Matrix', icon: 'fas fa-bolt', id: 'win-skills', desc: 'Generative AI & Web tools' },
+      { name: 'Canary Security', icon: 'fas fa-shield-alt', id: 'win-canary', desc: 'Intrusion detection monitor' },
+      { name: 'Music Player', icon: 'fas fa-compact-disc', id: 'win-music', desc: 'Audio visualizer & beats' },
+      { name: 'Resume Preview', icon: 'fas fa-file-pdf', id: 'win-resume', desc: 'View and download resume' },
+      { name: 'System Settings', icon: 'fas fa-cog', id: 'win-settings', desc: 'Wallpapers and appearance' }
+    ];
+
+    function toggleSpotlight(show) {
+      if (show === undefined) show = !spotlightOverlay.classList.contains('show');
+      if (show) {
+        spotlightOverlay.classList.add('show');
+        spotlightInput.value = '';
+        renderResults(apps);
+        setTimeout(() => spotlightInput.focus(), 50);
+        playSystemSound('open');
+      } else {
+        spotlightOverlay.classList.remove('show');
+      }
+    }
+
+    function renderResults(list) {
+      spotlightResults.innerHTML = '';
+      if (list.length === 0) {
+        spotlightResults.innerHTML = '<div style="padding:12px; color:#9ca3af; text-align:center; font-size:12px;">No matching applications found</div>';
+        return;
+      }
+      list.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = `os-spotlight-item ${idx === 0 ? 'active' : ''}`;
+        row.innerHTML = `<i class="${item.icon}" style="font-size:16px; width:20px; text-align:center;"></i> <div><div style="font-weight:600;">${item.name}</div><div style="font-size:11px; opacity:0.7;">${item.desc}</div></div>`;
+        row.addEventListener('click', () => {
+          openApp(item.id);
+          toggleSpotlight(false);
+        });
+        spotlightResults.appendChild(row);
+      });
+    }
+
+    spotlightInput.addEventListener('input', () => {
+      const q = spotlightInput.value.trim().toLowerCase();
+      const filtered = apps.filter(a => a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q));
+      renderResults(filtered);
+    });
+
+    spotlightInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') toggleSpotlight(false);
+      if (e.key === 'Enter') {
+        const first = spotlightResults.querySelector('.os-spotlight-item');
+        if (first) first.click();
+      }
+    });
+
+    spotlightOverlay.addEventListener('click', (e) => {
+      if (e.target === spotlightOverlay) toggleSpotlight(false);
+    });
+
+    // Keyboard shortcut (Cmd+Space / Ctrl+Space)
+    window.addEventListener('keydown', (e) => {
+      const osActive = document.getElementById('vishwak-os')?.classList.contains('active');
+      if (osActive && (e.metaKey || e.ctrlKey) && e.code === 'Space') {
+        e.preventDefault();
+        toggleSpotlight();
+      }
+    });
+
+    const searchIcon = document.getElementById('os-search-icon');
+    if (searchIcon) {
+      searchIcon.addEventListener('click', () => toggleSpotlight(true));
+    }
+  }
+
+  // App Launcher Event Listeners
   function initAppLaunchers() {
-    // Desktop Icons
     document.querySelectorAll('.os-icon').forEach(icon => {
       icon.addEventListener('click', () => {
+        document.querySelectorAll('.os-icon').forEach(i => i.classList.remove('selected'));
+        icon.classList.add('selected');
+      });
+      icon.addEventListener('dblclick', () => {
         const app = icon.getAttribute('data-app');
         if (app) openApp(app);
       });
     });
 
-    // Dock Items
     document.querySelectorAll('.os-dock-item').forEach(item => {
       item.addEventListener('click', () => {
         const app = item.getAttribute('data-app');
@@ -224,11 +615,31 @@
       });
     });
 
-    // Menu Bar App Links
     document.querySelectorAll('[data-os-menu-app]').forEach(btn => {
       btn.addEventListener('click', () => {
         const app = btn.getAttribute('data-os-menu-app');
         if (app) openApp(app);
+      });
+    });
+  }
+
+  // ==========================================================================
+  // SYSTEM SETTINGS & WALLPAPER SWITCHER
+  // ==========================================================================
+  function initSettings() {
+    const wpCards = document.querySelectorAll('.wp-choice-card');
+    const wpLayer = document.getElementById('os-wallpaper-layer');
+
+    wpCards.forEach(card => {
+      card.addEventListener('click', () => {
+        wpCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        const theme = card.getAttribute('data-wp');
+        if (wpLayer && theme) {
+          wpLayer.className = `os-wallpaper-layer wp-${theme}`;
+          playSystemSound('click');
+        }
       });
     });
   }
@@ -251,6 +662,7 @@
   - bouu         : Open live BOUU Music Web app (bouu-gamma.vercel.app)
   - browser      : Open Safari / Web Browser
   - resume       : View / Download PDF resume
+  - settings     : Open System Settings
   - whoami       : Current user information
   - contact      : Get in touch
   - matrix       : Toggle hacker digital rain
@@ -260,7 +672,7 @@
       neofetch: `
    \x1b[38;2;224;96;49m     /\\         \x1b[0m \x1b[1mvishwak@cvrce\x1b[0m
    \x1b[38;2;224;96;49m    /  \\        \x1b[0m ------------
-   \x1b[38;2;224;96;49m   / /\\ \\       \x1b[0m \x1b[33mOS:\x1b[0m VishwakOS v2.0 (Liquid Glass)
+   \x1b[38;2;224;96;49m   / /\\ \\       \x1b[0m \x1b[33mOS:\x1b[0m VishwakOS v2.5 (Liquid Glass Desktop)
    \x1b[38;2;224;96;49m  / /__\\ \\      \x1b[0m \x1b[33mHost:\x1b[0m CVR College of Engineering (CSE)
    \x1b[38;2;224;96;49m /_/    \\_\\     \x1b[0m \x1b[33mRole:\x1b[0m AI & Web Digital Builder
                      \x1b[33mTimeline:\x1b[0m 2025 – 2029 (B.Tech)
@@ -302,6 +714,8 @@
 
       browser: `Opening Safari Web Browser...`,
 
+      settings: `Opening System Settings...`,
+
       date: () => new Date().toString(),
 
       sudo: `Nice try! You are already root on VishwakOS.`,
@@ -314,7 +728,6 @@
         const cmdText = input.value.trim().toLowerCase();
         input.value = '';
 
-        // Add prompt line to history
         const line = document.createElement('div');
         line.className = 'term-line';
         line.innerHTML = `<span class="term-prompt">vishwak@cvrce:~$</span> <span>${escapeHtml(cmdText)}</span>`;
@@ -325,13 +738,9 @@
           return;
         }
 
-        if (cmdText === 'resume') {
-          openApp('win-resume');
-        }
-
-        if (cmdText === 'apk') {
-          openApp('win-apk');
-        }
+        if (cmdText === 'resume') openApp('win-resume');
+        if (cmdText === 'apk') openApp('win-apk');
+        if (cmdText === 'settings') openApp('win-settings');
 
         if (cmdText === 'bouu') {
           openApp('win-browser');
@@ -354,7 +763,6 @@
           const res = typeof commands[cmdText] === 'function' ? commands[cmdText]() : commands[cmdText];
           outLine.innerText = res;
         } else if (cmdText === '') {
-          // Empty enter
           return;
         } else {
           outLine.innerHTML = `<span style="color:#ef4444">Command not found: ${escapeHtml(cmdText)}. Type <strong>help</strong> for available commands.</span>`;
@@ -362,7 +770,6 @@
 
         outputContainer.appendChild(outLine);
 
-        // Auto scroll to bottom
         const termBody = document.querySelector('.terminal-body');
         if (termBody) termBody.scrollTop = termBody.scrollHeight;
       }
